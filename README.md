@@ -14,15 +14,15 @@ El sistema será una imitación de Reddit Inc. en el que los usuarios no registr
 | Miguel Cendrero Ortega		| m.cendrero.2017@alumnos.urjc.es	| micenor |
 | Óscar Rivas Melar         | o.rivas.2017@alumnos.urjc.es 	| oscar-llury |
 
-### Diagrams
+### Diagramas de clases
 
 **Diagrama de clases Reddit-URJC**
-![Diagrama de clases Reddit-URJC](src/UMLclassesDiagram-Reddit-G4.png)
+![Diagrama de clases Reddit-URJC](diagramas-UML/UMLclassesDiagram-Reddit-G4.png)
 
-**Diagrma de clases del paquete ComandosSistema**
-![Diagrma de clases del paquete ComandosSistema](src/UMLclassesDiagram(ComandosSistema)-Reddit-G4.png)
+**Diagrama de clases del paquete ComandosSistema**
+![Diagrma de clases del paquete ComandosSistema](diagramas-UML/UMLclassesDiagram(ComandosSistema)-Reddit-G4.png)
 
-Diagramas desarrollados con [StarUML](http://staruml.io/), el archivo se adjunta en [src/UMLclassesDiagram-Reddit-G4.mdj](src/UMLclassesDiagram-Reddit-G4.mdj).
+Diagramas desarrollados con [StarUML](http://staruml.io/), el archivo se adjunta en [src/UMLclassesDiagram-Reddit-G4.mdj](diagramas-UML/UMLclassesDiagram-Reddit-G4.mdj).
 
 ## Fase 2: Implementación
 
