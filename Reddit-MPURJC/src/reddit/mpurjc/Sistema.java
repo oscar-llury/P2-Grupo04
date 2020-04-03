@@ -15,25 +15,30 @@ public class Sistema {
     private HashMap <String, Usuario> listaUsuarios;
 
     
-   public void iniciarForo(){
+    public void iniciarForo(){
        
         Usuario usuarioActual;
         SubForo subForoActual;
         Entrada entradaActual;
         
+        usuarioActual = new Usuario();
+        
         subForoActual = nuevoSubForo();
         usuarioActual = nuevoUsuario(); //Esto es para registrar un usuario
         
-        
-   }
+        entradaActual = new Entrada(usuarioActual);
+        entradaActual.construirEntrada();
+    }
    
-   private SubForo nuevoSubForo(){
-       System.out.print("Nombre del nuevo SubForo:");
+    private SubForo nuevoSubForo(){
+       System.out.print("Nombre del nuevo SubForo: ");
        Scanner scan = new Scanner(System.in);
        String nombre = scan.nextLine();
        SubForo subForoActual = new SubForo(nombre);
        return subForoActual;
-   }
+    }
+
+ 
    
    private Usuario nuevoUsuario(){
        System.out.print("Nick del nuevo usuario: ");

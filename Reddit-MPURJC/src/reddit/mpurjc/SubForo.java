@@ -18,5 +18,27 @@ public class SubForo {
     }
     
     
+    /*------------------------GETTERS------------------------*/
+
     
+    public String getNombre() {
+        return nombre;
+    }
+
+    public HashMap<Integer, Entrada> getEntradas() {
+        return entradas;
+    }
+    
+    
+    /*------------------------SETTERS------------------------*/
+    
+    
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public void setEntradas(HashMap<Integer, Entrada> entradas) {
+        this.entradas = entradas;
+    }
+
 }

@@ -8,37 +8,43 @@ import reddit.mpurjc.Usuario;
 
 public class Entrada implements TipoEntrada{
 
+    private String titulo;
     private List<TipoEntrada> contenido;
     private boolean verificado;
     private Usuario autor;
     
-    public void Entrada(){}
+    public Entrada(){}
     
-    public void ConstruirEntrada(){
-        System.out.println("De que tipo quieres la entrada:\nTexto Plano [1]\n Encuenstas [2]\n Ejercicios [3]");
+    public Entrada(Usuario usuario){
+        contenido = new ArrayList<TipoEntrada>();
+        this.autor=usuario;
+    }
+    
+    public void construirEntrada(){
+        System.out.print("Time el título: ");
+        Scanner scanTitulo = new Scanner(System.in);
+        this.titulo = scanTitulo.nextLine();
+        
+        System.out.print("De que tipo quieres la entrada:\nTexto Plano [1]\n Encuenstas [2]\n Ejercicios [3]");
         Scanner scanTipo = new Scanner(System.in);
         int tipo = scanTipo.nextInt();
-        
-        System.out.println("Time el título");
-        Scanner scanTitulo = new Scanner(System.in);
-        String titulo = scanTitulo.nextLine();
-        System.out.println("Time el contenido del Texto");
-        Scanner scanTexto = new Scanner(System.in);
-        String texto = scanTexto.nextLine();
-        TextoPlano entrada = new TextoPlano(titulo, texto);
-        
-        /*switch(tipo){
-            case 1:{
-                System.out.println("Time el título");
-                Scanner scanTitulo = new Scanner(System.in);
-                String titulo = scanTitulo.nextLine();
-                System.out.println("Time el contenido del Texto");
-                Scanner scanTexto = new Scanner(System.in);
-                String texto = scanTexto.nextLine();
-                TextoPlano entrada = new TextoPlano(titulo, texto);
+        switch(tipo){
+            case 1: {
+                TextoPlano entrada = new TextoPlano();
+                this.contenido.add(entrada);
             }
-        }*/
-        entrada.mostrar();
+            //case 2: Encuestas entrada = new TextoPlano(titulo, texto);
+            //case 3: Ejercicios entrada = new TextoPlano(titulo, texto);
+            default: {
+                System.out.println("Por defecto la entrada es de Texto Plano");
+                TextoPlano entrada = new TextoPlano();
+                this.contenido.add(entrada);
+            }
+        }
+        
+        
+        
+        //entrada.mostrar();
     }
     
     
@@ -51,8 +57,4 @@ public class Entrada implements TipoEntrada{
     public void mostrar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
-    
-    
 }
