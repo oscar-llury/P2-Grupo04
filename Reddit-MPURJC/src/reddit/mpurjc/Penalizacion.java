@@ -29,13 +29,5 @@ public class Penalizacion {
         }
         return penalizado;
     }
-    
-    public Date getFechaInicio() {
-        return fechaInicio;
-    }
-
-    public Date getFechaFin() {
-        return fechaFin;
-    }
-    
+   
 }

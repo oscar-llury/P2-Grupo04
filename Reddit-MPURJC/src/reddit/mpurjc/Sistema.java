@@ -5,11 +5,15 @@ import java.util.HashMap;
 
 public class Sistema {
     
+    private HashMap <String, SubForo> listaSubforos;
+    private HashMap <String, Usuario> listaUsuarios;
+
     
    public void iniciarForo(){
        
-       HashMap <String, SubForo> listaSubforos;
-       
+        Usuario usuarioActual;
+        SubForo subForoActual;
+        //Entrada entradaActual;
        
        
        
