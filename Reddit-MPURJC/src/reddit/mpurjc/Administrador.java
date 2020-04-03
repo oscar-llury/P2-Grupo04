@@ -8,10 +8,11 @@ public class Administrador extends reddit.mpurjc.Usuario {
     //private List<Entrada> pendientes;
     
     private boolean esAdministrador;
-    public Administrador() {
-        
-        
+
+    public Administrador(String nick, String nombre, String contraseña, String email, Rol rol) {
+        super(nick, nombre, contraseña, email, rol);
     }
+    
     /*
     public boolean validarEntrada(Entrada entrada){
         return false;

@@ -1,6 +1,8 @@
 
 package reddit.mpurjc;
 
+import static java.lang.Boolean.FALSE;
+import java.util.ArrayList;
 import java.util.List;
 
 enum Rol
@@ -18,6 +20,8 @@ public class Usuario {
     private List<SubForo> subscripciones;
     private Penalizacion penalizacion;
     private boolean esAdministrador;
+
+   
     
     public boolean inicioPermitido(){
         return false;
@@ -26,6 +30,18 @@ public class Usuario {
     public boolean comprobarCredenciales(Usuario usuario){
         return false;
     }
+    
+    public Usuario (String nick, String nombre, String contraseña, String email, Rol rol){
+        this.nick = nick;
+        this.nombre = nombre;
+        this.contraseña = contraseña;
+        this.email = email;
+        this.rol = rol;
+        this.subscripciones = new ArrayList<SubForo>();
+        this.esAdministrador = FALSE;
+    }
+    
+    
     
     /*------------------------GETTERS------------------------*/
     public String getNick() {
