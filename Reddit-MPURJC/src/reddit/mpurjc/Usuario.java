@@ -4,11 +4,8 @@ package reddit.mpurjc;
 import static java.lang.Boolean.FALSE;
 import java.util.ArrayList;
 import java.util.List;
+import static reddit.mpurjc.Usuario.Rol.*;
 
-enum Rol
-{
-    ALUMNO, PROFESOR, ADMINISTRADOR;
-}
 
 public class Usuario {
     
@@ -21,7 +18,24 @@ public class Usuario {
     private Penalizacion penalizacion;
     private boolean esAdministrador;
 
-   
+    enum Rol
+    {
+        ALUMNO, PROFESOR, ADMINISTRADOR;
+    }
+    public Usuario(){}
+    
+    public Usuario (String nick, String nombre, String contraseña, String email){
+        if(evaluadorEmail(email)){
+            this.nick = nick;
+            this.nombre = nombre;
+            this.contraseña = contraseña;
+            this.email = email;
+            this.subscripciones = new ArrayList<SubForo>();
+            this.esAdministrador = FALSE;
+        }else
+            System.out.println("Debes introducir un correo de la urjc");
+    }
+
     
     public boolean inicioPermitido(){
         return false;
@@ -30,18 +44,11 @@ public class Usuario {
     public boolean comprobarCredenciales(Usuario usuario){
         return false;
     }
-    
-    public Usuario (String nick, String nombre, String contraseña, String email, Rol rol){
-        this.nick = nick;
-        this.nombre = nombre;
-        this.contraseña = contraseña;
-        this.email = email;
-        this.rol = rol;
-        this.subscripciones = new ArrayList<SubForo>();
-        this.esAdministrador = FALSE;
+   
+    private boolean evaluadorEmail(String email){
+        this.rol=ALUMNO;
+        return true;
     }
-    
-    
     
     /*------------------------GETTERS------------------------*/
     public String getNick() {

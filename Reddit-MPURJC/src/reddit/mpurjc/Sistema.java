@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import reddit.mpurjc.Entradas.Entrada;
-import static reddit.mpurjc.Rol.ALUMNO;
 public class Sistema {
     
     private HashMap <String, SubForo> listaSubforos;
@@ -53,8 +52,7 @@ public class Sistema {
        System.out.print("Email del nuevo usuario: ");
        Scanner scanEmail = new Scanner(System.in);
        String email = scanEmail.nextLine();
-       Rol rol = ALUMNO;
-       Usuario usuarioActual = new Usuario (nick,nombre,contraseña,email,rol);
+       Usuario usuarioActual = new Usuario (nick,nombre,contraseña,email);
        return usuarioActual;
    }
    
