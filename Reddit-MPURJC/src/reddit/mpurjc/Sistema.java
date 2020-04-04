@@ -16,12 +16,12 @@ public class Sistema {
     
     public void iniciarForo(){
        
-        Usuario usuarioActual;
+        Usuario usuarioActual = new Usuario();
         SubForo subForoActual;
         Entrada entradaActual;
         
         subForoActual = nuevoSubForo();
-        usuarioActual = nuevoUsuario(); //Esto es para registrar un usuario
+        nuevoUsuario(); //Esto es para registrar un usuario
         
         entradaActual = new Entrada(usuarioActual);
         entradaActual.construirEntrada();
@@ -35,11 +35,11 @@ public class Sistema {
         return subForoActual;
     }
 
-    private boolean esUnicoUsuario(String string){
-        
+    private boolean esUnicoUsuario(String nick){
+        return !listaUsuarios.containsKey(nick);
     }
    
-    private Usuario nuevoUsuario(){
+    private void nuevoUsuario(){
         boolean unico = true;
         Usuario usuario;
         while(unico){
@@ -48,7 +48,6 @@ public class Sistema {
             String email = scanEmail.nextLine();
             unico = esUnicoUsuario(email);
             if (unico){
-                String nick = ;
                 System.out.print("Nombre del nuevo usuario: ");
                 Scanner scanNombre = new Scanner(System.in);
                 String nombre = scanNombre.nextLine();
@@ -56,10 +55,9 @@ public class Sistema {
                 Scanner scanContraseña = new Scanner(System.in);
                 String contraseña = scanContraseña.nextLine();
 
-                usuario = new Usuario (nick,nombre,contraseña,email);
+                usuario = new Usuario (nombre,contraseña,email);
             }
         }
-        return usuario;
     }
 
 }

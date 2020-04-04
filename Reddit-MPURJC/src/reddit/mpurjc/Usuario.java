@@ -24,19 +24,18 @@ public class Usuario {
     }
     public Usuario(){}
     
-    public Usuario (String nick, String nombre, String contraseña, String email){
+    public Usuario (String nombre, String contraseña, String email){
         boolean evaluador = true;
         while(evaluador){
             evaluador = evaluadorEmail(email);
 
-            this.nick = nick;
+            this.nick = sacarNick(email);
             this.nombre = nombre;
             this.contraseña = contraseña;
-            this.email = email;
+            this.email = email.toLowerCase();
             this.subscripciones = new ArrayList<SubForo>();
             this.esAdministrador = FALSE;
         }
-
     }
 
     
@@ -52,7 +51,7 @@ public class Usuario {
         int longitud = email.length();
         int index = email.indexOf("@");
         String subEmail = email.substring(index+1,longitud);
-        switch (subEmail){
+        switch (subEmail.toLowerCase()){
             case "alumnos.urjc.es": {
                 this.rol = ALUMNO;
                 return true;
@@ -71,6 +70,10 @@ public class Usuario {
         }
     }
     
+    private String sacarNick(String email){
+        int index = email.indexOf("@");
+        return email.substring(0,index-1).toLowerCase();
+    }
     /*------------------------GETTERS------------------------*/
     public String getNick() {
         return nick;

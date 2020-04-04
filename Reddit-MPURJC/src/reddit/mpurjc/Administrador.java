@@ -10,7 +10,7 @@ public class Administrador extends reddit.mpurjc.Usuario {
     private boolean esAdministrador;
 
     public Administrador(String nick, String nombre, String contraseña, String email) {
-        super(nick, nombre, contraseña, email);
+        super(nombre, contraseña, email);
     }
     
     /*
