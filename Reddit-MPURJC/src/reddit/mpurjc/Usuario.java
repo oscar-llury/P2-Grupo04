@@ -46,8 +46,17 @@ public class Usuario {
     }
    
     private boolean evaluadorEmail(String email){
-        this.rol=ALUMNO;
-        return true;
+        int longitud = email.length();
+        int index = email.indexOf("@");
+        String subEmail = email.substring(index+1,longitud);
+        switch (subEmail){
+            case "alumnos.urjc.es": this.rol = ALUMNO;
+                                    return true;
+                                   
+            case "urjc.es": this.rol = PROFESOR;
+                                    return true;
+            default: return false;                        
+        }
     }
     
     /*------------------------GETTERS------------------------*/
