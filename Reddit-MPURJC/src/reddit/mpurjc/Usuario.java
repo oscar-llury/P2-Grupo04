@@ -25,15 +25,18 @@ public class Usuario {
     public Usuario(){}
     
     public Usuario (String nick, String nombre, String contraseña, String email){
-        if(evaluadorEmail(email)){
+        boolean evaluador = true;
+        while(evaluador){
+            evaluador = evaluadorEmail(email);
+
             this.nick = nick;
             this.nombre = nombre;
             this.contraseña = contraseña;
             this.email = email;
             this.subscripciones = new ArrayList<SubForo>();
             this.esAdministrador = FALSE;
-        }else
-            System.out.println("Debes introducir un correo de la urjc");
+        }
+
     }
 
     
@@ -50,12 +53,21 @@ public class Usuario {
         int index = email.indexOf("@");
         String subEmail = email.substring(index+1,longitud);
         switch (subEmail){
-            case "alumnos.urjc.es": this.rol = ALUMNO;
-                                    return true;
+            case "alumnos.urjc.es": {
+                this.rol = ALUMNO;
+                return true;
+            }
                                    
-            case "urjc.es": this.rol = PROFESOR;
-                                    return true;
-            default: return false;                        
+            case "urjc.es": {
+                this.rol = PROFESOR;
+                return true;
+            }
+
+            default: {
+                System.out.println("Debes introducir un correo de la urjc");
+                return false;
+            } 
+                        
         }
     }
     

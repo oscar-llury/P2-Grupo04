@@ -20,8 +20,6 @@ public class Sistema {
         SubForo subForoActual;
         Entrada entradaActual;
         
-        usuarioActual = new Usuario();
-        
         subForoActual = nuevoSubForo();
         usuarioActual = nuevoUsuario(); //Esto es para registrar un usuario
         
@@ -30,30 +28,38 @@ public class Sistema {
     }
    
     private SubForo nuevoSubForo(){
-       System.out.print("Nombre del nuevo SubForo: ");
-       Scanner scan = new Scanner(System.in);
-       String nombre = scan.nextLine();
-       SubForo subForoActual = new SubForo(nombre);
-       return subForoActual;
+        System.out.print("Nombre del nuevo SubForo: ");
+        Scanner scan = new Scanner(System.in);
+        String nombre = scan.nextLine();
+        SubForo subForoActual = new SubForo(nombre);
+        return subForoActual;
     }
 
- 
+    private boolean esUnicoUsuario(String string){
+        
+    }
    
-   private Usuario nuevoUsuario(){
-       System.out.print("Nick del nuevo usuario: ");
-       Scanner scanNick = new Scanner(System.in);
-       String nick = scanNick.nextLine();
-       System.out.print("Nombre del nuevo usuario: ");
-       Scanner scanNombre = new Scanner(System.in);
-       String nombre = scanNombre.nextLine();
-       System.out.print("Contraseña del nuevo usuario: ");
-       Scanner scanContraseña = new Scanner(System.in);
-       String contraseña = scanContraseña.nextLine();
-       System.out.print("Email del nuevo usuario: ");
-       Scanner scanEmail = new Scanner(System.in);
-       String email = scanEmail.nextLine();
-       Usuario usuarioActual = new Usuario (nick,nombre,contraseña,email);
-       return usuarioActual;
-   }
-   
+    private Usuario nuevoUsuario(){
+        boolean unico = true;
+        Usuario usuario;
+        while(unico){
+            System.out.print("Email del nuevo usuario: ");
+            Scanner scanEmail = new Scanner(System.in);
+            String email = scanEmail.nextLine();
+            unico = esUnicoUsuario(email);
+            if (unico){
+                String nick = ;
+                System.out.print("Nombre del nuevo usuario: ");
+                Scanner scanNombre = new Scanner(System.in);
+                String nombre = scanNombre.nextLine();
+                System.out.print("Contraseña del nuevo usuario: ");
+                Scanner scanContraseña = new Scanner(System.in);
+                String contraseña = scanContraseña.nextLine();
+
+                usuario = new Usuario (nick,nombre,contraseña,email);
+            }
+        }
+        return usuario;
+    }
+
 }
