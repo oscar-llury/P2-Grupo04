@@ -1,11 +1,6 @@
-
 package reddit.mpurjc;
 
-import static java.lang.Boolean.FALSE;
-import static java.sql.JDBCType.NULL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import reddit.mpurjc.Entradas.Entrada;
 public class Sistema {
@@ -15,16 +10,18 @@ public class Sistema {
 
     
     public void iniciarForo(){
-       
-        Usuario usuarioActual = new Usuario();
         SubForo subForoActual;
         Entrada entradaActual;
-        
+        Usuario usuarioActual;
+
         subForoActual = nuevoSubForo();
-        nuevoUsuario(); //Esto es para registrar un usuario
         
+        //nuevoUsuario(); //Esto es para registrar un usuario
+        
+        usuarioActual = new Usuario();
         entradaActual = new Entrada(usuarioActual);
         entradaActual.construirEntrada();
+        entradaActual.mostrar();
     }
    
     private SubForo nuevoSubForo(){
@@ -41,22 +38,45 @@ public class Sistema {
    
     private void nuevoUsuario(){
         boolean unico = true;
-        Usuario usuario;
-        while(unico){
+        boolean evaluador = true;
+        String email = "";
+        while(unico || evaluador){
             System.out.print("Email del nuevo usuario: ");
             Scanner scanEmail = new Scanner(System.in);
-            String email = scanEmail.nextLine();
+            email = scanEmail.nextLine();
             unico = esUnicoUsuario(email);
-            if (unico){
-                System.out.print("Nombre del nuevo usuario: ");
-                Scanner scanNombre = new Scanner(System.in);
-                String nombre = scanNombre.nextLine();
-                System.out.print("Contraseña del nuevo usuario: ");
-                Scanner scanContraseña = new Scanner(System.in);
-                String contraseña = scanContraseña.nextLine();
+            evaluador = evaluadorEmail(email);
+        }
+        
+        System.out.print("Nombre del nuevo usuario: ");
+        Scanner scanNombre = new Scanner(System.in);
+        String nombre = scanNombre.nextLine();
+        System.out.print("Apellidos del nuevo usuario: ");
+        Scanner scanApellidos = new Scanner(System.in);
+        String apellidos = scanApellidos.nextLine();
+        System.out.print("Contraseña del nuevo usuario: ");
+        Scanner scanContraseña = new Scanner(System.in);
+        String contraseña = scanContraseña.nextLine();
 
-                usuario = new Usuario (nombre,contraseña,email);
+        //setusuarioactual
+        Usuario usuario = new Usuario (nombre,apellidos,email,contraseña);
+
+    }
+        private boolean evaluadorEmail(String email){
+        int longitud = email.length();
+        int index = email.indexOf("@");
+        String subEmail = email.substring(index+1,longitud);
+        switch (subEmail.toLowerCase()){
+            case "alumnos.urjc.es": {
+                return true;
+            }                       
+            case "urjc.es": {
+                return true;
             }
+            default: {
+                System.out.println("Debes introducir un correo de la urjc");
+                return false;
+            }                
         }
     }
 

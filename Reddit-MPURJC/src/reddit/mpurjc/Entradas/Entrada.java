@@ -1,4 +1,3 @@
-
 package reddit.mpurjc.Entradas;
 
 import java.util.ArrayList;
@@ -16,8 +15,9 @@ public class Entrada implements TipoEntrada{
     public Entrada(){}
     
     public Entrada(Usuario usuario){
-        contenido = new ArrayList<TipoEntrada>();
-        this.autor=usuario;
+        contenido = new ArrayList<>();
+        this.autor = usuario;
+        this.verificado = false;
     }
     
     public void construirEntrada(){
@@ -33,28 +33,44 @@ public class Entrada implements TipoEntrada{
                 TextoPlano entrada = new TextoPlano();
                 this.contenido.add(entrada);
             }
-            //case 2: Encuestas entrada = new TextoPlano(titulo, texto);
-            //case 3: Ejercicios entrada = new TextoPlano(titulo, texto);
+            case 2: {
+                Encuesta entrada = new Encuesta();
+                this.contenido.add(entrada);
+            }
+            case 3: {
+                Ejercicios entrada = new Ejercicios();
+                this.contenido.add(entrada);
+            }
             default: {
                 System.out.println("Por defecto la entrada es de Texto Plano");
                 TextoPlano entrada = new TextoPlano();
                 this.contenido.add(entrada);
             }
         }
-        
-        
-        
-        //entrada.mostrar();
     }
     
-    
+    //devuelve true si es valida
     @Override
     public boolean validar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean validar = true;
+        for (TipoEntrada iter : this.contenido) {
+            if(!iter.validar()){
+                validar = false;
+            }
+        }
+        this.verificado = validar;
+        return validar;
     }
 
     @Override
     public void mostrar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.contenido.forEach((iter) -> {
+            iter.mostrar();
+        });
     }
+
+    public boolean isVerificado() {
+        return verificado;
+    }
+    
 }

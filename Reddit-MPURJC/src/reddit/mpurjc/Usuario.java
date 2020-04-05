@@ -1,4 +1,3 @@
-
 package reddit.mpurjc;
 
 import static java.lang.Boolean.FALSE;
@@ -6,11 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import static reddit.mpurjc.Usuario.Rol.*;
 
-
 public class Usuario {
     
     private String nick;
     private String nombre;
+    private String apellidos;
     private String contraseña;
     private String email;
     private Rol rol;
@@ -24,21 +23,17 @@ public class Usuario {
     }
     public Usuario(){}
     
-    public Usuario (String nombre, String contraseña, String email){
-        boolean evaluador = true;
-        while(evaluador){
-            evaluador = evaluadorEmail(email);
-
-            this.nick = sacarNick(email);
-            this.nombre = nombre;
-            this.contraseña = contraseña;
-            this.email = email.toLowerCase();
-            this.subscripciones = new ArrayList<SubForo>();
-            this.esAdministrador = FALSE;
-        }
+    public Usuario (String nombre, String apellidos, String email, String contraseña){
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email.toLowerCase();
+        this.nick = sacarNick(email);
+        this.contraseña = contraseña;
+        this.rol = sacarRol(email);
+        this.subscripciones = new ArrayList<>();
+        this.esAdministrador = FALSE;
     }
 
-    
     public boolean inicioPermitido(){
         return false;
     }
@@ -46,34 +41,24 @@ public class Usuario {
     public boolean comprobarCredenciales(Usuario usuario){
         return false;
     }
-   
-    private boolean evaluadorEmail(String email){
-        int longitud = email.length();
-        int index = email.indexOf("@");
-        String subEmail = email.substring(index+1,longitud);
-        switch (subEmail.toLowerCase()){
-            case "alumnos.urjc.es": {
-                this.rol = ALUMNO;
-                return true;
-            }
-                                   
-            case "urjc.es": {
-                this.rol = PROFESOR;
-                return true;
-            }
-
-            default: {
-                System.out.println("Debes introducir un correo de la urjc");
-                return false;
-            } 
-                        
-        }
-    }
-    
+       
     private String sacarNick(String email){
         int index = email.indexOf("@");
         return email.substring(0,index-1).toLowerCase();
     }
+    
+    private Rol sacarRol(String email){
+        int index = email.indexOf("@");
+        switch (email.substring(index,email.length()).toLowerCase()){
+            case "alumnos.urjc.es": {
+                return ALUMNO;
+            }                    
+            default: {
+                return PROFESOR;
+            }               
+        }
+    }
+    
     /*------------------------GETTERS------------------------*/
     public String getNick() {
         return nick;
@@ -81,6 +66,14 @@ public class Usuario {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public String getApellidos() {
+        return apellidos;
+    }
+
+    public String getContraseña() {
+        return contraseña;
     }
 
     public String getEmail() {
@@ -104,26 +97,16 @@ public class Usuario {
     }
     
     /*------------------------SETTERS------------------------*/
-    
-    
-    public void setNick(String nick) {
-        this.nick = nick;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    public void setApellidos(String apellidos) {
+        this.apellidos = apellidos;
+    }
+
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
     }
 
     public void setSubscripciones(List<SubForo> subscripciones) {
@@ -137,6 +120,5 @@ public class Usuario {
     public void setEsAdministrador(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
     }
-    
-    
+
 }
