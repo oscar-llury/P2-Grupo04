@@ -38,7 +38,7 @@ public class Entrada implements TipoEntrada{
                 this.contenido.add(entrada);
             }
             case 3: {
-                Ejercicios entrada = new Ejercicios();
+                Ejercicio entrada = new Ejercicio();
                 this.contenido.add(entrada);
             }
             default: {
