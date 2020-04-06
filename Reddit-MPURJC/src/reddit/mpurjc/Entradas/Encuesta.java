@@ -1,5 +1,6 @@
 package reddit.mpurjc.Entradas;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import reddit.mpurjc.Usuario;
@@ -8,10 +9,11 @@ public class Encuesta implements TipoEntrada {
     
     protected String enunciado, opcion ;
     protected int nOpciones;
-    protected List<String> opciones;
+   
     
     
     public Encuesta(){
+        List<String> opciones=new ArrayList<String>();
         System.out.print("Escribe el enunciado de la encuesta: ");
         Scanner scanTexto = new Scanner(System.in);
         this.enunciado = scanTexto.nextLine();
@@ -19,8 +21,8 @@ public class Encuesta implements TipoEntrada {
         System.out.print("Escribe el numero de opciones:");
         this.nOpciones = scanTexto.nextInt();
         
-        for(int i=0;i<nOpciones;i++){
-            System.out.println("Escribe la opcion numero "+ nOpciones);
+        for(int i=1;i<=nOpciones;i++){
+            System.out.println("Escribe la opcion numero "+ i);
             this.opcion=scanTexto.nextLine();
             opciones.add(opcion);
         }
@@ -32,6 +34,8 @@ public class Encuesta implements TipoEntrada {
     @Override
     public boolean validar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+
     }
 
     @Override
