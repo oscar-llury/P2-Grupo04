@@ -15,16 +15,66 @@ public class Entrada implements TipoEntrada{
     public Entrada(){}
     
     public Entrada(Usuario usuario){
+        System.out.print("Time el título: ");
+        Scanner scanTitulo = new Scanner(System.in);
+        
+        this.titulo = scanTitulo.nextLine();
         contenido = new ArrayList<>();
         this.autor = usuario;
         this.verificado = false;
     }
     
+
+    @Override
+    public void mostrar() {
+        if(this.verificado){
+            System.out.println("Título: "+this.titulo);
+            System.err.println("Autor: "+this.autor.getNick());
+            this.contenido.forEach((iter) -> {
+                iter.mostrar();
+            });
+        }else{
+            System.out.println("Esta entrada aun no ha sido verificada por un usuario Administrador.");
+        }
+    }
+    
+    /*------------------------GETTERS------------------------*/
+    public boolean isVerificado() {
+        return this.verificado;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public List<TipoEntrada> getContenido() {
+        return contenido;
+    }
+
+    public Usuario getAutor() {
+        return autor;
+    }
+    
+    /*------------------------SETTERS------------------------*/
+
+    public void setContenido(List<TipoEntrada> contenido) {
+        this.contenido = contenido;
+    }
+    
+    //devuelve true si es valida
+    @Override
+    public boolean validar() {
+        boolean validar = true;
+        for (TipoEntrada iter : this.contenido) {
+            if(!iter.validar()){
+                validar = false;
+            }
+        }
+        this.verificado = validar;
+        return validar;
+    }
+    
     public void construirEntrada(){
-        System.out.print("Time el título: ");
-        Scanner scanTitulo = new Scanner(System.in);
-        this.titulo = scanTitulo.nextLine();
-        
         System.out.print("De que tipo quieres la entrada:\nTexto Plano [1]\n Encuenstas [2]\n Ejercicios [3]");
         Scanner scanTipo = new Scanner(System.in);
         int tipo = scanTipo.nextInt();
@@ -47,30 +97,6 @@ public class Entrada implements TipoEntrada{
                 this.contenido.add(entrada);
             }
         }
-    }
-    
-    //devuelve true si es valida
-    @Override
-    public boolean validar() {
-        boolean validar = true;
-        for (TipoEntrada iter : this.contenido) {
-            if(!iter.validar()){
-                validar = false;
-            }
-        }
-        this.verificado = validar;
-        return validar;
-    }
-
-    @Override
-    public void mostrar() {
-        this.contenido.forEach((iter) -> {
-            iter.mostrar();
-        });
-    }
-
-    public boolean isVerificado() {
-        return verificado;
     }
     
 }
