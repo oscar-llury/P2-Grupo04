@@ -40,13 +40,12 @@ public class Sistema {
         entradaActual.mostrar();
     }
    
-    private SubForo nuevoSubForo(String nombre){
-        SubForo subForoActual = new SubForo(nombre);
-        return subForoActual;
-    }
-
     private boolean esUnicoUsuario(String nick){
         return !listaUsuarios.containsKey(nick);
+    }
+
+    public boolean contieneSubForo (String nombre){
+        return listaSubforos.containsKey(nombre);
     }
    
     private void nuevoUsuario(String nombre, String apellidos, String email, String contraseña){
@@ -61,21 +60,21 @@ public class Sistema {
 
     }
         private boolean evaluadorEmail(String email){
-        int longitud = email.length();
-        int index = email.indexOf("@");
-        String subEmail = email.substring(index+1,longitud);
-        switch (subEmail.toLowerCase()){
-            case "alumnos.urjc.es": {
-                return true;
-            }                       
-            case "urjc.es": {
-                return true;
+            int longitud = email.length();
+            int index = email.indexOf("@");
+            String subEmail = email.substring(index+1,longitud);
+            switch (subEmail.toLowerCase()){
+                case "alumnos.urjc.es": {
+                    return true;
+                }                       
+                case "urjc.es": {
+                    return true;
+                }
+                default: {
+                    System.out.println("Debes introducir un correo de la urjc");
+                    return false;
+                }                
             }
-            default: {
-                System.out.println("Debes introducir un correo de la urjc");
-                return false;
-            }                
         }
-    }
 
 }
