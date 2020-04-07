@@ -7,27 +7,40 @@ public class Sistema {
     
     private HashMap <String, SubForo> listaSubforos;
     private HashMap <String, Usuario> listaUsuarios;
-
     
     public void iniciarForo(){
         SubForo subForoActual;
         Entrada entradaActual;
         Usuario usuarioActual;
 
-        subForoActual = nuevoSubForo();
         
-        //nuevoUsuario(); //Esto es para registrar un usuario
+        System.out.print("Nombre del nuevo SubForo: ");
+        Scanner scan = new Scanner(System.in);
+        String nombreSubForo = scan.nextLine();
+        subForoActual = nuevoSubForo(nombreSubForo);
+        listaSubforos.put(subForoActual.getNombre(),subForoActual);
         
-        usuarioActual = new Usuario();
+        System.out.print("Nombre del nuevo usuario: ");
+        Scanner scanNombre = new Scanner(System.in);
+        String nombreUsuario = scanNombre.nextLine();
+        System.out.print("Apellidos del nuevo usuario: ");
+        Scanner scanApellidos = new Scanner(System.in);
+        String apellidosUsuario = scanApellidos.nextLine();
+        System.out.print("Email del nuevo usuario: ");
+        Scanner scanEmail = new Scanner(System.in);
+        String emailUsuario = scanEmail.nextLine();
+        System.out.print("Contraseña del nuevo usuario: ");
+        Scanner scanContraseña = new Scanner(System.in);
+        String contraseñaUsuario = scanContraseña.nextLine();
+        
+        nuevoUsuario(nombreUsuario, apellidosUsuario, emailUsuario, contraseñaUsuario);
+        listaUsuarios.put(usuarioActual.getNick(),usuarioActual);
         entradaActual = new Entrada(usuarioActual);
         entradaActual.construirEntrada();
         entradaActual.mostrar();
     }
    
-    private SubForo nuevoSubForo(){
-        System.out.print("Nombre del nuevo SubForo: ");
-        Scanner scan = new Scanner(System.in);
-        String nombre = scan.nextLine();
+    private SubForo nuevoSubForo(String nombre){
         SubForo subForoActual = new SubForo(nombre);
         return subForoActual;
     }
@@ -36,28 +49,13 @@ public class Sistema {
         return !listaUsuarios.containsKey(nick);
     }
    
-    private void nuevoUsuario(){
+    private void nuevoUsuario(String nombre, String apellidos, String email, String contraseña){
         boolean unico = true;
         boolean evaluador = true;
-        String email = "";
         while(unico || evaluador){
-            System.out.print("Email del nuevo usuario: ");
-            Scanner scanEmail = new Scanner(System.in);
-            email = scanEmail.nextLine();
             unico = esUnicoUsuario(email);
             evaluador = evaluadorEmail(email);
         }
-        
-        System.out.print("Nombre del nuevo usuario: ");
-        Scanner scanNombre = new Scanner(System.in);
-        String nombre = scanNombre.nextLine();
-        System.out.print("Apellidos del nuevo usuario: ");
-        Scanner scanApellidos = new Scanner(System.in);
-        String apellidos = scanApellidos.nextLine();
-        System.out.print("Contraseña del nuevo usuario: ");
-        Scanner scanContraseña = new Scanner(System.in);
-        String contraseña = scanContraseña.nextLine();
-
         //setusuarioactual
         Usuario usuario = new Usuario (nombre,apellidos,email,contraseña);
 
