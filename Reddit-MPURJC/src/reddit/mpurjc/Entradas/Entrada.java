@@ -7,6 +7,7 @@ import reddit.mpurjc.Usuario;
 
 public class Entrada implements TipoEntrada{
 
+    private int id;
     private String titulo;
     private List<TipoEntrada> contenido;
     private boolean verificado;
@@ -14,11 +15,8 @@ public class Entrada implements TipoEntrada{
     
     public Entrada(){}
     
-    public Entrada(Usuario usuario){
-        System.out.print("Time el título: ");
-        Scanner scanTitulo = new Scanner(System.in);
-        
-        this.titulo = scanTitulo.nextLine();
+    public Entrada(String titulo, Usuario usuario){  
+        this.titulo = titulo;
         contenido = new ArrayList<>();
         this.autor = usuario;
         this.verificado = false;
@@ -37,7 +35,18 @@ public class Entrada implements TipoEntrada{
             System.out.println("Esta entrada aun no ha sido verificada por un usuario Administrador.");
         }
     }
-    
+    //devuelve true si es valida
+    @Override
+    public boolean validar() {
+        boolean validar = true;
+        for (TipoEntrada iter : this.contenido) {
+            if(!iter.validar()){
+                validar = false;
+            }
+        }
+        this.verificado = validar;
+        return validar;
+    } 
     /*------------------------GETTERS------------------------*/
     public boolean isVerificado() {
         return this.verificado;
@@ -54,49 +63,24 @@ public class Entrada implements TipoEntrada{
     public Usuario getAutor() {
         return autor;
     }
+
+    public int getId() {
+        return id;
+    }
     
     /*------------------------SETTERS------------------------*/
 
     public void setContenido(List<TipoEntrada> contenido) {
         this.contenido = contenido;
     }
-    
-    //devuelve true si es valida
-    @Override
-    public boolean validar() {
-        boolean validar = true;
-        for (TipoEntrada iter : this.contenido) {
-            if(!iter.validar()){
-                validar = false;
-            }
-        }
-        this.verificado = validar;
-        return validar;
+    public void addTextoPlano(String s){
+        TextoPlano textoPlano = new TextoPlano(s);
+        this.contenido.add(textoPlano);
     }
-    
-    public void construirEntrada(){
-        System.out.print("De que tipo quieres la entrada:\nTexto Plano [1]\n Encuenstas [2]\n Ejercicios [3]");
-        Scanner scanTipo = new Scanner(System.in);
-        int tipo = scanTipo.nextInt();
-        switch(tipo){
-            case 1: {
-                TextoPlano entrada = new TextoPlano();
-                this.contenido.add(entrada);
-            }
-            case 2: {
-                Encuesta entrada = new Encuesta();
-                this.contenido.add(entrada);
-            }
-            case 3: {
-                Ejercicio entrada = new Ejercicio();
-                this.contenido.add(entrada);
-            }
-            default: {
-                System.out.println("Por defecto la entrada es de Texto Plano");
-                TextoPlano entrada = new TextoPlano();
-                this.contenido.add(entrada);
-            }
-        }
+    public void addEncuesta(){
+
     }
-    
+    public void addEjercicio(){
+
+    }   
 }

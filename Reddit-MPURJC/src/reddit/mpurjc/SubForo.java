@@ -28,7 +28,9 @@ public class SubForo {
         return entradas;
     }
     
-    
+    public boolean contieneEntrada(Entrada entrada){
+        return this.entradas.containsValue(entrada);
+    }
     /*------------------------SETTERS------------------------*/
     
     
@@ -39,5 +41,8 @@ public class SubForo {
     public void setEntradas(HashMap<Integer, Entrada> entradas) {
         this.entradas = entradas;
     }
-
+    
+    public void insertarEntrada(Entrada entrada){
+        this.entradas.put(entrada.getId(), entrada);
+    }
 }

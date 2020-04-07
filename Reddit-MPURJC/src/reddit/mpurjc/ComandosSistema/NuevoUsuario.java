@@ -46,6 +46,7 @@ public class NuevoUsuario extends ComandosSistema {
         
         Usuario usuario = new Usuario (nombre,apellidos,email,pass);
         foro.insertarUsuario(usuario);
+        foro.setUsuarioActual(usuario);
         return true;
     }
 

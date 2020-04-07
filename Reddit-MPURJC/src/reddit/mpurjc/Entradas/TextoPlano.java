@@ -8,10 +8,8 @@ public class TextoPlano implements TipoEntrada {
 
     protected String texto;
 
-    public TextoPlano() {
-        System.out.print("Time el contenido del Texto: ");
-        Scanner scanTexto = new Scanner(System.in);
-        this.texto = scanTexto.nextLine();
+    public TextoPlano(String texto) {
+        this.texto = texto;
     }
     
     //devuelve true si es valida

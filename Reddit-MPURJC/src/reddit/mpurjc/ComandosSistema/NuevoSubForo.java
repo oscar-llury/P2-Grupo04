@@ -18,6 +18,7 @@ public class NuevoSubForo extends ComandosSistema {
         if (!foro.contieneSubForo(s)){
             SubForo nuevoSubForo = new SubForo(s);
             foro.insertarSubForo(nuevoSubForo);
+            foro.setSubForoActual(nuevoSubForo);
             return true;
         } else {
             System.out.println("Ese subforo ya existe.");
