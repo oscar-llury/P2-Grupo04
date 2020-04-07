@@ -42,10 +42,7 @@ public class Usuario {
         return false;
     }
        
-    private String sacarNick(String email){
-        int index = email.indexOf("@");
-        return email.substring(0,index-1).toLowerCase();
-    }
+
     
     private Rol sacarRol(String email){
         int index = email.indexOf("@");
@@ -58,7 +55,10 @@ public class Usuario {
             }               
         }
     }
-    
+    private String sacarNick(String email){
+        int index = email.indexOf("@");
+        return email.substring(0,index-1).toLowerCase();
+    }
     /*------------------------GETTERS------------------------*/
     public String getNick() {
         return nick;

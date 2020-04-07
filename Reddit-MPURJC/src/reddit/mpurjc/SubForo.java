@@ -10,9 +10,8 @@ public class SubForo {
     private String nombre;
     private HashMap<Integer, Entrada> entradas;
 
-    public SubForo() {
-    }
-
+    public SubForo(){}
+    
     public SubForo(String nombre) {
         this.nombre = nombre;
     }

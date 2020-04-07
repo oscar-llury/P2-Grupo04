@@ -1,22 +1,38 @@
 
 package reddit.mpurjc.ComandosSistema;
 
+import reddit.mpurjc.Foro;
+import reddit.mpurjc.SubForo;
+
 public class NuevoSubForo extends ComandosSistema {
 
+    private Foro foro;
+    
+    public NuevoSubForo(Foro foro){
+        this.foro = foro;
+    }
+    
     @Override
     public boolean ejecutar(String s) {
-        SubForo subForoActual = new SubForo(s);
-        if (contieneSubForo(s)){
-            System.out.printl("Ese subforo ya existe.")
-            return false;
-        } else {
+        
+        if (!foro.contieneSubForo(s)){
+            SubForo nuevoSubForo = new SubForo(s);
+            foro.insertarSubForo(nuevoSubForo);
             return true;
+        } else {
+            System.out.println("Ese subforo ya existe.");
+            return false;
         }    
     }
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return s.equals("Nuevo´SubForo");
+    }
+
+    @Override
+    public void setForo(Foro foro) {
+        this.foro = foro;
     }
     
 }
