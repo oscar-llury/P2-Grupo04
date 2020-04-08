@@ -1,51 +1,44 @@
 package reddit.mpurjc.Entradas;
 
-import java.util.Scanner;
 import reddit.mpurjc.Usuario;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Ejercicio implements TipoEntrada {
     
-   private String tituloEj;
-   private String textoExplic;
-   private List<Ejercicio> lista = new ArrayList<Ejercicio>();
-   
-    Ejercicio() {
-       
-    }
+    String enunciado;
+    String subenunciado;
 
-    public Ejercicio(Usuario Usuario) {
-           
-        System.out.println("Vas a crear un ejercicio");
+    public Ejercicio(String s) {
+        int separador = s.indexOf(",");
+        enunciado = s.substring(1, separador);
+        s = s.substring(separador, s.length());
         
-        Scanner scanTituloEj = new Scanner(System.in);
-        this.tituloEj = scanTituloEj.nextLine();
-       
-        Scanner scanTextoExplic = new Scanner(System.in);
-        this.textoExplic = scanTextoExplic.nextLine();
-            
-    }
-
-    public void addEjercicio(Ejercicio ej){
-        lista.add(ej);
+        subenunciado = s;
     }
 
     @Override
     public boolean validar() {
-        for (Ejercicio ej: lista){
-            ej.validar();
-            System.out.println("El ejercicio ha sido validado");
-        }
-       return false;
+        String str = this.enunciado.toLowerCase();
+        String[] words = str.split(" ");
+        String censurado[] = {"idiota","joder","cabron"};
        
-    }
-    @Override
-    public void mostrar() {
+        String str2 = this.subenunciado.toLowerCase();
         
-        System.out.println("El ejercicio ha sido creado satisfactoriamente");
-        System.out.println("Título del Ejercicio: " + this.tituloEj);
-        System.out.println("Descripción del Ejercicio: " + this.textoExplic);
+        for (String word : words){
+            for (String censura : censurado) {
+                if (word.equals(censura)) {
+                    //words[i]=words[i].replaceAll("\\B\\w\\B","*");
+                    return false;
+                }
+            }
+        }
+        return false;
+    }  
+    
+    @Override
+    public void mostrar(){
+        System.out.println("El enunciado del ejercicio es el siguiente: \n" + this.enunciado);
+        System.out.println();
+        System.out.println("El subenunciado del ejercicio es " + this.subenunciado);
     }
     
 }

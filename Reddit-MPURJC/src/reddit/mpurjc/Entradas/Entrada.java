@@ -82,7 +82,8 @@ public class Entrada implements TipoEntrada{
         this.contenido.add(encuesta);
 
     }
-    public void addEjercicio(){
-        
+    public void addEjercicio(String s){
+        Ejercicio ejercicio = new Ejercicio(s);
+        this.contenido.add(ejercicio);    
     }   
 }
