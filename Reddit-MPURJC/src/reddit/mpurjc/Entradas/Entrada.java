@@ -77,10 +77,12 @@ public class Entrada implements TipoEntrada{
         TextoPlano textoPlano = new TextoPlano(s);
         this.contenido.add(textoPlano);
     }
-    public void addEncuesta(){
+    public void addEncuesta(String s){
+        Encuesta encuesta=new Encuesta(s);
+        this.contenido.add(encuesta);
 
     }
     public void addEjercicio(){
-
+        
     }   
 }
