@@ -1,17 +1,68 @@
 package reddit.mpurjc;
 
-/** Autores:
- * Javier Espín Prieto
- * Jorge Utrero Sevillano
- * Miguel Cendrero Ortega
- * Óscar Rivas Melar
- */
-public class Foro {
+import java.util.HashMap;
+import reddit.mpurjc.Entradas.Entrada;
 
-    public static void main(String[] args) {
-        System.out.println("Bienvenido a Reddit URJC 2020");
-        Sistema s= new Sistema();
-        s.iniciarForo();
+public class Foro {
+    
+    private HashMap <String, SubForo> listaSubforos;
+    private HashMap <String, Usuario> listaUsuarios;
+    private SubForo subForoActual;
+    private Entrada entradaActual;
+    private Usuario usuarioActual;
+    
+    public Foro(){
+        this.entradaActual = new Entrada();
+        this.subForoActual = new SubForo();
+        this.usuarioActual = new Usuario();
+    }
+    
+    public Foro(Entrada entrada, SubForo subForo, Usuario usuario){
+        this.entradaActual = entrada;
+        this.subForoActual = subForo;
+        this.usuarioActual = usuario;
+    }
+   
+    public boolean contieneUsuario(String nick){
+        return !listaUsuarios.containsKey(nick);
+    }
+
+    public boolean contieneSubForo (String nombre){
+        return listaSubforos.containsKey(nombre);
+    }
+   
+    public void insertarSubForo(SubForo subForo){
+        this.listaSubforos.put(subForo.getNombre() , subForo);
+    }
+    
+    public void insertarUsuario(Usuario usuario){
+        this.listaUsuarios.put(usuario.getNick(),usuario);
+    }
+
+/*------------------------SETTERS------------------------*/
+    public void setSubForoActual(SubForo subForoActual) {
+        this.subForoActual = subForoActual;
+    }
+
+    public void setEntradaActual(Entrada entradaActual) {
+        this.entradaActual = entradaActual;
+    }
+
+    public void setUsuarioActual(Usuario usuarioActual) {
+        this.usuarioActual = usuarioActual;
+    }
+/*------------------------GETTERS------------------------*/
+
+    public SubForo getSubForoActual() {
+        return subForoActual;
+    }
+
+    public Entrada getEntradaActual() {
+        return entradaActual;
+    }
+
+    public Usuario getUsuarioActual() {
+        return usuarioActual;
     }
     
 }
