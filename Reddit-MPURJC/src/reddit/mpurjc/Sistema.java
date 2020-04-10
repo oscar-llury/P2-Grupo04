@@ -2,7 +2,6 @@ package reddit.mpurjc;
 
 import java.util.Scanner;
 import reddit.mpurjc.ComandosSistema.*;
-import reddit.mpurjc.Entradas.Entrada;
 /** Autores:
  * Javier Espín Prieto
  * Jorge Utrero Sevillano

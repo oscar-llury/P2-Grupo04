@@ -1,7 +1,5 @@
 package reddit.mpurjc.Entradas;
 
-import reddit.mpurjc.Usuario;
-
 public class Ejercicio implements TipoEntrada {
     
     String enunciado;
@@ -20,9 +18,7 @@ public class Ejercicio implements TipoEntrada {
         String str = this.enunciado.toLowerCase();
         String[] words = str.split(" ");
         String censurado[] = {"idiota","joder","cabron"};
-       
-        String str2 = this.subenunciado.toLowerCase();
-        
+
         for (String word : words){
             for (String censura : censurado) {
                 if (word.equals(censura)) {
@@ -30,8 +26,18 @@ public class Ejercicio implements TipoEntrada {
                     return false;
                 }
             }
+        }        
+        String str2 = this.subenunciado.toLowerCase();
+        String[] words2 = str2.split(" ");
+        for (String word : words2){
+            for (String censura : censurado) {
+                if (word.equals(censura)) {
+                    //words[i]=words[i].replaceAll("\\B\\w\\B","*");
+                    return false;
+                }
+            }
         }
-        return false;
+        return true;
     }  
     
     @Override

@@ -6,38 +6,32 @@ import java.util.List;
 
 public class Encuesta implements TipoEntrada {    
     
-    protected String  enunciado,opcion ;
+    protected String  enunciado;
     protected List<String> respuestas;
    
     public Encuesta(String s){
         
         List<String> respuestas=new ArrayList<String>();
-        
         int separador=s.indexOf(",");
-        
         enunciado=s.substring(1,separador);
         
         s = s.substring(separador,s.length());
-        
+        String opcion;
         while(separador != -1){   
             
             separador=s.indexOf(",");
-            opcion=s.substring(1, separador);
+            opcion = s.substring(1, separador);
             respuestas.add(opcion);
-            s=s.substring(separador,s.length());
+            s = s.substring(separador,s.length());
         }
-        
-        
-       
     }
  
     
 
     @Override
     public boolean validar() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        
-       String str = this.enunciado.toLowerCase();
+
+        String str = this.enunciado.toLowerCase();
         String[] words = str.split(" ");
         String censurado[]={"idiota","joder","cabron"};
         
@@ -52,12 +46,12 @@ public class Encuesta implements TipoEntrada {
             }
         }
         
-        //soluciones
+        //recorro soluciones
         
         Iterator<String> it = respuestas.iterator();
         while(it.hasNext()){
-            str=it.next().toLowerCase();
-             words = str.split(" ");
+            str = it.next().toLowerCase();
+            words = str.split(" ");
              
             for (String word : words) {
                 for (String censura : censurado) {
@@ -76,19 +70,14 @@ public class Encuesta implements TipoEntrada {
 
     @Override
     public void mostrar() {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         int i=1;
-        
         System.out.println("El enunciado de la ecuesta es: " + enunciado);
-        
         Iterator<String> it = respuestas.iterator();
         
         while(it.hasNext()){
             System.out.println("la opcion " + i +  ":  "+ it.next());
             i++;
         }
-        
         it.remove();
     }
-    
 }
