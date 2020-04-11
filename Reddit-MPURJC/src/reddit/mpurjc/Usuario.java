@@ -112,6 +112,10 @@ public class Usuario {
     public void setSubscripciones(List<SubForo> subscripciones) {
         this.subscripciones = subscripciones;
     }
+    
+    public void addSubscripcion(SubForo subforo){
+        this.subscripciones.add(subforo);
+    }
 
     public void setPenalizacion(Penalizacion penalizacion) {
         this.penalizacion = penalizacion;
@@ -120,5 +124,5 @@ public class Usuario {
     public void setEsAdministrador(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
     }
-
+    
 }
