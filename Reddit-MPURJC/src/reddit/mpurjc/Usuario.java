@@ -116,6 +116,10 @@ public class Usuario {
     public void addSubscripcion(SubForo subforo){
         this.subscripciones.add(subforo);
     }
+    
+    public void removeSubscripcion(SubForo subforo){
+        this.subscripciones.remove(subforo);
+    }
 
     public void setPenalizacion(Penalizacion penalizacion) {
         this.penalizacion = penalizacion;
