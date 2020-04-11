@@ -14,6 +14,7 @@ public class Comentario {
     private List<Comentario> comentarios;
     private Usuario autor;
     private int positivo, negativo;
+    private boolean verificado;
     
     public Comentario(String texto){
         this.texto = texto;
@@ -45,6 +46,27 @@ public class Comentario {
             }
         });
         
+       
+        
         return ("Positivos: "+this.positivo+", Negativos: "+this.negativo);
+    }
+    
+    public void votarComentario(Usuario votante, boolean voto){
+        boolean valido = verificado;
+        this.puntuaciones.forEach((Usuario k, Votacion v) -> {
+            if (k.getNick().equals(votante.getNick())){
+                verificado=false;
+            }
+        });
+        if(verificado){
+            Votacion votacion = new Votacion(voto);
+            this.puntuaciones.put(votante,votacion);
+        }else{
+            Votacion votoAnterior = this.puntuaciones.get(votante);
+            if(!votoAnterior.equals(voto)){
+                votoAnterior.votar(voto);
+            }
+        }
+        this.verificado=valido;
     }
 }
