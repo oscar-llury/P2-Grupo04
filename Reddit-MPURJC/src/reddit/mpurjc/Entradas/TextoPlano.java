@@ -14,7 +14,7 @@ public class TextoPlano implements TipoEntrada {
     
     //devuelve true si es valida
     @Override
-    public boolean validar() {
+    public boolean verificar() {
         String str = this.texto.toLowerCase();
         String[] words = str.split(" ");
         String censurado[]={"idiota","joder","cabron"};

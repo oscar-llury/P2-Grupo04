@@ -16,6 +16,7 @@ public class Votacion {
     public boolean getVotacion(){
         return this.votacion;
     }
+    
     public boolean equals(boolean comparar){
         return this.votacion == comparar;
     }

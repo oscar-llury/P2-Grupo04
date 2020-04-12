@@ -29,7 +29,7 @@ public class Encuesta implements TipoEntrada {
     
 
     @Override
-    public boolean validar() {
+    public boolean verificar() {
 
         String str = this.enunciado.toLowerCase();
         String[] words = str.split(" ");

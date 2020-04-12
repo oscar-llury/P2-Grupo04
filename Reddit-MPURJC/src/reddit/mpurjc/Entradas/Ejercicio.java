@@ -14,7 +14,7 @@ public class Ejercicio implements TipoEntrada {
     }
 
     @Override
-    public boolean validar() {
+    public boolean verificar() {
         String str = this.enunciado.toLowerCase();
         String[] words = str.split(" ");
         String censurado[] = {"idiota","joder","cabron"};

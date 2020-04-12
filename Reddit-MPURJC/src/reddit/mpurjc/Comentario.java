@@ -14,14 +14,16 @@ public class Comentario {
     private List<Comentario> comentarios;
     private Usuario autor;
     private int positivo, negativo;
-    private boolean verificado;
+    private boolean validado;
     
-    public Comentario(String texto){
+    public Comentario(Usuario autor, String texto){
         this.texto = texto;
+        this.autor = autor;
         this.puntuaciones = new HashMap<>();
         this.comentarios = new ArrayList<>();
         this.negativo=0;
         this.positivo=0;
+        this.validado = false;
     }
     
     public void mostrar(){
@@ -45,20 +47,17 @@ public class Comentario {
                 this.negativo++;
             }
         });
-        
-       
-        
         return ("Positivos: "+this.positivo+", Negativos: "+this.negativo);
     }
     
     public void votarComentario(Usuario votante, boolean voto){
-        boolean valido = verificado;
+        boolean valido = validado;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
             if (k.getNick().equals(votante.getNick())){
-                verificado=false;
+                validado=false;
             }
         });
-        if(verificado){
+        if(validado){
             Votacion votacion = new Votacion(voto);
             this.puntuaciones.put(votante,votacion);
         }else{
@@ -67,6 +66,33 @@ public class Comentario {
                 votoAnterior.votar(voto);
             }
         }
-        this.verificado=valido;
+        this.validado=valido;
+    }
+    
+    public void addComentario(Comentario comentarios) {
+        this.comentarios.add(comentarios);
+    }
+    
+    public boolean validar() {
+        String str = this.texto.toLowerCase();
+        String[] words = str.split(" ");
+        String censurado[]={"idiota","joder","cabron"};        
+        for (String word : words) {
+            for (String censura : censurado) {
+                if (word.equals(censura)) {
+                    //words[i]=words[i].replaceAll("\\B\\w\\B","*");
+                    return false;
+                }
+            }
+        }
+        Iterator<Comentario> it = comentarios.iterator();
+        while(it.hasNext()){
+            it.next().validar();
+        }
+        return true;
+    }
+    
+    public boolean isValidado(){
+        return this.validado;
     }
 }

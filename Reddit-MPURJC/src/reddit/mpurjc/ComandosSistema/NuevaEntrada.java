@@ -11,10 +11,10 @@ public class NuevaEntrada extends ComandosSistema {
     private Usuario usuarioActual;
     private SubForo subForoActual;
 
-    public NuevaEntrada(Foro foro, SubForo subForo, Usuario usuario) {
+    public NuevaEntrada(Foro foro) {
         this.foro = foro;
-        this.usuarioActual = usuario;
-        this.subForoActual = subForo;
+        this.usuarioActual = foro.getUsuarioActual();
+        this.subForoActual = foro.getSubForoActual();
     }
  
     @Override
@@ -52,6 +52,8 @@ public class NuevaEntrada extends ComandosSistema {
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;
+        this.usuarioActual = foro.getUsuarioActual();
+        this.subForoActual = foro.getSubForoActual();
     }
     
 }

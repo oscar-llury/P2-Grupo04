@@ -2,7 +2,6 @@ package reddit.mpurjc.Entradas;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import reddit.mpurjc.Comentario;
 import reddit.mpurjc.Usuario;
@@ -37,21 +36,25 @@ public class Entrada implements TipoEntrada{
     public void mostrar() {
         if(this.verificado){
             System.out.println("Título: "+this.titulo);
-            System.err.println("Autor: "+this.autor.getNick());
+            System.out.println("Autor: "+this.autor.getNick());
             System.out.println("Puntuación: "+ contarVotos());
             this.contenido.forEach((iter) -> {
+                iter.mostrar();
+            });
+            System.out.println("Comentarios: ");
+            this.comentarios.forEach((iter) -> {
                 iter.mostrar();
             });
         }else{
             System.out.println("Esta entrada aun no ha sido verificada por un usuario Administrador.");
         }
     }
-    //devuelve true si es valida
+    //devuelve true si es valido su contenido (tipo de entrada)
     @Override
-    public boolean validar() {
+    public boolean verificar() {
         boolean validar = true;
         for (TipoEntrada iter : this.contenido) {
-            if(!iter.validar()){
+            if(!iter.verificar()){
                 validar = false;
             }
         }
@@ -69,9 +72,9 @@ public class Entrada implements TipoEntrada{
                 this.negativo++;
             }
         });
-        
         return ("Positivos: "+this.positivo+", Negativos: "+this.negativo);
     }
+    
     public void votarEntrada(Usuario votante, boolean voto){
         boolean valido = verificado;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
@@ -116,10 +119,12 @@ public class Entrada implements TipoEntrada{
     public void setContenido(List<TipoEntrada> contenido) {
         this.contenido = contenido;
     }
+    
     public void addTextoPlano(String s){
         TextoPlano textoPlano = new TextoPlano(s);
         this.contenido.add(textoPlano);
     }
+    
     public void addEncuesta(String s){
         Encuesta encuesta=new Encuesta(s);
         this.contenido.add(encuesta);
@@ -128,5 +133,10 @@ public class Entrada implements TipoEntrada{
     public void addEjercicio(String s){
         Ejercicio ejercicio = new Ejercicio(s);
         this.contenido.add(ejercicio);    
-    }   
+    }  
+
+    public void addComentario(Comentario comentarios) {
+        this.comentarios.add(comentarios);
+    }
+    
 }
