@@ -2,6 +2,7 @@ package reddit.mpurjc;
 
 import java.util.HashMap;
 import reddit.mpurjc.Entradas.Entrada;
+import reddit.mpurjc.SubForo;
 
 public class Foro {
     
@@ -55,6 +56,11 @@ public class Foro {
 
     public SubForo getSubForoActual() {
         return subForoActual;
+    }
+    
+    public SubForo getSubForo(String s){
+        SubForo subforo= new SubForo(s);
+       return subforo;
     }
 
     public Entrada getEntradaActual() {

@@ -24,11 +24,13 @@ public class NuevaSubscripcion extends ComandosSistema {
         //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    
         if(!foro.contieneSubForo(s)){
-            SubForo nuevoSubForo = new SubForo(s);
-            usuarioActual.addSubscripcion(nuevoSubForo);
+           
+           subforo=foro.getSubForo(s);
+           usuarioActual.addSubscripcion(subforo);
+           
             return true;
         }else{
-        return false;
+            return false;
         }
     }
 
