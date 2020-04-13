@@ -40,7 +40,8 @@ public class NuevaEntrada extends ComandosSistema {
                 //entrada.addEjercicio();
             }
             default: {
-                System.out.println("Por defecto la entrada es de Texto Plano");
+                System.out.println("No se ha podido generar la entrada.");
+                return false;
 
             }
         }
