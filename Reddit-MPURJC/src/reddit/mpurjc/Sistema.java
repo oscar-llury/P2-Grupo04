@@ -22,12 +22,14 @@ public class Sistema {
         NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(reddit);
         NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);
         ComentarEntrada comandoNuevoComentarioEntrada = new ComentarEntrada(reddit);
+        VotarComentario comandoVotarComentario = new VotarComentario(reddit);
         //Iniciar demostrador
         comandoNuevoSubForo.ejecutar("SubForo 1");
-        comandoNuevoUsuario.ejecutar("NombreUsuario,ApellidosUsuario,EmailUsuario,ContraseñaUsuario");
+        comandoNuevoUsuario.ejecutar("NombreUsuario,ApellidosUsuario,EmailUsuario@urjc.es,ContraseñaUsuario");
         comandoNuevaEntrada.ejecutar("TituloEntrada,Texto Plano, esto es el texto del Texto Plano.");
 
         comandoNuevoComentarioEntrada.ejecutar("Esto es un comentario");
+        comandoVotarComentario.ejecutar("(1) hola");
         
         /*entradaActual = new Entrada(usuarioActual);
         entradaActual.construirEntrada();

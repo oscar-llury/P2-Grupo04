@@ -15,23 +15,21 @@ public class NuevoUsuario extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
         int separador = s.indexOf(",");
-        String nombre = s.substring(1,separador);
+        String nombre = s.substring(0,separador);
         
-        s = s.substring(separador,s.length());
-        
-        separador = s.indexOf(",");
-        String apellidos = s.substring(1,separador);
-        
-        s = s.substring(separador,s.length());
+        s = s.substring(separador+1,s.length());
         
         separador = s.indexOf(",");
-        String email = s.substring(1,separador);
+        String apellidos = s.substring(0,separador);
         
-        s = s.substring(separador,s.length());
+        s = s.substring(separador+1,s.length());
         
-        String pass = s;
+        separador = s.indexOf(",");
+        String email = s.substring(0,separador);
         
-        boolean unico = true;
+        s = s.substring(separador+1,s.length());
+        
+        boolean unico = false;
         boolean evaluador = true;
         while (!(unico || evaluador)){
             if(!evaluador){
@@ -40,11 +38,13 @@ public class NuevoUsuario extends ComandosSistema {
                 Scanner scan = new Scanner(System.in);
                 email = scan.nextLine();
             }
-            unico = !foro.contieneUsuario(sacarNick(email));
+            if(!foro.sinUsuarios()){
+                unico = foro.contieneUsuario(sacarNick(email));
+            }
             evaluador = evaluadorEmail(email);
         }
         
-        Usuario usuario = new Usuario (nombre,apellidos,email,pass);
+        Usuario usuario = new Usuario (nombre,apellidos,email,s);
         foro.insertarUsuario(usuario);
         foro.setUsuarioActual(usuario);
         return true;

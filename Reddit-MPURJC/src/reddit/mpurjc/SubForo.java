@@ -14,6 +14,7 @@ public class SubForo {
     
     public SubForo(String nombre) {
         this.nombre = nombre;
+        this.entradas = new HashMap();
     }
     
     

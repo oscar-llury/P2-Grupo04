@@ -12,9 +12,8 @@ public class Foro {
     private Usuario usuarioActual;
     
     public Foro(){
-        this.entradaActual = new Entrada();
-        this.subForoActual = new SubForo();
-        this.usuarioActual = new Usuario();
+        this.listaSubforos = new HashMap();
+        this.listaUsuarios = new HashMap();
     }
     
     public Foro(Entrada entrada, SubForo subForo, Usuario usuario){
@@ -52,7 +51,14 @@ public class Foro {
         this.usuarioActual = usuarioActual;
     }
 /*------------------------GETTERS------------------------*/
-
+    public boolean sinSubForos(){
+        return this.listaSubforos.isEmpty();
+    }
+    
+    public boolean sinUsuarios(){
+        return this.listaUsuarios.isEmpty();
+    } 
+    
     public SubForo getSubForoActual() {
         return subForoActual;
     }

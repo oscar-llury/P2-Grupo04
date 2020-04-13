@@ -16,7 +16,7 @@ public class ComentarComentario extends ComandosSistema {
         this.foro = foro;
         this.usuarioActual = foro.getUsuarioActual();
         this.entradaActual = foro.getEntradaActual();
-        this.comentarioActual = foro.getComentarioActual();
+        //this.comentarioActual = foro.getComentarioActual();
     }
     
     @Override
@@ -41,7 +41,7 @@ public class ComentarComentario extends ComandosSistema {
         this.foro = foro;
         this.usuarioActual = foro.getUsuarioActual();
         this.entradaActual = foro.getEntradaActual();
-        this.comentarioActual = foro.getComentarioActual();
+        //this.comentarioActual = foro.getComentarioActual();
     }
     
 }

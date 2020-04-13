@@ -17,7 +17,7 @@ public class Administrador extends reddit.mpurjc.Usuario {
     public boolean validarTodasEntradas(){
         boolean valido = true;
         for (Entrada validar : pendientes) {
-            if(!validar.validar()){
+            if(!validar.verificar()){
                 valido = false;
             }
         }

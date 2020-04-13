@@ -50,23 +50,27 @@ public class Comentario {
         return ("Positivos: "+this.positivo+", Negativos: "+this.negativo);
     }
     
-    public void votarComentario(Usuario votante, boolean voto){
+    public boolean votarComentario(Usuario votante, boolean voto){
         boolean valido = validado;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
             if (k.getNick().equals(votante.getNick())){
                 validado=false;
             }
         });
+        boolean devolver = false;
         if(validado){
             Votacion votacion = new Votacion(voto);
             this.puntuaciones.put(votante,votacion);
+            devolver = true;
         }else{
             Votacion votoAnterior = this.puntuaciones.get(votante);
             if(!votoAnterior.equals(voto)){
                 votoAnterior.votar(voto);
+                devolver = true;
             }
         }
         this.validado=valido;
+        return devolver;
     }
     
     public void addComentario(Comentario comentarios) {

@@ -118,6 +118,10 @@ public class Entrada implements TipoEntrada{
         return id;
     }
     
+    public Comentario getComentarioPorOrden(int i){
+        return this.comentarios.get(i);
+    }
+    
     /*------------------------SETTERS------------------------*/
 
     public void setContenido(List<TipoEntrada> contenido) {
