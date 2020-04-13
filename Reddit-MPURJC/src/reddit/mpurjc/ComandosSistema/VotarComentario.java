@@ -22,6 +22,7 @@ public class VotarComentario extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
         setForo(this.foro);
+        s = s.replace(" ","").toLowerCase();
         int ini = s.indexOf("(");
         int fin = s.indexOf(")");
         int profundidad = contarPuntosDeProfundidad(s.substring(ini+1,fin));
@@ -37,7 +38,7 @@ public class VotarComentario extends ComandosSistema {
         }
         Comentario comentario1 = this.entradaActual.getComentarioPorOrden(profundidad);
         boolean voto;
-        switch(s.substring(fin+2)){
+        switch(s.substring(fin+1)){
             case "like": voto = true;
                          break;
             case "dislike": voto = false;

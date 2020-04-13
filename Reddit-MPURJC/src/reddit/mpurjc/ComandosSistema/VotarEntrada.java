@@ -20,10 +20,19 @@ public class VotarEntrada extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
         setForo(this.foro);
+        s = s.replace(" ","").toLowerCase();
         int ini = s.indexOf("(");
         int fin = s.indexOf(")");
         int orden = Integer.parseInt(s.substring(ini+1,fin));
-        boolean voto = Boolean.valueOf(s.substring(fin+1));
+        boolean voto;
+        switch(s.substring(fin+1)){
+            case "like": voto = true;
+                         break;
+            case "dislike": voto = false;
+                         break;
+            default: voto = false;
+                        break;
+        }
         Entrada entradaVotar = this.subForoActual.getEntradaPorOrden(orden);  
         boolean error = entradaVotar.votarEntrada(usuarioActual, voto);
         entradaVotar.contarVotos();
