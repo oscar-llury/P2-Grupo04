@@ -36,7 +36,7 @@ public class Sistema {
         
         comandoNuevoComentarioEntrada.ejecutar("Esto es un comentario");
         
-        comandoVotarComentario.ejecutar("(1) true");
+        comandoVotarComentario.ejecutar("(1) dislike");
         
         comandoVotarEntrada.ejecutar("(1)true");
         

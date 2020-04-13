@@ -36,7 +36,15 @@ public class VotarComentario extends ComandosSistema {
             }
         }
         Comentario comentario1 = this.entradaActual.getComentarioPorOrden(profundidad);
-        boolean voto = Boolean.valueOf(s.substring(fin+2));
+        boolean voto;
+        switch(s.substring(fin+2)){
+            case "like": voto = true;
+                         break;
+            case "dislike": voto = false;
+                         break;
+            default: voto = false;
+                        break;
+        }
         return comentario1.votarComentario(usuarioActual, voto);
     }
 
