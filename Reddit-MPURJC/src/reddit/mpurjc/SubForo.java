@@ -19,7 +19,9 @@ public class SubForo {
     
     
     /*------------------------GETTERS------------------------*/
-
+    public int contarEntradas(){
+        return this.entradas.size();
+    }
     
     public String getNombre() {
         return nombre;
@@ -27,6 +29,11 @@ public class SubForo {
 
     public HashMap<Integer, Entrada> getEntradas() {
         return entradas;
+    }
+    
+    public Entrada getEntradaPorOrden(int i){
+        Integer inT = new Integer(i);
+        return this.entradas.get(inT);
     }
     
     public boolean contieneEntrada(Entrada entrada){

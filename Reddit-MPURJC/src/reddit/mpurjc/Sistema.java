@@ -1,6 +1,5 @@
 package reddit.mpurjc;
 
-import java.util.Scanner;
 import reddit.mpurjc.ComandosSistema.*;
 /** Autores:
  * Javier Espín Prieto
@@ -23,6 +22,7 @@ public class Sistema {
         NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);
         ComentarEntrada comandoNuevoComentarioEntrada = new ComentarEntrada(reddit);
         VotarComentario comandoVotarComentario = new VotarComentario(reddit);
+        VotarEntrada comandoVotarEntrada = new VotarEntrada(reddit);
         ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
         //Iniciar demostrador
         
@@ -37,6 +37,8 @@ public class Sistema {
         comandoNuevoComentarioEntrada.ejecutar("Esto es un comentario");
         
         comandoVotarComentario.ejecutar("(1) true");
+        
+        comandoVotarEntrada.ejecutar("(1)true");
         
         /*entradaActual = new Entrada(usuarioActual);
         entradaActual.construirEntrada();

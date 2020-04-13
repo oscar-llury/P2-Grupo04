@@ -23,7 +23,13 @@ public class NuevaEntrada extends ComandosSistema {
         int index = s.indexOf(",");
         String tituloEntrada = s.substring(0,index);
         s = s.substring(index+1, s.length());
-        Entrada entrada = new Entrada(tituloEntrada,usuarioActual);
+        int id;
+        if(subForoActual.contarEntradas()==0){
+            id = 1;
+        }else{
+            id = subForoActual.contarEntradas();
+        }
+        Entrada entrada = new Entrada(id,tituloEntrada,usuarioActual);
         
         index = s.indexOf(",");
         String tipoEntrada = s.substring(0,index).toLowerCase();

@@ -20,7 +20,7 @@ public class Entrada implements TipoEntrada{
     
     public Entrada(){}
     
-    public Entrada(String titulo, Usuario usuario){  
+    public Entrada(int id, String titulo, Usuario usuario){  
         this.titulo = titulo;
         contenido = new ArrayList<>();
         this.autor = usuario;
@@ -29,6 +29,7 @@ public class Entrada implements TipoEntrada{
         this.comentarios = new ArrayList<>();
         this.negativo=0;
         this.positivo=0;
+        this.id = id;
     }
     
 
