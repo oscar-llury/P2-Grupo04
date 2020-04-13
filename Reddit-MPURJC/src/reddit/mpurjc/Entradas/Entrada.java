@@ -75,23 +75,27 @@ public class Entrada implements TipoEntrada{
         return ("Positivos: "+this.positivo+", Negativos: "+this.negativo);
     }
     
-    public void votarEntrada(Usuario votante, boolean voto){
+    public boolean votarEntrada(Usuario votante, boolean voto){
         boolean valido = verificado;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
             if (k.getNick().equals(votante.getNick())){
                 verificado=false;
             }
         });
+        boolean devolver = false;
         if(verificado){
             Votacion votacion = new Votacion(voto);
             this.puntuaciones.put(votante,votacion);
+            devolver = true;
         }else{
             Votacion votoAnterior = this.puntuaciones.get(votante);
             if(!votoAnterior.equals(voto)){
                 votoAnterior.votar(voto);
+                devolver = true;
             }
         }
         this.verificado=valido;
+        return devolver;
     }
     /*------------------------GETTERS------------------------*/
     public boolean isVerificado() {
