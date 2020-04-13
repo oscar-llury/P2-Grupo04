@@ -19,17 +19,19 @@ public class NuevaEntrada extends ComandosSistema {
 
     @Override
     public boolean ejecutar(String s) {
+        setForo(this.foro);
         int index = s.indexOf(",");
         String tituloEntrada = s.substring(0,index);
-        s = s.substring(index, s.length());
+        s = s.substring(index+1, s.length());
         Entrada entrada = new Entrada(tituloEntrada,usuarioActual);
         
         index = s.indexOf(",");
         String tipoEntrada = s.substring(0,index).toLowerCase();
-        s = s.substring(index, s.length());
+        s = s.substring(index+1, s.length());
         switch(tipoEntrada){
             case "texto plano": {
                 entrada.addTextoPlano(s);
+                break;
             }
             case "encuesta": {
                 //entrada.addEncuesta();
@@ -44,6 +46,7 @@ public class NuevaEntrada extends ComandosSistema {
         }
         this.subForoActual.insertarEntrada(entrada);
         foro.setEntradaActual(entrada);
+        foro.getAdministrador().addPendientes(entrada);
         return true;
     }
 

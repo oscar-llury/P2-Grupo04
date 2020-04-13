@@ -119,7 +119,7 @@ public class Entrada implements TipoEntrada{
     }
     
     public Comentario getComentarioPorOrden(int i){
-        return this.comentarios.get(i);
+        return this.comentarios.get(i-1);
     }
     
     /*------------------------SETTERS------------------------*/

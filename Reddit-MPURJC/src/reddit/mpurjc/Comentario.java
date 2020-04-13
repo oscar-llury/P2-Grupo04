@@ -52,6 +52,7 @@ public class Comentario {
     
     public boolean votarComentario(Usuario votante, boolean voto){
         boolean valido = validado;
+        this.validado = true;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
             if (k.getNick().equals(votante.getNick())){
                 validado=false;
@@ -70,6 +71,7 @@ public class Comentario {
             }
         }
         this.validado=valido;
+        contarVotos();
         return devolver;
     }
     
@@ -84,8 +86,7 @@ public class Comentario {
         for (String word : words) {
             for (String censura : censurado) {
                 if (word.equals(censura)) {
-                    //words[i]=words[i].replaceAll("\\B\\w\\B","*");
-                    return false;
+                    word=word.replaceAll("\\B\\w\\B","*");
                 }
             }
         }

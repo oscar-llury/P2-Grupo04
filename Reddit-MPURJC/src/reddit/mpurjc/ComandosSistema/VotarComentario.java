@@ -21,18 +21,22 @@ public class VotarComentario extends ComandosSistema {
     
     @Override
     public boolean ejecutar(String s) {
-        
+        setForo(this.foro);
         int ini = s.indexOf("(");
         int fin = s.indexOf(")");
         int profundidad = contarPuntosDeProfundidad(s.substring(ini+1,fin));
         int punto1 = s.indexOf("."); 
-        int orden = Integer.parseInt(s.substring(ini+1,punto1));
-        Comentario comentario1 = this.entradaActual.getComentarioPorOrden(orden);
         
-        for(int i=2; i<profundidad; i++){
-            
+        
+        
+        if (punto1!=-1){
+            int orden = Integer.parseInt(s.substring(ini+1,punto1));
+            for(int i=2; i<profundidad; i++){
+                
+            }
         }
-        boolean voto = Boolean.valueOf(s.substring(fin+1));
+        Comentario comentario1 = this.entradaActual.getComentarioPorOrden(profundidad);
+        boolean voto = Boolean.valueOf(s.substring(fin+2));
         return comentario1.votarComentario(usuarioActual, voto);
     }
 
@@ -44,8 +48,8 @@ public class VotarComentario extends ComandosSistema {
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;
-        this.usuarioActual = foro.getUsuarioActual();
-        this.entradaActual = foro.getEntradaActual();
+        this.usuarioActual = this.foro.getUsuarioActual();
+        this.entradaActual = this.foro.getEntradaActual();
     }
     
     private int contarPuntosDeProfundidad(String str){

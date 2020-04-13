@@ -1,17 +1,17 @@
 
 package reddit.mpurjc;
 
+import java.util.ArrayList;
 import java.util.List;
 import reddit.mpurjc.Entradas.Entrada;
 
 public class Administrador extends reddit.mpurjc.Usuario {
     
     private List<Entrada> pendientes;
-    private boolean esAdministrador;
 
-    public Administrador (String nombre, String apellidos, String email, String contraseña){
-        super(nombre, apellidos, email, contraseña);
-        this.esAdministrador = true;
+    public Administrador (String nombre, String apellidos, String email, String contraseña,boolean esAdministrador){
+        super(nombre, apellidos, email, contraseña,esAdministrador);
+        this.pendientes = new ArrayList();
     }
     
     public boolean validarTodasEntradas(){
@@ -33,14 +33,16 @@ public class Administrador extends reddit.mpurjc.Usuario {
         }
         return pendiente;
     }
-    
-    @Override
-    public void setEsAdministrador(boolean esAdministrador){
-        this.esAdministrador = esAdministrador;
+
+    public Administrador getEsAdministrador() {
+        return this;
     }
 
-    public boolean getEsAdministrador() {
-        return esAdministrador;
+    public void addPendientes(Entrada pendiente) {
+        this.pendientes.add(pendiente);
     }
-    
+     
+    public void limpiarPendientes(){
+        this.pendientes.clear();
+    }
 }

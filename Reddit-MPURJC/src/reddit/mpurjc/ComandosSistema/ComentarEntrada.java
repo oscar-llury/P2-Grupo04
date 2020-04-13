@@ -19,10 +19,16 @@ public class ComentarEntrada extends ComandosSistema {
     
     @Override
     public boolean ejecutar(String s) {
+        setForo(this.foro);
         if(this.entradaActual.isVerificado()){
             Comentario nuevoComentario = new Comentario(usuarioActual,s);
-            this.entradaActual.addComentario(nuevoComentario);
-            return true;
+            if(nuevoComentario.validar()){
+                this.entradaActual.addComentario(nuevoComentario);
+                return true;
+            }else{
+                System.out.println("El comentario no es aceptado;");
+                return false;
+            }
         }else{
             System.out.println("No se ha podido comentar la entrada.");
             return false;
@@ -37,8 +43,8 @@ public class ComentarEntrada extends ComandosSistema {
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;
-        this.usuarioActual = foro.getUsuarioActual();
-        this.entradaActual = foro.getEntradaActual();
+        this.usuarioActual = this.foro.getUsuarioActual();
+        this.entradaActual = this.foro.getEntradaActual();
     }
     
 }

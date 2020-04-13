@@ -34,6 +34,17 @@ public class Usuario {
         this.esAdministrador = FALSE;
     }
 
+    public Usuario (String nombre, String apellidos, String email, String contraseña, boolean esAdministrador){
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email.toLowerCase();
+        this.nick = sacarNick(email);
+        this.contraseña = contraseña;
+        this.rol = ADMINISTRADOR;
+        this.subscripciones = new ArrayList<>();
+        this.esAdministrador = esAdministrador;
+    }
+    
     public boolean inicioPermitido(){
         return false;
     }
@@ -57,7 +68,7 @@ public class Usuario {
     }
     private String sacarNick(String email){
         int index = email.indexOf("@");
-        return email.substring(0,index-1).toLowerCase();
+        return email.substring(0,index).toLowerCase();
     }
     /*------------------------GETTERS------------------------*/
     public String getNick() {
@@ -117,8 +128,10 @@ public class Usuario {
         this.penalizacion = penalizacion;
     }
 
-    public void setEsAdministrador(boolean esAdministrador) {
+    public void setEsAdmin(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
+        Administrador admin = new Administrador(this.nombre,this.apellidos,this.email,this.contraseña,true);
+        
     }
 
 }
