@@ -16,29 +16,32 @@ public class NuevaEntrada extends ComandosSistema {
         this.usuarioActual = foro.getUsuarioActual();
         this.subForoActual = foro.getSubForoActual();
     }
- 
+
     @Override
     public boolean ejecutar(String s) {
-        Entrada entrada = new Entrada(s,usuarioActual);
-
-        /*
-        bucle hasta que no haya mas comas
-        switch(tipo){
-            case 1: {
-                entrada.addTextoPlano(textoPlano);
+        int index = s.indexOf(",");
+        String tituloEntrada = s.substring(0,index);
+        s = s.substring(index, s.length());
+        Entrada entrada = new Entrada(tituloEntrada,usuarioActual);
+        
+        index = s.indexOf(",");
+        String tipoEntrada = s.substring(0,index).toLowerCase();
+        s = s.substring(index, s.length());
+        switch(tipoEntrada){
+            case "texto plano": {
+                entrada.addTextoPlano(s);
             }
-            case 2: {
-                entrada.addEncuesta();
+            case "encuesta": {
+                //entrada.addEncuesta();
             }
-            case 3: {
-                entrada.addEjercicio();
+            case "ejercicio": {
+                //entrada.addEjercicio();
             }
             default: {
                 System.out.println("Por defecto la entrada es de Texto Plano");
 
             }
-        }*/
- 
+        }
         this.subForoActual.insertarEntrada(entrada);
         foro.setEntradaActual(entrada);
         return true;
