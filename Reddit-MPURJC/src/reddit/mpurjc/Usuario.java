@@ -65,6 +65,11 @@ public class Usuario {
         return subscripciones.contains(subforo);
         
     }
+     
+    public void eliminarSubcripcion(SubForo subforo){
+        
+        subscripciones.remove(subforo);
+    }
     /*------------------------GETTERS------------------------*/
     public String getNick() {
         return nick;
@@ -137,6 +142,6 @@ public class Usuario {
         this.esAdministrador = esAdministrador;
     }
     
-    
+
     
 }
