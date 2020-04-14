@@ -59,6 +59,12 @@ public class Usuario {
         int index = email.indexOf("@");
         return email.substring(0,index-1).toLowerCase();
     }
+    
+     public boolean contieneSubscripcion(SubForo subforo){
+    
+        return subscripciones.contains(subforo);
+        
+    }
     /*------------------------GETTERS------------------------*/
     public String getNick() {
         return nick;
@@ -96,6 +102,8 @@ public class Usuario {
         return esAdministrador;
     }
     
+   
+    
     /*------------------------SETTERS------------------------*/
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -128,5 +136,7 @@ public class Usuario {
     public void setEsAdministrador(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
     }
+    
+    
     
 }
