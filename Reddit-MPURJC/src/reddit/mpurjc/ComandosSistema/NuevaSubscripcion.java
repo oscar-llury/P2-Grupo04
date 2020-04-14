@@ -34,10 +34,11 @@ public class NuevaSubscripcion extends ComandosSistema {
            
             subforoActual=foro.getSubForo(s);
             
-            usuarioActual.addSubscripcion(subforoActual);
-           
-            return true;
-            
+            if(!usuarioActual.contieneSubscripcion(subforoActual)){
+                
+                usuarioActual.addSubscripcion(subforoActual);
+            }
+             return true;
         }else{
             System.out.println("El foro no contiene ese subforo");
             return false;
