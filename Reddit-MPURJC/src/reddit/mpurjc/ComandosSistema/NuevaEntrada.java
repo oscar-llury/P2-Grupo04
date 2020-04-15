@@ -20,41 +20,46 @@ public class NuevaEntrada extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
         setForo(this.foro);
-        int index = s.indexOf(",");
-        String tituloEntrada = s.substring(0,index);
-        s = s.substring(index+1, s.length());
-        int id;
-        if(subForoActual.contarEntradas()==0){
-            id = 1;
-        }else{
-            id = subForoActual.contarEntradas();
-        }
-        Entrada entrada = new Entrada(id,tituloEntrada,usuarioActual);
-        
-        index = s.indexOf(",");
-        String tipoEntrada = s.substring(0,index).toLowerCase();
-        s = s.substring(index+1, s.length());
-        switch(tipoEntrada){
-            case "texto plano": {
-                entrada.addTextoPlano(s);
-                break;
+        if(this.usuarioActual != null){
+            int index = s.indexOf(",");
+            String tituloEntrada = s.substring(0,index);
+            s = s.substring(index+1, s.length());
+            int id;
+            if(subForoActual.contarEntradas()==0){
+                id = 1;
+            }else{
+                id = subForoActual.contarEntradas();
             }
-            case "encuesta": {
-                //entrada.addEncuesta();
-            }
-            case "ejercicio": {
-                //entrada.addEjercicio();
-            }
-            default: {
-                System.out.println("No se ha podido generar la entrada.");
-                return false;
+            Entrada entrada = new Entrada(id,tituloEntrada,usuarioActual);
 
+            index = s.indexOf(",");
+            String tipoEntrada = s.substring(0,index).toLowerCase();
+            s = s.substring(index+1, s.length());
+            switch(tipoEntrada){
+                case "texto plano": {
+                    entrada.addTextoPlano(s);
+                    break;
+                }
+                case "encuesta": {
+                    //entrada.addEncuesta();
+                }
+                case "ejercicio": {
+                    //entrada.addEjercicio();
+                }
+                default: {
+                    System.out.println("No se ha podido generar la entrada.");
+                    return false;
+
+                }
             }
+            this.subForoActual.insertarEntrada(entrada);
+            foro.setEntradaActual(entrada);
+            foro.getAdministrador().addPendientes(entrada);
+            return true;
+        }else{
+            System.out.println("Es necesario tener iniciada sesón.");
+            return false;
         }
-        this.subForoActual.insertarEntrada(entrada);
-        foro.setEntradaActual(entrada);
-        foro.getAdministrador().addPendientes(entrada);
-        return true;
     }
 
     @Override

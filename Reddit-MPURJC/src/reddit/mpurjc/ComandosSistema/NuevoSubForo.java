@@ -14,7 +14,7 @@ public class NuevoSubForo extends ComandosSistema {
     
     @Override
     public boolean ejecutar(String s) {
-        
+        if(this.foro.getUsuarioActual() != null){
         if (foro.sinSubForos() || !foro.contieneSubForo(s)){
             SubForo nuevoSubForo = new SubForo(s);
             foro.insertarSubForo(nuevoSubForo);
@@ -23,7 +23,11 @@ public class NuevoSubForo extends ComandosSistema {
         } else {
             System.out.println("Ese subforo ya existe.");
             return false;
-        }    
+        }
+        }else{
+            System.out.println("Es necesario tener iniciada sesón.");
+            return false;
+        }
     }
 
     @Override

@@ -21,12 +21,17 @@ public class ComentarComentario extends ComandosSistema {
     
     @Override
     public boolean ejecutar(String s) {
-        if(this.entradaActual.isVerificado() && this.comentarioActual.isValidado()){
-            Comentario nuevoComentario = new Comentario(usuarioActual,s);
-            this.comentarioActual.addComentario(nuevoComentario);
-            return true;
+        if(this.usuarioActual != null){
+            if(this.entradaActual.isVerificado() && this.comentarioActual.isValidado()){
+                Comentario nuevoComentario = new Comentario(usuarioActual,s);
+                this.comentarioActual.addComentario(nuevoComentario);
+                return true;
+            }else{
+                System.out.println("No se ha podido comentar la entrada.");
+                return false;
+            }
         }else{
-            System.out.println("No se ha podido comentar la entrada.");
+            System.out.println("Es necesario tener iniciada sesón.");
             return false;
         }
     }

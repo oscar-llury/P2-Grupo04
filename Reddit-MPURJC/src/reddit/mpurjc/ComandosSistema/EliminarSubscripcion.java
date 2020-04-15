@@ -20,17 +20,21 @@ public class EliminarSubscripcion  extends ComandosSistema{
     @Override
     public boolean ejecutar(String s) {
         setForo(this.foro);
-        
-        if(foro.contieneSubForo(s)){
-            if(usuarioActual.contieneSubscripcion(s)){ 
-                usuarioActual.eliminarSubcripcion(subforoActual);
-                return true;
+        if(this.usuarioActual != null){
+            if(foro.contieneSubForo(s)){
+                if(usuarioActual.contieneSubscripcion(s)){ 
+                    usuarioActual.eliminarSubcripcion(subforoActual);
+                    return true;
+                }else{
+                    System.out.println("No estás subscrito a este SubForo.");
+                    return false;
+                }
             }else{
-                System.out.println("No estás subscrito a este SubForo.");
+                System.out.println("Este SubForo no exixte.");
                 return false;
             }
         }else{
-            System.out.println("Este SubForo no exixte.");
+            System.out.println("Es necesario tener iniciada sesón.");
             return false;
         }
     }

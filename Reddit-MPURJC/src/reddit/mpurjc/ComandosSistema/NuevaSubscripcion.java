@@ -19,14 +19,18 @@ public class NuevaSubscripcion extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
        setForo(this.foro);
-
-        if(!usuarioActual.contieneSubscripcion(s)){
-            usuarioActual.addSubscripcion(subforoActual);
-            return true;
-        }else{
-            System.out.println("Ya estás subscrito a este SubForo.");
+       if(this.usuarioActual != null){
+            if(!usuarioActual.contieneSubscripcion(s)){
+                usuarioActual.addSubscripcion(subforoActual);
+                return true;
+            }else{
+                System.out.println("Ya estás subscrito a este SubForo.");
+                return false;
+            }
+       }else{
+           System.out.println("Es necesario tener iniciada sesón.");
             return false;
-        }
+       }
     }
 
     @Override
