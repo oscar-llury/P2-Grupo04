@@ -69,7 +69,11 @@ public class Foro {
         boolean a = this.listaUsuarios.isEmpty();
         return a;
     }
-    
+
+    public HashMap<String, Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
     public SubForo getSubForoActual() {
         return subForoActual;
     }

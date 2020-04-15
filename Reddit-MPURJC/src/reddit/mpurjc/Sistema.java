@@ -27,12 +27,15 @@ public class Sistema {
         NuevaSubscripcion comandoNuevaSubscripcion = new NuevaSubscripcion(reddit);
         EliminarSubscripcion comandoEliminarSubscripcion = new EliminarSubscripcion(reddit);
         Logout comandoLogout = new Logout(reddit);
+        Login comandoLogin = new Login(reddit);
         //Iniciar demostrador
         
         comandoNuevoUsuario.ejecutar("Admin,Admin,Admin@admin.urjc.es,AdminPass");
 
         comandoNuevoSubForo.ejecutar("SubForo 1");
         comandoNuevoUsuario.ejecutar("NombreUsuario,ApellidosUsuario,EmailUsuario@urjc.es,ContraseñaUsuario");
+
+
         comandoNuevaEntrada.ejecutar("TituloEntrada,Texto Plano, esto es el texto del Texto Plano.");
 
         comandoValidarEntrada.ejecutar("all");
@@ -47,9 +50,11 @@ public class Sistema {
         
         comandoEliminarSubscripcion.ejecutar("SubForo 1");
 
-
         comandoLogout.ejecutar("Salir");
-        
+
+        comandoLogin.ejecutar("EmailUsuario ContraseñaUsuario"); //Donde pone EmailUsuario es el nick, tendriamos que poner que ponga el correo y recortarlo
+
+
         /*entradaActual = new Entrada(usuarioActual);
         entradaActual.construirEntrada();
         entradaActual.mostrar();*/
