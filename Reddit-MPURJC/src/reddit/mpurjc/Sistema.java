@@ -26,6 +26,7 @@ public class Sistema {
         ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
         NuevaSubscripcion comandoNuevaSubscripcion = new NuevaSubscripcion(reddit);
         EliminarSubscripcion comandoEliminarSubscripcion = new EliminarSubscripcion(reddit);
+        Logout comandoLogout = new Logout(reddit);
         //Iniciar demostrador
         
         comandoNuevoUsuario.ejecutar("Admin,Admin,Admin@admin.urjc.es,AdminPass");
@@ -45,10 +46,13 @@ public class Sistema {
         comandoNuevaSubscripcion.ejecutar("SubForo 1");
         
         comandoEliminarSubscripcion.ejecutar("SubForo 1");
+
+
+        comandoLogout.ejecutar("Salir");
         
         /*entradaActual = new Entrada(usuarioActual);
         entradaActual.construirEntrada();
         entradaActual.mostrar();*/
     }
-    
+
 }
