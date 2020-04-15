@@ -15,7 +15,7 @@ public class NuevoSubForo extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
         
-        if (!foro.contieneSubForo(s)){
+        if (foro.sinSubForos() || !foro.contieneSubForo(s)){
             SubForo nuevoSubForo = new SubForo(s);
             foro.insertarSubForo(nuevoSubForo);
             foro.setSubForoActual(nuevoSubForo);

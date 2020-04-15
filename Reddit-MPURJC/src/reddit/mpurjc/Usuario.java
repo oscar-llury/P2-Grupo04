@@ -34,6 +34,17 @@ public class Usuario {
         this.esAdministrador = FALSE;
     }
 
+    public Usuario (String nombre, String apellidos, String email, String contraseña, boolean esAdministrador){
+        this.nombre = nombre;
+        this.apellidos = apellidos;
+        this.email = email.toLowerCase();
+        this.nick = sacarNick(email);
+        this.contraseña = contraseña;
+        this.rol = ADMINISTRADOR;
+        this.subscripciones = new ArrayList<>();
+        this.esAdministrador = esAdministrador;
+    }
+    
     public boolean inicioPermitido(){
         return false;
     }
@@ -41,9 +52,7 @@ public class Usuario {
     public boolean comprobarCredenciales(Usuario usuario){
         return false;
     }
-       
 
-    
     private Rol sacarRol(String email){
         int index = email.indexOf("@");
         switch (email.substring(index,email.length()).toLowerCase()){
@@ -55,10 +64,12 @@ public class Usuario {
             }               
         }
     }
+    
     private String sacarNick(String email){
         int index = email.indexOf("@");
-        return email.substring(0,index-1).toLowerCase();
+        return email.substring(0,index).toLowerCase();
     }
+
     /*------------------------GETTERS------------------------*/
     public String getNick() {
         return nick;
@@ -96,6 +107,18 @@ public class Usuario {
         return esAdministrador;
     }
     
+    public boolean contieneSubscripcion(String s){
+        boolean contenido = this.esAdministrador;
+        this.subscripciones.forEach((iter) -> {
+                if(iter.getNombre().equals(s)){
+                    this.esAdministrador = true;
+                }
+            });
+        boolean devolver = esAdministrador;
+        this.esAdministrador = contenido;
+        return devolver;
+    }
+    
     /*------------------------SETTERS------------------------*/
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -112,13 +135,26 @@ public class Usuario {
     public void setSubscripciones(List<SubForo> subscripciones) {
         this.subscripciones = subscripciones;
     }
+    
+    public void addSubscripcion(SubForo subforo){
+        this.subscripciones.add(subforo);
+    }
+    
+    public void removeSubscripcion(SubForo subforo){
+        this.subscripciones.remove(subforo);
+    }
 
     public void setPenalizacion(Penalizacion penalizacion) {
         this.penalizacion = penalizacion;
     }
 
-    public void setEsAdministrador(boolean esAdministrador) {
+    public void setEsAdmin(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
+        Administrador admin = new Administrador(this.nombre,this.apellidos,this.email,this.contraseña,true);  
     }
-
+    
+    public void eliminarSubcripcion(SubForo subforo){
+        subscripciones.remove(subforo);
+    }
+    
 }

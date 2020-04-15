@@ -11,36 +11,49 @@ public class NuevaEntrada extends ComandosSistema {
     private Usuario usuarioActual;
     private SubForo subForoActual;
 
-    public NuevaEntrada(Foro foro, SubForo subForo, Usuario usuario) {
+    public NuevaEntrada(Foro foro) {
         this.foro = foro;
-        this.usuarioActual = usuario;
-        this.subForoActual = subForo;
+        this.usuarioActual = foro.getUsuarioActual();
+        this.subForoActual = foro.getSubForoActual();
     }
- 
+
     @Override
     public boolean ejecutar(String s) {
-        Entrada entrada = new Entrada(s,usuarioActual);
-
-        /*
-        bucle hasta que no haya mas comas
-        switch(tipo){
-            case 1: {
-                entrada.addTextoPlano(textoPlano);
+        setForo(this.foro);
+        int index = s.indexOf(",");
+        String tituloEntrada = s.substring(0,index);
+        s = s.substring(index+1, s.length());
+        int id;
+        if(subForoActual.contarEntradas()==0){
+            id = 1;
+        }else{
+            id = subForoActual.contarEntradas();
+        }
+        Entrada entrada = new Entrada(id,tituloEntrada,usuarioActual);
+        
+        index = s.indexOf(",");
+        String tipoEntrada = s.substring(0,index).toLowerCase();
+        s = s.substring(index+1, s.length());
+        switch(tipoEntrada){
+            case "texto plano": {
+                entrada.addTextoPlano(s);
+                break;
             }
-            case 2: {
-                entrada.addEncuesta();
+            case "encuesta": {
+                //entrada.addEncuesta();
             }
-            case 3: {
-                entrada.addEjercicio();
+            case "ejercicio": {
+                //entrada.addEjercicio();
             }
             default: {
-                System.out.println("Por defecto la entrada es de Texto Plano");
+                System.out.println("No se ha podido generar la entrada.");
+                return false;
 
             }
-        }*/
- 
+        }
         this.subForoActual.insertarEntrada(entrada);
         foro.setEntradaActual(entrada);
+        foro.getAdministrador().addPendientes(entrada);
         return true;
     }
 
@@ -52,6 +65,8 @@ public class NuevaEntrada extends ComandosSistema {
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;
+        this.usuarioActual = foro.getUsuarioActual();
+        this.subForoActual = foro.getSubForoActual();
     }
     
 }
