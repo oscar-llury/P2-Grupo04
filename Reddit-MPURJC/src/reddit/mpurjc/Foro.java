@@ -11,11 +11,11 @@ public class Foro {
     private SubForo subForoActual;
     private Entrada entradaActual;
     private Usuario usuarioActual;
+    private Administrador usuarioAdministrador;
     
     public Foro(){
-        this.entradaActual = new Entrada();
-        this.subForoActual = new SubForo();
-        this.usuarioActual = new Usuario();
+        this.listaSubforos = new HashMap();
+        this.listaUsuarios = new HashMap();
     }
     
     public Foro(Entrada entrada, SubForo subForo, Usuario usuario){
@@ -25,7 +25,7 @@ public class Foro {
     }
    
     public boolean contieneUsuario(String nick){
-        return !listaUsuarios.containsKey(nick);
+        return listaUsuarios.containsKey(nick);
     }
 
     public boolean contieneSubForo (String nombre){
@@ -52,8 +52,24 @@ public class Foro {
     public void setUsuarioActual(Usuario usuarioActual) {
         this.usuarioActual = usuarioActual;
     }
+    
+    public void setAdministrador(Administrador admin){
+        this.usuarioAdministrador = admin;
+    }
+    
+    public void addEntradaPendiente(Entrada entrada){
+        this.usuarioAdministrador.addPendientes(entrada);
+    }
 /*------------------------GETTERS------------------------*/
-
+    public boolean sinSubForos(){
+        return this.listaSubforos.isEmpty();
+    }
+    
+    public boolean sinUsuarios(){
+        boolean a = this.listaUsuarios.isEmpty();
+        return a;
+    }
+    
     public SubForo getSubForoActual() {
         return subForoActual;
     }
@@ -71,4 +87,7 @@ public class Foro {
         return usuarioActual;
     }
     
+    public Administrador getAdministrador(){
+        return this.usuarioAdministrador;
+    }
 }

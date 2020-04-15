@@ -3,6 +3,6 @@ package reddit.mpurjc.Entradas;
 
 public interface TipoEntrada {
         
-    boolean validar();
+    boolean verificar();
     void mostrar();
 }

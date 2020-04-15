@@ -1,6 +1,5 @@
 package reddit.mpurjc;
 
-import java.util.Scanner;
 import reddit.mpurjc.ComandosSistema.*;
 /** Autores:
  * Javier Espín Prieto
@@ -20,14 +19,26 @@ public class Sistema {
         //iniciar Comandos del Sistema
         NuevoSubForo comandoNuevoSubForo = new NuevoSubForo(reddit);
         NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(reddit);
-        NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit,reddit.getSubForoActual(),reddit.getUsuarioActual());
+        NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);
+        ComentarEntrada comandoNuevoComentarioEntrada = new ComentarEntrada(reddit);
+        VotarComentario comandoVotarComentario = new VotarComentario(reddit);
+        VotarEntrada comandoVotarEntrada = new VotarEntrada(reddit);
+        ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
         //Iniciar demostrador
-        comandoNuevoSubForo.ejecutar("SubForo 1");
-        comandoNuevoUsuario.ejecutar("NombreUsuario,ApellidosUsuario,EmailUsuario,ContraseñaUsuario");
-        comandoNuevaEntrada.ejecutar("TituloEntrada");
         
-        System.out.print("De que tipo quieres la entrada:\nTexto Plano [1]\n Encuenstas [2]\n Ejercicios [3]");
-        Scanner scanTipo = new Scanner(System.in);
+        comandoNuevoUsuario.ejecutar("Admin,Admin,Admin@admin.urjc.es,AdminPass");
+
+        comandoNuevoSubForo.ejecutar("SubForo 1");
+        comandoNuevoUsuario.ejecutar("NombreUsuario,ApellidosUsuario,EmailUsuario@urjc.es,ContraseñaUsuario");
+        comandoNuevaEntrada.ejecutar("TituloEntrada,Texto Plano, esto es el texto del Texto Plano.");
+
+        comandoValidarEntrada.ejecutar("all");
+        
+        comandoNuevoComentarioEntrada.ejecutar("Esto es un comentario");
+        
+        comandoVotarComentario.ejecutar("(1) like");
+        
+        comandoVotarEntrada.ejecutar("(1)  dislike");
         
         /*entradaActual = new Entrada(usuarioActual);
         entradaActual.construirEntrada();
