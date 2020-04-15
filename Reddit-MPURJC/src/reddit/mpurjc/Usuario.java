@@ -52,9 +52,7 @@ public class Usuario {
     public boolean comprobarCredenciales(Usuario usuario){
         return false;
     }
-       
 
-    
     private Rol sacarRol(String email){
         int index = email.indexOf("@");
         switch (email.substring(index,email.length()).toLowerCase()){
@@ -66,21 +64,12 @@ public class Usuario {
             }               
         }
     }
+    
     private String sacarNick(String email){
         int index = email.indexOf("@");
         return email.substring(0,index).toLowerCase();
     }
-    
-     public boolean contieneSubscripcion(SubForo subforo){
-    
-        return subscripciones.contains(subforo);
-        
-    }
-     
-    public void eliminarSubcripcion(SubForo subforo){
-        
-        subscripciones.remove(subforo);
-    }
+
     /*------------------------GETTERS------------------------*/
     public String getNick() {
         return nick;
@@ -118,7 +107,17 @@ public class Usuario {
         return esAdministrador;
     }
     
-   
+    public boolean contieneSubscripcion(String s){
+        boolean contenido = this.esAdministrador;
+        this.subscripciones.forEach((iter) -> {
+                if(iter.getNombre().equals(s)){
+                    this.esAdministrador = true;
+                }
+            });
+        boolean devolver = esAdministrador;
+        this.esAdministrador = contenido;
+        return devolver;
+    }
     
     /*------------------------SETTERS------------------------*/
     public void setNombre(String nombre) {
@@ -151,10 +150,11 @@ public class Usuario {
 
     public void setEsAdmin(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
-        Administrador admin = new Administrador(this.nombre,this.apellidos,this.email,this.contraseña,true);
-        
+        Administrador admin = new Administrador(this.nombre,this.apellidos,this.email,this.contraseña,true);  
     }
     
-
+    public void eliminarSubcripcion(SubForo subforo){
+        subscripciones.remove(subforo);
+    }
     
 }

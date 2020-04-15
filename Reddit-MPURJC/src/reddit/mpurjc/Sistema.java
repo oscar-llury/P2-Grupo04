@@ -24,6 +24,8 @@ public class Sistema {
         VotarComentario comandoVotarComentario = new VotarComentario(reddit);
         VotarEntrada comandoVotarEntrada = new VotarEntrada(reddit);
         ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
+        NuevaSubscripcion comandoNuevaSubscripcion = new NuevaSubscripcion(reddit);
+        EliminarSubscripcion comandoEliminarSubscripcion = new EliminarSubscripcion(reddit);
         //Iniciar demostrador
         
         comandoNuevoUsuario.ejecutar("Admin,Admin,Admin@admin.urjc.es,AdminPass");
@@ -39,6 +41,10 @@ public class Sistema {
         comandoVotarComentario.ejecutar("(1) like");
         
         comandoVotarEntrada.ejecutar("(1)  dislike");
+        
+        comandoNuevaSubscripcion.ejecutar("SubForo 1");
+        
+        comandoEliminarSubscripcion.ejecutar("SubForo 1");
         
         /*entradaActual = new Entrada(usuarioActual);
         entradaActual.construirEntrada();

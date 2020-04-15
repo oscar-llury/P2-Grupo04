@@ -1,55 +1,38 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reddit.mpurjc.ComandosSistema;
 
-import reddit.mpurjc.Entradas.Entrada;
 import reddit.mpurjc.Foro;
 import reddit.mpurjc.SubForo;
 import reddit.mpurjc.Usuario;
 
-/**
- *
- * @author Jorge Utrero
- */
 public class EliminarSubscripcion  extends ComandosSistema{
+
     
-    
-    
-    private SubForo subforoActual;
     private Foro foro;
+    private SubForo subforoActual;
     private Usuario usuarioActual;
-    private Entrada entradaActual;
-    
-    
-    
-    public void EliminarSubscripcion(){
-    
+
+    public EliminarSubscripcion(Foro foro){
        this.foro = foro;
-       this.subforoActual=foro.getSubForoActual();  
+       this.subforoActual = foro.getSubForoActual();  
        this.usuarioActual = foro.getUsuarioActual();
-       this.entradaActual = foro.getEntradaActual();
-    
     }
 
     @Override
     public boolean ejecutar(String s) {
+        setForo(this.foro);
         
         if(foro.contieneSubForo(s)){
-            
-            subforoActual=foro.getSubForo(s);
-            
-            if(usuarioActual.contieneSubscripcion(subforoActual)){
-                
+            if(usuarioActual.contieneSubscripcion(s)){ 
                 usuarioActual.eliminarSubcripcion(subforoActual);
+                return true;
+            }else{
+                System.out.println("No estás subscrito a este SubForo.");
+                return false;
             }
-            
-            return true;
+        }else{
+            System.out.println("Este SubForo no exixte.");
+            return false;
         }
-        
-       return false;
     }
 
     @Override
@@ -59,13 +42,9 @@ public class EliminarSubscripcion  extends ComandosSistema{
 
     @Override
     public void setForo(Foro foro) {
-        
-        this.foro=foro;
-        this.usuarioActual=foro.getUsuarioActual();
-        this.subforoActual=foro.getSubForoActual();
-        this.entradaActual=foro.getEntradaActual();
+       this.foro = foro;
+       this.subforoActual = foro.getSubForoActual();  
+       this.usuarioActual = foro.getUsuarioActual();
     }
-    
-    
-    
+
 }
