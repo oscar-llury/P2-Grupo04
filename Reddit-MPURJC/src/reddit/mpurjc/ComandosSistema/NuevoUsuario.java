@@ -67,22 +67,29 @@ public class NuevoUsuario extends ComandosSistema {
         return s.equals("BorrarHoja");
     }
     
+    /**
+     * Este método es para evaluar el email del usuario.
+     * Sólo se permitirá el registro de nuevos usuarios que proporcionen
+     * una dirección de correo de la universidad
+     * @param email
+     * @return boolean para comprobar si es un correo de la universidad
+     */
     private boolean evaluadorEmail(String email){
         int longitud = email.length();
         int index = email.indexOf("@");
         String subEmail = email.substring(index+1,longitud);
         switch (subEmail.toLowerCase()){
-            case "alumnos.urjc.es": {
+            case "alumnos.urjc.es": {       //Distinción correo alumnos
                 return true;
             }                       
-            case "urjc.es": {
+            case "urjc.es": {               //Distinción correo profesores
                 return true;
             }
-            case "admin.urjc.es": {
+            case "admin.urjc.es": {         //Distinción correo administrador
                 this.contruyendoAdmin = true;
                 return true;
             }
-            default: {
+            default: {          
                 System.out.println("Debes introducir un correo de la urjc");
                 return false;
             }                

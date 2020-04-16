@@ -27,8 +27,8 @@ public class Entrada implements TipoEntrada{
         this.verificado = false;
         this.puntuaciones = new HashMap<>();
         this.comentarios = new ArrayList<>();
-        this.negativo=0;
-        this.positivo=0;
+        this.negativo = 0;
+        this.positivo = 0;
         this.id = id;
     }
     
@@ -36,9 +36,9 @@ public class Entrada implements TipoEntrada{
     @Override
     public void mostrar() {
         if(this.verificado){
-            System.out.println("Título: "+this.titulo);
-            System.out.println("Autor: "+this.autor.getNick());
-            System.out.println("Puntuación: "+ contarVotos());
+            System.out.println("Título: " + this.titulo);
+            System.out.println("Autor: " + this.autor.getNick());
+            System.out.println("Puntuación: " + contarVotos());
             this.contenido.forEach((iter) -> {
                 iter.mostrar();
             });
@@ -64,8 +64,8 @@ public class Entrada implements TipoEntrada{
     } 
     
     public String contarVotos(){
-        this.negativo=0;
-        this.positivo=0;
+        this.negativo = 0;
+        this.positivo = 0;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
             if (v.getVotacion()){
                 this.positivo++;
@@ -73,7 +73,7 @@ public class Entrada implements TipoEntrada{
                 this.negativo++;
             }
         });
-        return ("Positivos: "+this.positivo+", Negativos: "+this.negativo);
+        return ("Positivos: " + this.positivo + ", Negativos: " + this.negativo);
     }
     
     public boolean votarEntrada(Usuario votante, boolean voto){
@@ -95,7 +95,7 @@ public class Entrada implements TipoEntrada{
                 devolver = true;
             }
         }
-        this.verificado=valido;
+        this.verificado = valido;
         return devolver;
     }
     /*------------------------GETTERS------------------------*/
@@ -135,7 +135,7 @@ public class Entrada implements TipoEntrada{
     }
     
     public void addEncuesta(String s){
-        Encuesta encuesta=new Encuesta(s);
+        Encuesta encuesta = new Encuesta(s);
         this.contenido.add(encuesta);
 
     }

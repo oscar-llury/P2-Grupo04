@@ -17,6 +17,11 @@ public class EliminarSubscripcion  extends ComandosSistema{
        this.usuarioActual = foro.getUsuarioActual();
     }
 
+    /**
+     * Este método nos sirve para eliminar la subscripción al SubForo
+     * @param s
+     * @return true si se ha eliminado con éxito
+     */
     @Override
     public boolean ejecutar(String s) {
         setForo(this.foro);
@@ -41,7 +46,7 @@ public class EliminarSubscripcion  extends ComandosSistema{
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override

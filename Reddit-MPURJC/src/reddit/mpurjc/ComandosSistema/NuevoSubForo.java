@@ -12,10 +12,15 @@ public class NuevoSubForo extends ComandosSistema {
         this.foro = foro;
     }
     
+    /**
+     * Este método es para crear un nuevo SubForo.
+     * @param s
+     * @return true si se ha creado el subforo satisfactoriamente.
+     */
     @Override
     public boolean ejecutar(String s) {
         if(this.foro.getUsuarioActual() != null){
-        if (foro.sinSubForos() || !foro.contieneSubForo(s)){
+        if (foro.sinSubForos() || !foro.contieneSubForo(s)){ //Podremos crear el subforo siempre y cuando el Foro no contenga subforos o que el Foro no tenga ese subforo a crear.
             SubForo nuevoSubForo = new SubForo(s);
             foro.insertarSubForo(nuevoSubForo);
             foro.setSubForoActual(nuevoSubForo);
@@ -25,16 +30,17 @@ public class NuevoSubForo extends ComandosSistema {
             return false;
         }
         }else{
-            System.out.println("Es necesario tener iniciada sesón.");
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
 
     @Override
     public boolean comprobar(String s) {
-        return s.equals("Nuevo´SubForo");
+        return s.equals("Nuevo SubForo");
     }
 
+    // Nos devolverá el Foro con los subforos que hayamos creado
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;

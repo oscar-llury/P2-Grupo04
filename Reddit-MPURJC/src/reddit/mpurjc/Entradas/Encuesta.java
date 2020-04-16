@@ -28,6 +28,12 @@ public class Encuesta implements TipoEntrada {
  
     
 
+     /**
+     * Este método es para validar la entrada de Encuesta con el
+     * fin de que no contenga determinadas palabras en su enunciado
+     * y respuestas
+     * @return true si es válido
+     */
     @Override
     public boolean verificar() {
 
@@ -46,7 +52,7 @@ public class Encuesta implements TipoEntrada {
             }
         }
         
-        //recorro soluciones
+        //Recorremos las respuestas
         
         Iterator<String> it = respuestas.iterator();
         while(it.hasNext()){
@@ -68,6 +74,7 @@ public class Encuesta implements TipoEntrada {
         return true;
     }
 
+    //Mostramos el enunciado y las opciones a las respuestas.
     @Override
     public void mostrar() {
         int i=1;

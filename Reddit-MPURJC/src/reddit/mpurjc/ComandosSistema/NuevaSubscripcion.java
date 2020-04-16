@@ -16,10 +16,15 @@ public class NuevaSubscripcion extends ComandosSistema {
        this.usuarioActual = foro.getUsuarioActual();
     }
 
+    /**
+     * Este método sirve para crear una nueva Subscripción.
+     * @param s
+     * @return true si se ha creado satisfactoriamente.
+     */
     @Override
     public boolean ejecutar(String s) {
        setForo(this.foro);
-       if(this.usuarioActual != null){
+       if(this.usuarioActual != null){      //Podremos crear la nueva subscripción siempre y cuando el usuario no tenga ya esa subscripción
             if(!usuarioActual.contieneSubscripcion(s)){
                 usuarioActual.addSubscripcion(subforoActual);
                 return true;

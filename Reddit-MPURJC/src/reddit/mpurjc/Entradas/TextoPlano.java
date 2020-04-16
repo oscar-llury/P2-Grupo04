@@ -12,7 +12,11 @@ public class TextoPlano implements TipoEntrada {
         this.texto = texto;
     }
     
-    //devuelve true si es valida
+    /**
+     * Este método es para validar la entrada de TextoPlano con el
+     * fin de que no contenga determinadas palabras en su texto
+     * @return true si es válido
+     */
     @Override
     public boolean verificar() {
         String str = this.texto.toLowerCase();
@@ -31,9 +35,10 @@ public class TextoPlano implements TipoEntrada {
         return true;
     }
 
+    //Mostraremos el texto
     @Override
     public void mostrar() {
-        System.out.println("Contenido: "+this.texto);
+        System.out.println("Contenido: " + this.texto);
     }
     
 }
