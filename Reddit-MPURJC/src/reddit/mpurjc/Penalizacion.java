@@ -19,7 +19,7 @@ public class Penalizacion {
         int dias = (int) ((fechaFin.getTime()-fechaActual.getTime())/86400000);
         boolean penalizado=true;
         if(dias==0){
-            penalizado=true;
+            penalizado=false;
         }
         return penalizado;
     }
