@@ -22,9 +22,12 @@ public class Login extends ComandosSistema {
         for (String key : foro.getListaUsuarios().keySet()){
             valor = foro.getListaUsuarios().get(key);
             if((nick.equals(key))&&(valor.getContraseña().equals(contraseña))){
-                foro.setUsuarioActual(valor);
-                foro.setUsuarioActual(valor);
-                System.out.println("Usuario logeado con exito");
+                if(valor.getPenalizacion().penalizado()){
+                    System.out.println("No puedes logearte, estas penalizado");
+                }else {
+                    foro.setUsuarioActual(valor);
+                    System.out.println("Usuario logeado con exito");
+                }
             }
         }
         return true;
