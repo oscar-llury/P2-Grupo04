@@ -25,6 +25,9 @@ public class Login extends ComandosSistema {
                 if(valor.getPenalizacion().penalizado()){
                     System.out.println("No puedes logearte, estas penalizado");
                 }else {
+                    if(valor.getPenalizacion()!=null){
+                        valor.setPenalizacion(null);
+                    }
                     foro.setUsuarioActual(valor);
                     System.out.println("Usuario logeado con exito");
                 }
