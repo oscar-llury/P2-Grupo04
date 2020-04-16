@@ -23,11 +23,13 @@ public class ComentarEntrada extends ComandosSistema {
         if(this.usuarioActual != null){
             if(this.entradaActual.isVerificado()){
                 Comentario nuevoComentario = new Comentario(usuarioActual,s);
-                if(nuevoComentario.validar()){
+                nuevoComentario.validar();
+                if(nuevoComentario.isValidado()){
                     this.entradaActual.addComentario(nuevoComentario);
                     return true;
                 }else{
-                    System.out.println("El comentario no es aceptado;");
+                    System.out.println("El comentario no es aceptado.");
+                    //add penalizacion
                     return false;
                 }
             }else{

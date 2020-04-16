@@ -17,9 +17,7 @@ public class ValidarEntrada extends ComandosSistema {
     public boolean ejecutar(String s) {
         setForo(foro);
         if(admin.hayPendientes()){
-            if(admin.validarTodasEntradas()){
-                admin.limpiarPendientes();
-            }
+            admin.validarTodasEntradas();
         }
         return true;
     }

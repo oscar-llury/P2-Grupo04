@@ -79,7 +79,7 @@ public class Comentario {
         this.comentarios.add(comentarios);
     }
     
-    public boolean validar() {
+    public void validar() {
         String str = this.texto.toLowerCase();
         String[] words = str.split(" ");
         String censurado[]={"idiota","joder","cabron"};        
@@ -94,7 +94,7 @@ public class Comentario {
         while(it.hasNext()){
             it.next().validar();
         }
-        return true;
+        this.validado = true;
     }
     
     public boolean isValidado(){

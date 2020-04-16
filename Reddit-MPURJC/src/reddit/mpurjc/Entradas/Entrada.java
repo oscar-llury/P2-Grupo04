@@ -3,6 +3,7 @@ package reddit.mpurjc.Entradas;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 import reddit.mpurjc.Comentario;
 import reddit.mpurjc.Usuario;
 import reddit.mpurjc.Votacion;
@@ -52,15 +53,20 @@ public class Entrada implements TipoEntrada{
     }
     //devuelve true si es valido su contenido (tipo de entrada)
     @Override
-    public boolean verificar() {
-        boolean validar = true;
+    public void verificar() {
         for (TipoEntrada iter : this.contenido) {
-            if(!iter.verificar()){
-                validar = false;
-            }
+            iter.verificar();
         }
-        this.verificado = validar;
-        return validar;
+        System.out.println("¿Deseas verificar la entrada?");
+        Scanner scan = new Scanner(System.in);
+        String s = scan.next();
+        this.verificado  = Boolean.valueOf(s);
+        
+        if(this.verificado){
+            //penalizar autor
+            System.out.println();//borrar
+        }
+        
     } 
     
     public String contarVotos(){

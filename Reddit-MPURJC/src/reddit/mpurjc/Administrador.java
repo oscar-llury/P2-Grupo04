@@ -18,14 +18,11 @@ public class Administrador extends reddit.mpurjc.Usuario {
      * Este método es para validar las entradas que se han introducido
      * @return boolean true si es válido
      */
-    public boolean validarTodasEntradas(){
-        boolean valido = true;
+    public void validarTodasEntradas(){
         for (Entrada validar : pendientes) {
-            if(!validar.verificar()){
-                valido = false;
-            }
+            validar.verificar();
+            this.pendientes.remove(validar);
         }
-        return valido;
     }
     
     public boolean hayPendientes(){

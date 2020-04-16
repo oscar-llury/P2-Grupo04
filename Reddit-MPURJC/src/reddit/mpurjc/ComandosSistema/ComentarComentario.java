@@ -24,8 +24,15 @@ public class ComentarComentario extends ComandosSistema {
         if(this.usuarioActual != null){
             if(this.entradaActual.isVerificado() && this.comentarioActual.isValidado()){
                 Comentario nuevoComentario = new Comentario(usuarioActual,s);
-                this.comentarioActual.addComentario(nuevoComentario);
-                return true;
+                nuevoComentario.validar();
+                if(nuevoComentario.isValidado()){
+                    this.comentarioActual.addComentario(nuevoComentario);
+                    return true;
+                }else{
+                    System.out.println("El comentario no es aceptado");
+                    //add penalizacion
+                    return false;
+                }
             }else{
                 System.out.println("No se ha podido comentar la entrada.");
                 return false;
