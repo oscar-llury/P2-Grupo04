@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import reddit.mpurjc.Comentario;
+import reddit.mpurjc.Penalizacion;
 import reddit.mpurjc.Usuario;
 import reddit.mpurjc.Votacion;
 
@@ -62,9 +63,14 @@ public class Entrada implements TipoEntrada{
         String s = scan.next();
         this.verificado  = Boolean.valueOf(s);
         
-        if(this.verificado){
-            //penalizar autor
-            System.out.println();//borrar
+        if(!this.verificado){
+            Penalizacion penalizacion = this.autor.getPenalizacion();
+            if(penalizacion.isPenalizado()){
+                penalizacion.actualizarPenalizacion();
+            }else{
+                penalizacion = new Penalizacion();
+                this.autor.setPenalizacion(penalizacion);
+            }
         }
         
     } 

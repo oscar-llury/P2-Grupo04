@@ -22,7 +22,7 @@ public class Login extends ComandosSistema {
         for (String key : foro.getListaUsuarios().keySet()){
             valor = foro.getListaUsuarios().get(key);
             if((nick.equals(key))&&(valor.getContraseña().equals(contraseña))){
-                if(valor.getPenalizacion().penalizado()){
+                if(valor.getPenalizacion().isPenalizado()){
                     System.out.println("No puedes logearte, estas penalizado");
                 }else {
                     if(valor.getPenalizacion()!=null){
@@ -38,7 +38,7 @@ public class Login extends ComandosSistema {
 
     @Override
     public boolean comprobar(String s) {
-        return false;
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override

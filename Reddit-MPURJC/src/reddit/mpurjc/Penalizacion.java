@@ -1,7 +1,5 @@
-
 package reddit.mpurjc;
 
-import java.text.ParseException;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -9,8 +7,7 @@ public class Penalizacion {
 
     private Date fechaFin;
 
-    public Penalizacion() throws ParseException {
-
+    public Penalizacion() {
         this.fechaFin = fechaPenalizacion(); //Lo asociamos
     }
 
@@ -18,16 +15,22 @@ public class Penalizacion {
      * Este método nos sirve para saber si el usuario está penalizado o no
      * @return boolean si está penalizado devolverá true 
      */
-    public boolean penalizado(){
+    public boolean isPenalizado(){
         Date fechaActual = new Date();
         int dias = (int) ((fechaFin.getTime()-fechaActual.getTime())/86400000);
         boolean penalizado=true;
-        if(dias==0){
+        if(dias<=0){
             penalizado=false;
         }
         return penalizado;
     }
 
+    public void actualizarPenalizacion(){
+        Calendar cal = Calendar.getInstance(); //Creamos calendario para sumar dias
+        cal.setTime(fechaFin);
+        cal.add(Calendar.DATE,2); //Sumamos dos dias
+        fechaFin = cal.getTime();
+    }
     /**
      * Este método es para establecer la fecha de la penalización,
      * es decir, dos dias después
