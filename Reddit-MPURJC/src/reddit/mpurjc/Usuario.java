@@ -21,6 +21,7 @@ public class Usuario {
     {
         ALUMNO, PROFESOR, ADMINISTRADOR;
     }
+    
     public Usuario(){}
     
     public Usuario (String nombre, String apellidos, String email, String contraseña){
@@ -53,7 +54,13 @@ public class Usuario {
         return false;
     }
 
+    /**
+     * Utilizaremos este método para identificar el rol del usuario 
+     * @param email
+     * @return enumerado con el correspondiente rol de usuario
+     */
     private Rol sacarRol(String email){
+        // Se tendrá que verificar que el email introducido tenga la arroba en el email
         int index = email.indexOf("@");
         switch (email.substring(index,email.length()).toLowerCase()){
             case "alumnos.urjc.es": {
@@ -150,7 +157,7 @@ public class Usuario {
 
     public void setEsAdmin(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
-        Administrador admin = new Administrador(this.nombre,this.apellidos,this.email,this.contraseña,true);  
+        Administrador admin = new Administrador(this.nombre, this.apellidos, this.email, this.contraseña, true);  
     }
     
     public void eliminarSubcripcion(SubForo subforo){

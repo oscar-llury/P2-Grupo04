@@ -13,18 +13,12 @@ public class Ejercicio implements TipoEntrada {
         subenunciado = s;
     }
 
-    /**
-     * Este método es para validar la entrada de Ejercicio con el
-     * fin de que no contenga determinadas palabras en su enunciado
-     * y subenunciado
-     * @return true si es válido
-     */
     @Override
     public void verificar() {
         mostrar();
     }  
     
-    //Mostramos el enunciado y subenunciado del ejercicio
+    // Se mostrará el enunciado y subenunciado del ejercicio
     @Override
     public void mostrar(){
         System.out.println("Enunciado del ejercicio: \n" + this.enunciado);

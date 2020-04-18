@@ -13,14 +13,19 @@ public class NuevoSubForo extends ComandosSistema {
     }
     
     /**
-     * Este método es para crear un nuevo SubForo.
+     * Este método se utilizará para crear un nuevo SubForo.
      * @param s
-     * @return true si se ha creado el subforo satisfactoriamente.
+     * @return true si se ha creado el subforo satisfactoriamente o false en casos 
+     * excepcionales
      */
     @Override
     public boolean ejecutar(String s) {
         if(this.foro.getUsuarioActual() != null){
-        if (foro.sinSubForos() || !foro.contieneSubForo(s)){ //Podremos crear el subforo siempre y cuando el Foro no contenga subforos o que el Foro no tenga ese subforo a crear.
+        /**
+         * // Podremos crear el subforo siempre y cuando el Foro no contenga subforos 
+         * o que el Foro no tenga ese subforo a crear.
+         */
+        if (foro.sinSubForos() || !foro.contieneSubForo(s)){ 
             SubForo nuevoSubForo = new SubForo(s);
             foro.insertarSubForo(nuevoSubForo);
             foro.setSubForoActual(nuevoSubForo);

@@ -17,14 +17,17 @@ public class NuevaSubscripcion extends ComandosSistema {
     }
 
     /**
-     * Este método sirve para crear una nueva Subscripción.
+     * Este método se utilizará para la creación de nuevas subscripciones y añadirlas 
+     * en el correspondiente SubForo
      * @param s
-     * @return true si se ha creado satisfactoriamente.
+     * @return true si la subscripción se ha creado satisfactoriamente o false en casos
+     * excepcionales
      */
     @Override
     public boolean ejecutar(String s) {
        setForo(this.foro);
-       if(this.usuarioActual != null){      //Podremos crear la nueva subscripción siempre y cuando el usuario no tenga ya esa subscripción
+       if(this.usuarioActual != null){      
+            //Podremos crear la nueva subscripción siempre y cuando el usuario no tenga ya esa subscripción
             if(!usuarioActual.contieneSubscripcion(s)){
                 usuarioActual.addSubscripcion(subforoActual);
                 return true;
@@ -33,21 +36,22 @@ public class NuevaSubscripcion extends ComandosSistema {
                 return false;
             }
        }else{
-           System.out.println("Es necesario tener iniciada sesón.");
+           System.out.println("Es necesario tener iniciada sesión.");
             return false;
        }
     }
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates. 
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    // Se devolverá el Foro con la nueva subscripción creada
     @Override
     public void setForo(Foro foro) {
-        this.foro=foro;
-        this.usuarioActual=foro.getUsuarioActual();
-        this.subforoActual=foro.getSubForoActual();
+        this.foro = foro;
+        this.usuarioActual = foro.getUsuarioActual();
+        this.subforoActual = foro.getSubForoActual();
     }
     
     

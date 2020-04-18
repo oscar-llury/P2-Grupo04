@@ -6,6 +6,7 @@ import reddit.mpurjc.SubForo;
 
 public class Foro {
     
+    // Esta clase contendrá la información de los subforos y los usuarios que lo componen
     private HashMap <String, SubForo> listaSubforos;
     private HashMap <String, Usuario> listaUsuarios;
     private SubForo subForoActual;
@@ -79,7 +80,7 @@ public class Foro {
     }
     
     public SubForo getSubForo(String s){
-        SubForo subforo= new SubForo(s);
+        SubForo subforo = new SubForo(s);
        return subforo;
     }
 

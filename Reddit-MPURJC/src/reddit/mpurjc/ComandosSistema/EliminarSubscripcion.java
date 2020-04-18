@@ -6,7 +6,6 @@ import reddit.mpurjc.Usuario;
 
 public class EliminarSubscripcion  extends ComandosSistema{
 
-    
     private Foro foro;
     private SubForo subforoActual;
     private Usuario usuarioActual;
@@ -20,7 +19,8 @@ public class EliminarSubscripcion  extends ComandosSistema{
     /**
      * Este método nos sirve para eliminar la subscripción al SubForo
      * @param s
-     * @return true si se ha eliminado con éxito
+     * @return true si la subscripción se ha eliminado con éxito o false en 
+     * casos excepcionales
      */
     @Override
     public boolean ejecutar(String s) {
@@ -35,11 +35,11 @@ public class EliminarSubscripcion  extends ComandosSistema{
                     return false;
                 }
             }else{
-                System.out.println("Este SubForo no exixte.");
+                System.out.println("Este SubForo no existe.");
                 return false;
             }
         }else{
-            System.out.println("Es necesario tener iniciada sesón.");
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
@@ -49,6 +49,7 @@ public class EliminarSubscripcion  extends ComandosSistema{
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
+    // Se devolverá el Foro con la subscripción correspondiente eliminada
     @Override
     public void setForo(Foro foro) {
        this.foro = foro;

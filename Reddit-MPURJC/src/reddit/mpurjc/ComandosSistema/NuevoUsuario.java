@@ -95,6 +95,7 @@ public class NuevoUsuario extends ComandosSistema {
             }                
         }
     }
+    
     private String sacarNick(String email){
         int index = email.indexOf("@");
         return email.substring(0,index).toLowerCase();

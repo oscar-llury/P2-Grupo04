@@ -13,6 +13,11 @@ public class ValidarEntrada extends ComandosSistema {
         this.admin = foro.getAdministrador();
     }
     
+    /**
+     * Método para validar las entradas que tengamos
+     * @param s
+     * @return true si se han validado con éxito
+     */
     @Override
     public boolean ejecutar(String s) {
         setForo(foro);

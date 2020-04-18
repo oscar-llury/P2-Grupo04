@@ -12,6 +12,11 @@ public class Logout extends ComandosSistema {
     }
 
 
+    /**
+     * Este método nos servirá simplemente para cerrar la sesión del usuario
+     * @param s
+     * @return 
+     */
     @Override
     public boolean ejecutar(String s) {
         if(s.toLowerCase().equals("salir")){
@@ -25,7 +30,7 @@ public class Logout extends ComandosSistema {
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.    }
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
     @Override
     public void setForo(Foro foro) {

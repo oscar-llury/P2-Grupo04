@@ -35,6 +35,11 @@ public class Entrada implements TipoEntrada{
     }
     
 
+    /**
+     * Este método nos servirá en el caso de que este verificado nos mostrará el 
+     * título, autor y puntuación de las votaciones contadas en la clase 
+     * VotarEntrada. También nos mostrará los comentarios de dichas entradas.
+     */
     @Override
     public void mostrar() {
         if(this.verificado){
@@ -49,10 +54,12 @@ public class Entrada implements TipoEntrada{
                 iter.mostrar();
             });
         }else{
-            System.out.println("Esta entrada aun no ha sido verificada por un usuario Administrador.");
+            System.out.println("Esta entrada aún no ha sido verificada por un usuario Administrador.");
         }
     }
-    //devuelve true si es valido su contenido (tipo de entrada)
+    
+    
+    // Este método se utilizará para verificar la entrada
     @Override
     public void verificar() {
         for (TipoEntrada iter : this.contenido) {
@@ -75,6 +82,12 @@ public class Entrada implements TipoEntrada{
         
     } 
     
+    /**
+     * Método donde se contarán los votos de las entradas mediante votaciones 
+     * positivas o negativas 
+     * @return string de un listado con los votos positivos y los votos negativos,
+     * respectivamente.
+     */
     public String contarVotos(){
         this.negativo = 0;
         this.positivo = 0;
@@ -92,7 +105,7 @@ public class Entrada implements TipoEntrada{
         boolean valido = verificado;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
             if (k.getNick().equals(votante.getNick())){
-                verificado=false;
+                verificado = false;
             }
         });
         boolean devolver = false;

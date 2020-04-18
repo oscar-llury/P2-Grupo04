@@ -17,6 +17,12 @@ public class ComentarEntrada extends ComandosSistema {
         this.entradaActual = foro.getEntradaActual();
     }
     
+    /**
+     * Utilizaremos este método para comentar las entradas que tengamos
+     * @param s
+     * @return boolean true en caso de que se haya comentado con éxito la entrada o 
+     * false en otros casos 
+     */
     @Override
     public boolean ejecutar(String s) {
         setForo(this.foro);
@@ -44,9 +50,10 @@ public class ComentarEntrada extends ComandosSistema {
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
+    // Se devolverá el Foro con el propio comentario de la entrada 
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;

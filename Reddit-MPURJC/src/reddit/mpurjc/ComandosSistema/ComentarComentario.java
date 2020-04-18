@@ -38,14 +38,14 @@ public class ComentarComentario extends ComandosSistema {
                 return false;
             }
         }else{
-            System.out.println("Es necesario tener iniciada sesón.");
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override

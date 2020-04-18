@@ -17,6 +17,12 @@ public class VotarEntrada extends ComandosSistema {
         this.subForoActual = foro.getSubForoActual();
     }
 
+    /**
+     * Se utilizará este método para votar las entradas correspondientes y podremos 
+     * votarla satisfactoriamente con un like o por el contrario con un dislike
+     * @param s
+     * @return boolean voto like o dislike
+     */
     @Override
     public boolean ejecutar(String s) {
         setForo(this.foro);
@@ -39,14 +45,14 @@ public class VotarEntrada extends ComandosSistema {
             entradaVotar.contarVotos();
             return error;
         }else{
-            System.out.println("Es necesario tener iniciada sesón.");
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
     @Override

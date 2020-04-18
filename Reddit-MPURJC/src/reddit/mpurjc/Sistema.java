@@ -1,12 +1,15 @@
 package reddit.mpurjc;
 
-import reddit.mpurjc.ComandosSistema.*;
-/** Autores:
+/** 
+ * Autores Práctica MP:
  * Javier Espín Prieto
  * Jorge Utrero Sevillano
  * Miguel Cendrero Ortega
  * Óscar Rivas Melar
  */
+
+import reddit.mpurjc.ComandosSistema.*;
+
 public class Sistema {
 
     public static void main(String[] args) {
@@ -16,7 +19,7 @@ public class Sistema {
         
 
         
-        //iniciar Comandos del Sistema
+        // Iniciar Comandos del Sistema
         NuevoSubForo comandoNuevoSubForo = new NuevoSubForo(reddit);
         NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(reddit);
         NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);
@@ -28,7 +31,7 @@ public class Sistema {
         EliminarSubscripcion comandoEliminarSubscripcion = new EliminarSubscripcion(reddit);
         Logout comandoLogout = new Logout(reddit);
         Login comandoLogin = new Login(reddit);
-        //Iniciar demostrador
+        // Iniciar demostrador
         
         comandoNuevoUsuario.ejecutar("Admin,Admin,Admin@admin.urjc.es,AdminPass");
 
@@ -52,7 +55,7 @@ public class Sistema {
 
         comandoLogout.ejecutar("Salir");
 
-        comandoLogin.ejecutar("EmailUsuario ContraseñaUsuario"); //Donde pone EmailUsuario es el nick, tendriamos que poner que ponga el correo y recortarlo
+        comandoLogin.ejecutar("EmailUsuario ContraseñaUsuario"); // Donde pone EmailUsuario es el nick, tendriamos que poner que ponga el correo y recortarlo
 
 
         /*entradaActual = new Entrada(usuarioActual);

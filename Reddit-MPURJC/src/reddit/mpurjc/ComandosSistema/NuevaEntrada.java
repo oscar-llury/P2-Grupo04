@@ -17,6 +17,12 @@ public class NuevaEntrada extends ComandosSistema {
         this.subForoActual = foro.getSubForoActual();
     }
 
+    
+     /**
+     * Este método servirá para crear una entrada  
+     * @param s
+     * @return true si la entrada ha sido creada satisfactoriamente
+     */
     @Override
     public boolean ejecutar(String s) {
         setForo(this.foro);
@@ -25,17 +31,17 @@ public class NuevaEntrada extends ComandosSistema {
             String tituloEntrada = s.substring(0,index);
             s = s.substring(index+1, s.length());
             int id;
-            if(subForoActual.contarEntradas()==0){
+            if(subForoActual.contarEntradas() == 0){
                 id = 1;
             }else{
                 id = subForoActual.contarEntradas();
             }
-            Entrada entrada = new Entrada(id,tituloEntrada,usuarioActual);
+            Entrada entrada = new Entrada(id, tituloEntrada, usuarioActual);
 
             index = s.indexOf(",");
             String tipoEntrada = s.substring(0,index).toLowerCase();
             s = s.substring(index+1, s.length());
-            switch(tipoEntrada){
+            switch(tipoEntrada){    //Podremos crear las distintas entradas disponibles
                 case "texto plano": {
                     entrada.addTextoPlano(s);
                     break;
@@ -57,16 +63,17 @@ public class NuevaEntrada extends ComandosSistema {
             foro.getAdministrador().addPendientes(entrada);
             return true;
         }else{
-            System.out.println("Es necesario tener iniciada sesón.");
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet."); 
     }
 
+    // Se devolverá el Foro con la nueva entrada ya creada
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;

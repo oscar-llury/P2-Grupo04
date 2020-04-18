@@ -14,10 +14,7 @@ public class Administrador extends reddit.mpurjc.Usuario {
         this.pendientes = new ArrayList();
     }
     
-    /**
-     * Este método es para validar las entradas que se han introducido
-     * @return boolean true si es válido
-     */
+    // Este método se utilizará para verificar las entradas que se han introducido
     public void validarTodasEntradas(){
         for (Entrada validar : pendientes) {
             validar.verificar();
