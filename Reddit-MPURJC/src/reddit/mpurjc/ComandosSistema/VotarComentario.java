@@ -18,10 +18,10 @@ public class VotarComentario extends ComandosSistema {
     }
 
     /**
-     * Con este método se procederá a votar los comentarios y podremos 
-     * votarlos satisfactoriamente con un like o por el contrario con un dislike
+     * Este método se utilizará para la votación de los comentarios y se podrán
+     * votar satisfactoriamente con un like o por el contrario con un dislike
      * @param s
-     * @return boolean like o dislike 
+     * @return boolean tipo de voto like o dislike que ha realizado el usuario
      */
     @Override
     public boolean ejecutar(String s) {

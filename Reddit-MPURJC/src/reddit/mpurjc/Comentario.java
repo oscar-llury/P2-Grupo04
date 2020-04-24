@@ -28,8 +28,8 @@ public class Comentario {
     
    
     /**
-     * Este método podrá mostrar el autor del comentario propuesto junto al comentario
-     * dado y la puntuación que se le ha otorgado
+     * Este método se utilizará para mostrar el autor del comentario propuesto junto al comentario
+     * y la puntuación que se le ha otorgado
     */
     public void mostrar(){
         System.out.println("Autor: " + this.autor.getNick());
@@ -43,9 +43,9 @@ public class Comentario {
     }
     
     /**
-     * Este método sirve para ir pidiendo los votos de los comentarios que han 
-     * realizado los usuarios y a su vez contarlos
-     * @return recuento de los votos positivos y negativos
+     * Este método se utilizará para ir pidiendo los votos de los comentarios que han 
+     * realizado los usuarios y contarlos
+     * @return recuento de los votos positivos y negativos, respectivamente
      */
     public String contarVotos(){
         this.negativo = 0;
@@ -91,14 +91,14 @@ public class Comentario {
         return devolver;
     }
     
-    // Utilizaremos este método para ir añadiendo los comentarios
+    // Se procederá a añadirse los comentarios
     public void addComentario(Comentario comentarios) {
         this.comentarios.add(comentarios);
     }
     
     /**
-     * Este método nos servirá para validar los comentarios para comprobar 
-     * no se reciben comentarios mediante palabras inadecuadas 
+     * Este método se utilizará para validar los comentarios comprobando que  
+     * no se reciben comentarios que contengan palabras inadecuadas 
      */
     public void validar() {
         String str = this.texto.toLowerCase();
@@ -108,7 +108,7 @@ public class Comentario {
             for (String censura : censurado) {
                 if (word.equals(censura)) {
                     /**
-                     * Si se viesen comentarios con palabras inadecuadas se sustituirán 
+                     * Si algún comentario tuviera alguna palabra inadecuada se sustituirán 
                      * por asteriscos.
                      */
                     word = word.replaceAll("\\B\\w\\B","*"); 
@@ -116,7 +116,7 @@ public class Comentario {
             }
         }
         Iterator<Comentario> it = comentarios.iterator();
-        // Mientras tengamos comentarios, los seguiremos validando
+        // Mientras tengamos comentarios, se irán validando
         while(it.hasNext()){
             it.next().validar();
         }

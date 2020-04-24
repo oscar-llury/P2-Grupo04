@@ -36,7 +36,8 @@ public class NuevoUsuario extends ComandosSistema {
         boolean evaluador = true;
         while ((!unico || !evaluador)){
             if(!evaluador){
-                System.out.print("El email introducido no es ocrrecto o no pertenece a la URJC\n"
+                //Sólo aceptaremos nuevos usuarios que proporcionen un email de la Universidad
+                System.out.print("El email introducido no es correcto o no pertenece a la URJC\n"
                         + "Introduce de nuevo el email: ");
                 Scanner scan = new Scanner(System.in);
                 email = scan.nextLine();
@@ -64,11 +65,11 @@ public class NuevoUsuario extends ComandosSistema {
 
     @Override
     public boolean comprobar(String s) {
-        return s.equals("BorrarHoja");
+        return s.equals("Borrar Hoja");
     }
     
     /**
-     * Este método es para evaluar el email del usuario.
+     * Este método se utilizará para evaluar el email del usuario.
      * Sólo se permitirá el registro de nuevos usuarios que proporcionen
      * una dirección de correo de la universidad
      * @param email
@@ -79,13 +80,13 @@ public class NuevoUsuario extends ComandosSistema {
         int index = email.indexOf("@");
         String subEmail = email.substring(index+1,longitud);
         switch (subEmail.toLowerCase()){
-            case "alumnos.urjc.es": {       //Distinción correo alumnos
+            case "alumnos.urjc.es": {       // Distinción correo alumnos
                 return true;
             }                       
-            case "urjc.es": {               //Distinción correo profesores
+            case "urjc.es": {               // Distinción correo profesores
                 return true;
             }
-            case "admin.urjc.es": {         //Distinción correo administrador
+            case "admin.urjc.es": {         // Distinción correo administrador
                 this.contruyendoAdmin = true;
                 return true;
             }

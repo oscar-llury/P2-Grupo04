@@ -18,10 +18,10 @@ public class VotarEntrada extends ComandosSistema {
     }
 
     /**
-     * Se utilizará este método para votar las entradas correspondientes y podremos 
-     * votarla satisfactoriamente con un like o por el contrario con un dislike
+     * Este método se utilizará para votar las entradas correspondientes y se podrá valorar
+     * de manera positiva con un like o por el contrario con un dislike
      * @param s
-     * @return boolean voto like o dislike
+     * @return boolean tipo de voto like o dislike
      */
     @Override
     public boolean ejecutar(String s) {

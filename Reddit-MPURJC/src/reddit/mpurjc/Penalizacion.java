@@ -13,8 +13,8 @@ public class Penalizacion {
     }
 
     /**
-     * Este método sirve para saber si el usuario está penalizado o no
-     * @return boolean si está penalizado devolverá true y en caso contario, mientras no se
+     * Este método se utilizará para saber si el usuario está penalizado o no
+     * @return boolean true si está penalizado y en caso contario, mientras no se
      * hayan acabado los dias de penalización, nos devolverá que el usuario sigue estando 
      * penalizado
      */
@@ -36,7 +36,7 @@ public class Penalizacion {
     }
     
     /**
-     * Este método es para establecer la fecha final donde se acaba la penalización, 
+     * Este método se utilizará para establecer la fecha final donde se acaba la penalización, 
      * es decir, dos dias después de que se haya cometido. 
      * @return Nueva fecha actualizada
      */

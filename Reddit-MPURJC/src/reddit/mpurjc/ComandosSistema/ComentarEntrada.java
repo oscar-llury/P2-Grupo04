@@ -18,7 +18,7 @@ public class ComentarEntrada extends ComandosSistema {
     }
     
     /**
-     * Utilizaremos este método para comentar las entradas que tengamos
+     * Este método se utilizará para comentar las entradas propuestas
      * @param s
      * @return boolean true en caso de que se haya comentado con éxito la entrada o 
      * false en otros casos 
@@ -43,7 +43,7 @@ public class ComentarEntrada extends ComandosSistema {
                 return false;
             }
         }else{
-            System.out.println("Es necesario tener iniciada sesón.");
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
@@ -53,7 +53,6 @@ public class ComentarEntrada extends ComandosSistema {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // Se devolverá el Foro con el propio comentario de la entrada 
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;

@@ -17,7 +17,7 @@ public class EliminarSubscripcion  extends ComandosSistema{
     }
 
     /**
-     * Este método nos sirve para eliminar la subscripción al SubForo
+     * Este método se utilizará para eliminar una subscripción al SubForo
      * @param s
      * @return true si la subscripción se ha eliminado con éxito o false en 
      * casos excepcionales
@@ -49,7 +49,6 @@ public class EliminarSubscripcion  extends ComandosSistema{
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-    // Se devolverá el Foro con la subscripción correspondiente eliminada
     @Override
     public void setForo(Foro foro) {
        this.foro = foro;

@@ -18,7 +18,7 @@ public class Ejercicio implements TipoEntrada {
         mostrar();
     }  
     
-    // Se mostrará el enunciado y subenunciado del ejercicio
+    // Se mostrará el enunciado y subenunciado del ejercicio, respectivamente
     @Override
     public void mostrar(){
         System.out.println("Enunciado del ejercicio: \n" + this.enunciado);

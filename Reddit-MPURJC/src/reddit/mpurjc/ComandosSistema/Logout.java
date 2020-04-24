@@ -15,7 +15,7 @@ public class Logout extends ComandosSistema {
     /**
      * Este método nos servirá simplemente para cerrar la sesión del usuario
      * @param s
-     * @return 
+     * @return true si el cierre de sesión ha sido correcta
      */
     @Override
     public boolean ejecutar(String s) {
@@ -32,6 +32,7 @@ public class Logout extends ComandosSistema {
     public boolean comprobar(String s) {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
+    
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;

@@ -14,7 +14,8 @@ public class ValidarEntrada extends ComandosSistema {
     }
     
     /**
-     * Método para validar las entradas que tengamos
+     * Este método se utilizará para que el administrador pueda validar las entradas 
+     * introducidas
      * @param s
      * @return true si se han validado con éxito
      */

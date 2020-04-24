@@ -19,9 +19,18 @@ public class ComentarComentario extends ComandosSistema {
         //this.comentarioActual = foro.getComentarioActual();
     }
     
+    /**
+     * Esre método se utilzará para comentar los comentarios ya expuestos con
+     * anterioridad 
+     * @param s
+     * @return boolean true en el caso de que se haya podido comentar con éxito y que dicho 
+     * comentario sea válido, en caso contrario, no podrá ser aceptado 
+     */
     @Override
     public boolean ejecutar(String s) {
         if(this.usuarioActual != null){
+            // Se podrá comentar dicho comentario siempre y cuando la entrada esté verificada 
+            // y el comentario al que se hace referencia está validado
             if(this.entradaActual.isVerificado() && this.comentarioActual.isValidado()){
                 Comentario nuevoComentario = new Comentario(usuarioActual,s);
                 nuevoComentario.validar();

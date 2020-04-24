@@ -39,8 +39,8 @@ public class SubForo {
     public boolean contieneEntrada(Entrada entrada){
         return this.entradas.containsValue(entrada);
     }
-    /*------------------------SETTERS------------------------*/
     
+    /*------------------------SETTERS------------------------*/
     
     public void setNombre(String nombre) {
         this.nombre = nombre;

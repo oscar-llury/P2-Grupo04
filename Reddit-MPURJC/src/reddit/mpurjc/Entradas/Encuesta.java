@@ -31,7 +31,7 @@ public class Encuesta implements TipoEntrada {
         mostrar();
     }
 
-    // Se mostará el enunciado y las opciones a las respuestas.
+    // Se mostará el enunciado y las opciones a las respuestas, respectivamente
     @Override
     public void mostrar() {
         int i=1;
@@ -39,7 +39,7 @@ public class Encuesta implements TipoEntrada {
         Iterator<String> it = respuestas.iterator();
         
         while(it.hasNext()){
-            System.out.println("La opción " + i +  ":  " + it.next());
+            System.out.println("La opción " + i +  " :  " + it.next());
             i++;
         }
         it.remove();

@@ -36,7 +36,7 @@ public class Entrada implements TipoEntrada{
     
 
     /**
-     * Este método nos servirá en el caso de que este verificado nos mostrará el 
+     * Este método se utilizará para en el caso de que esté verificado nos mostrará el 
      * título, autor y puntuación de las votaciones contadas en la clase 
      * VotarEntrada. También nos mostrará los comentarios de dichas entradas.
      */
@@ -59,7 +59,10 @@ public class Entrada implements TipoEntrada{
     }
     
     
-    // Este método se utilizará para verificar la entrada
+    /**
+     * Se procederá a verificar la entrada y en el caso de que no se haya verificado
+     * se impondrá la correspondiente penalización
+     */
     @Override
     public void verificar() {
         for (TipoEntrada iter : this.contenido) {
@@ -83,10 +86,9 @@ public class Entrada implements TipoEntrada{
     } 
     
     /**
-     * Método donde se contarán los votos de las entradas mediante votaciones 
-     * positivas o negativas 
-     * @return string de un listado con los votos positivos y los votos negativos,
-     * respectivamente.
+     * Este método se utilizará para contar los votos de las entradas positiva o 
+     * negativamente
+     * @return Listado con los votos positivos y los votos negativos, respectivamente.
      */
     public String contarVotos(){
         this.negativo = 0;
@@ -101,6 +103,13 @@ public class Entrada implements TipoEntrada{
         return ("Positivos: " + this.positivo + ", Negativos: " + this.negativo);
     }
     
+    /**
+     * Este método se utilizará para la votación de las entradas y su correspondiente 
+     * almacenamiento
+     * @param votante
+     * @param voto
+     * @return true en caso de que la votación se haya realizado con éxito
+     */
     public boolean votarEntrada(Usuario votante, boolean voto){
         boolean valido = verificado;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
@@ -123,6 +132,8 @@ public class Entrada implements TipoEntrada{
         this.verificado = valido;
         return devolver;
     }
+    
+    
     /*------------------------GETTERS------------------------*/
     public boolean isVerificado() {
         return this.verificado;

@@ -19,7 +19,7 @@ public class NuevaEntrada extends ComandosSistema {
 
     
      /**
-     * Este método servirá para crear una entrada  
+     * Este método se utilizará para crear una entrada  
      * @param s
      * @return true si la entrada ha sido creada satisfactoriamente
      */
@@ -73,7 +73,6 @@ public class NuevaEntrada extends ComandosSistema {
         throw new UnsupportedOperationException("Not supported yet."); 
     }
 
-    // Se devolverá el Foro con la nueva entrada ya creada
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;

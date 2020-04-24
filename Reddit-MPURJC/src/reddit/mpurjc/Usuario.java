@@ -55,7 +55,7 @@ public class Usuario {
     }
 
     /**
-     * Utilizaremos este método para identificar el rol del usuario 
+     * Este método se utilizará para identificar el rol del usuario 
      * @param email
      * @return enumerado con el correspondiente rol de usuario
      */
@@ -74,6 +74,7 @@ public class Usuario {
     
     private String sacarNick(String email){
         int index = email.indexOf("@");
+        // Utilizaremos el nick como resultado de la 1ª posición del correo hasta la posición anterior a la arroba
         return email.substring(0,index).toLowerCase();
     }
 

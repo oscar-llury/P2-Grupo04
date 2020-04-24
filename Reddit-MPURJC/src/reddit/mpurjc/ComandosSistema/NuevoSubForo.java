@@ -23,7 +23,7 @@ public class NuevoSubForo extends ComandosSistema {
         if(this.foro.getUsuarioActual() != null){
         /**
          * // Podremos crear el subforo siempre y cuando el Foro no contenga subforos 
-         * o que el Foro no tenga ese subforo a crear.
+         * o que el Foro no tenga ya ese subforo a crear.
          */
         if (foro.sinSubForos() || !foro.contieneSubForo(s)){ 
             SubForo nuevoSubForo = new SubForo(s);
@@ -45,7 +45,6 @@ public class NuevoSubForo extends ComandosSistema {
         return s.equals("Nuevo SubForo");
     }
 
-    // Nos devolverá el Foro con los subforos que hayamos creado
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;

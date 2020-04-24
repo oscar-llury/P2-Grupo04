@@ -46,7 +46,6 @@ public class NuevaSubscripcion extends ComandosSistema {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    // Se devolverá el Foro con la nueva subscripción creada
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;

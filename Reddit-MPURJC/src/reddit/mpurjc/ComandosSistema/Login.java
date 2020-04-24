@@ -12,7 +12,7 @@ public class Login extends ComandosSistema {
     }
 
     /**
-     * Utilizaremos este método para logear a los usuarios 
+     * Este método se utilizará para logear a los usuarios 
      * @param s
      * @return true si el usuario se ha logeado con éxito
      */
@@ -34,7 +34,7 @@ public class Login extends ComandosSistema {
                         valor.setPenalizacion(null);
                     }
                     foro.setUsuarioActual(valor);
-                    System.out.println("Usuario logeado con exito");
+                    System.out.println("Usuario logeado con éxito");
                 }
             }
         }
