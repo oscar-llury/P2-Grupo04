@@ -39,10 +39,20 @@ public class Sistema {
 
         comandoNuevoUsuario.ejecutar("NuevoUsuario(NombreUsuario,ApellidosUsuario,EmailUsuario@urjc.es,ContraseñaUsuario)");
         
+        
+        //subForo1
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
 
-        comandoNuevaEntrada.ejecutar("NuevaEntrada(TituloEntrada,Texto Plano, esto es el texto del Texto Plano.)");
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 1,Texto Plano, esto es el texto de la entrada 1 subforo 1.)");
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 2,Ejercicio, esto es ejercico entrada 1 subforo 1.)");
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 3,Encuesta, esto es el enunciado de la encuesta de la entrada 1 subforo 1, opcion 1, opcion 2)");
+        
+        //subForo2
+        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 2)");
+        
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 2,Texto Plano, esto es el texto de la entrada 2 subforo 2.)");
 
+        
         comandoValidarEntrada.ejecutar("ValidarEntrada(all)");
         
         comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(Esto es un comentario)");
@@ -60,9 +70,7 @@ public class Sistema {
         comandoLogin.ejecutar("Login(EmailUsuario ContraseñaUsuario)"); // Donde pone EmailUsuario es el nick, tendriamos que poner que ponga el correo y recortarlo
 
         comandoSalvar.ejecutar("Salvar(E:/cole,hola)");
-        /*entradaActual = new Entrada(usuarioActual);
-        entradaActual.construirEntrada();
-        entradaActual.mostrar();*/
+
     }
 
 }

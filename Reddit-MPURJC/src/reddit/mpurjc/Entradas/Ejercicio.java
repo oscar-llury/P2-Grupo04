@@ -9,10 +9,11 @@ public class Ejercicio implements TipoEntrada , Serializable {
 
     public Ejercicio(String s) {
         int separador = s.indexOf(",");
-        enunciado = s.substring(1, separador);
-        s = s.substring(separador, s.length());
-        
-        subenunciado = s;
+        if(separador != -1){
+            enunciado = s.substring(1, separador);
+            subenunciado = s.substring(separador,s.length());
+        }else
+        enunciado = s;
     }
 
     @Override
@@ -25,7 +26,9 @@ public class Ejercicio implements TipoEntrada , Serializable {
     public void mostrar(){
         System.out.println("Enunciado del ejercicio: \n" + this.enunciado);
         System.out.println();
-        System.out.println("Subenunciado del ejercicio: \n" + this.subenunciado);
+        if(this.subenunciado != null){
+            System.out.println("Subenunciado del ejercicio: \n" + this.subenunciado);
+        }
     }
     
 }

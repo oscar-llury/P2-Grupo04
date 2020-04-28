@@ -12,18 +12,21 @@ public class Encuesta implements TipoEntrada , Serializable{
    
     public Encuesta(String s){
         
-        List<String> respuestas = new ArrayList<String>();
+        respuestas = new ArrayList<String>();
         int separador = s.indexOf(",");
         enunciado = s.substring(1,separador);
         
-        s = s.substring(separador,s.length());
+        s = s.substring(separador+1,s.length());
         String opcion;
         while(separador != -1){   
             
             separador = s.indexOf(",");
-            opcion = s.substring(1, separador);
+            if(separador == -1)
+                opcion = s.substring(1, s.length());
+            else
+                opcion = s.substring(1, separador);
             respuestas.add(opcion);
-            s = s.substring(separador,s.length());
+            s = s.substring(separador+1,s.length());
         }
     }
  
