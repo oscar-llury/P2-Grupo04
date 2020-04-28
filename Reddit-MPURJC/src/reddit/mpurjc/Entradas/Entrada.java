@@ -71,14 +71,15 @@ public class Entrada implements TipoEntrada{
         System.out.println("¿Deseas verificar la entrada?");
         Scanner scan = new Scanner(System.in);
         String s = scan.next();
-        this.verificado  = Boolean.valueOf(s);
+        s = s.toLowerCase();
+        this.verificado = s.equals("si");
         
         if(!this.verificado){
-            Penalizacion penalizacion = this.autor.getPenalizacion();
-            if(penalizacion.isPenalizado()){
+            if(this.autor.getPenalizacion().isPenalizado()){
+                Penalizacion penalizacion = this.autor.getPenalizacion();
                 penalizacion.actualizarPenalizacion();
             }else{
-                penalizacion = new Penalizacion();
+                Penalizacion penalizacion = new Penalizacion();
                 this.autor.setPenalizacion(penalizacion);
             }
         }

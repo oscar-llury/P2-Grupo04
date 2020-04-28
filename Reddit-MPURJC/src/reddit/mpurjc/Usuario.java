@@ -111,6 +111,16 @@ public class Usuario {
         return penalizacion;
     }
 
+    public boolean isPenalizado(){
+        
+        if((this.penalizacion != null)&&(this.penalizacion.isPenalizado())){
+            
+            return true;
+        }
+        
+        return false;
+    }
+    
     public boolean isEsAdministrador() {
         return esAdministrador;
     }
