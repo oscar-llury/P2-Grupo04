@@ -7,6 +7,7 @@ public class ValidarEntrada extends ComandosSistema {
 
     private Foro foro;
     private Administrador admin;
+    private String parametros;
 
     public ValidarEntrada(Foro foro) {
         this.foro = foro;
@@ -21,16 +22,30 @@ public class ValidarEntrada extends ComandosSistema {
      */
     @Override
     public boolean ejecutar(String s) {
-        setForo(foro);
-        if(admin.hayPendientes()){
-            admin.validarTodasEntradas();
+        if(comprobar(s)){
+            if(admin.hayPendientes()){
+                admin.validarTodasEntradas();
+            }
+            return true;
+        }else{
+            return false;
         }
-        return true;
     }
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+       
+        setForo(foro);
+        int ini = s.indexOf('(');
+        int fin = s.lastIndexOf(")");
+        String comando = s.substring(0,ini).toLowerCase();
+
+        if(comando.equals("validarentrada")){
+            this.parametros = s.substring(ini+1,fin);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override
