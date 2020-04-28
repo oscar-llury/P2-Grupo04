@@ -2,6 +2,7 @@
 package reddit.mpurjc;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import reddit.mpurjc.Entradas.Entrada;
 
@@ -16,9 +17,12 @@ public class Administrador extends reddit.mpurjc.Usuario {
     
     // Este método se utilizará para verificar las entradas que se han introducido
     public void validarTodasEntradas(){
-        for (Entrada validar : pendientes) {
-            validar.verificar();
-            this.pendientes.remove(validar);
+      
+        Iterator<Entrada> it = pendientes.iterator();
+        while(!pendientes.isEmpty()) {
+            Entrada entrada = it.next();
+            entrada.verificar();
+            this.pendientes.remove(entrada);
         }
     }
     
