@@ -37,19 +37,19 @@ public class Sistema {
         
         comandoNuevoUsuario.ejecutar("Admin,Admin,Admin@admin.urjc.es,AdminPass");
 
-        comandoNuevoUsuario.ejecutar("NombreUsuario,ApellidosUsuario,EmailUsuario@urjc.es,ContraseñaUsuario");
+        comandoNuevoUsuario.ejecutar("NuevoUsuario(NombreUsuario,ApellidosUsuario,EmailUsuario@urjc.es,ContraseñaUsuario)");
         
-        comandoNuevoSubForo.ejecutar("SubForo 1");
+        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
 
         comandoNuevaEntrada.ejecutar("TituloEntrada,Texto Plano, esto es el texto del Texto Plano.");
 
-        comandoValidarEntrada.ejecutar("all");
+        comandoValidarEntrada.ejecutar("ValidarEntrada(all)");
         
         comandoNuevoComentarioEntrada.ejecutar("Esto es un comentario");
         
-        comandoVotarComentario.ejecutar("(1) like");
+        comandoVotarComentario.ejecutar("VotarComentario((1) like)");
         
-        comandoVotarEntrada.ejecutar("(1)  dislike");
+        comandoVotarEntrada.ejecutar("VotarEntrada((1)  dislike)");
         
         comandoNuevaSubscripcion.ejecutar("SubForo 1");
         
