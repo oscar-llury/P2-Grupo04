@@ -78,6 +78,10 @@ public class Usuario implements Serializable {
         // Utilizaremos el nick como resultado de la 1ª posición del correo hasta la posición anterior a la arroba
         return email.substring(0,index).toLowerCase();
     }
+    
+    public boolean isProfesor(){
+        return this.rol == PROFESOR;
+    }
 
     /*------------------------GETTERS------------------------*/
     public String getNick() {
