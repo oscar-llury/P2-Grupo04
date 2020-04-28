@@ -10,6 +10,7 @@ public class NuevaEntrada extends ComandosSistema {
     private Foro foro;
     private Usuario usuarioActual;
     private SubForo subForoActual;
+    private String parametros;
 
     public NuevaEntrada(Foro foro) {
         this.foro = foro;
@@ -25,11 +26,10 @@ public class NuevaEntrada extends ComandosSistema {
      */
     @Override
     public boolean ejecutar(String s) {
-        setForo(this.foro);
-        if(this.usuarioActual != null){
+        if(comprobar(s)){
             int index = s.indexOf(",");
-            String tituloEntrada = s.substring(0,index);
-            s = s.substring(index+1, s.length());
+            String tituloEntrada = this.parametros.substring(0,index);
+            this.parametros = this.parametros.substring(index+1, this.parametros.length());
             int id;
             if(subForoActual.contarEntradas() == 0){
                 id = 1;
@@ -38,12 +38,12 @@ public class NuevaEntrada extends ComandosSistema {
             }
             Entrada entrada = new Entrada(id, tituloEntrada, usuarioActual);
 
-            index = s.indexOf(",");
-            String tipoEntrada = s.substring(0,index).toLowerCase();
-            s = s.substring(index+1, s.length());
+            index = this.parametros.indexOf(",");
+            String tipoEntrada = this.parametros.substring(0,index).toLowerCase();
+            this.parametros = this.parametros.substring(index+1, this.parametros.length());
             switch(tipoEntrada){    //Podremos crear las distintas entradas disponibles
                 case "texto plano": {
-                    entrada.addTextoPlano(s);
+                    entrada.addTextoPlano(this.parametros);
                     break;
                 }
                 case "encuesta": {
@@ -70,7 +70,20 @@ public class NuevaEntrada extends ComandosSistema {
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        setForo(this.foro);
+        if(this.usuarioActual == null){
+            return false;
+        } else {
+            int ini = s.indexOf("(");
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0,ini).toLowerCase();
+            if(comando.equals("nuevaentrada")){
+                this.parametros = s.substring(ini+1,fin);
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 
     @Override

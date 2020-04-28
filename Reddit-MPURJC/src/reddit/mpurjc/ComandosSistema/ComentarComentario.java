@@ -11,6 +11,7 @@ public class ComentarComentario extends ComandosSistema {
     private Usuario usuarioActual;
     private Comentario comentarioActual;
     private Entrada entradaActual;
+    private String parametros;
 
     public ComentarComentario(Foro foro) {
         this.foro = foro;
@@ -28,11 +29,11 @@ public class ComentarComentario extends ComandosSistema {
      */
     @Override
     public boolean ejecutar(String s) {
-        if(this.usuarioActual != null){
+        if(comprobar(s)){
             // Se podrá comentar dicho comentario siempre y cuando la entrada esté verificada 
             // y el comentario al que se hace referencia está validado
             if(this.entradaActual.isVerificado() && this.comentarioActual.isValidado()){
-                Comentario nuevoComentario = new Comentario(usuarioActual,s);
+                Comentario nuevoComentario = new Comentario(usuarioActual,this.parametros);
                 nuevoComentario.validar();
                 if(nuevoComentario.isValidado()){
                     this.comentarioActual.addComentario(nuevoComentario);
@@ -54,7 +55,20 @@ public class ComentarComentario extends ComandosSistema {
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        setForo(this.foro);
+        if(this.usuarioActual == null){
+            return false;
+        } else {
+            int ini = s.indexOf("(");
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0,ini).toLowerCase();
+            if(comando.equals("comentarcomentario")){
+                this.parametros = s.substring(ini+1,fin);
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 
     @Override

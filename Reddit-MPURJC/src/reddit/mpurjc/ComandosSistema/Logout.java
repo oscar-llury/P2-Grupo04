@@ -5,6 +5,7 @@ import reddit.mpurjc.Usuario;
 
 public class Logout extends ComandosSistema {
     private Foro foro;
+    private String parametros;
 
 
     public Logout(Foro foro) {
@@ -19,7 +20,7 @@ public class Logout extends ComandosSistema {
      */
     @Override
     public boolean ejecutar(String s) {
-        if(s.toLowerCase().equals("salir")){
+        if(comprobar(s)){
             setForo(foro);
            foro.setUsuarioActual(null);
             return true;
@@ -30,7 +31,18 @@ public class Logout extends ComandosSistema {
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        setForo(this.foro);
+        
+            int ini = s.indexOf("(");
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0,ini).toLowerCase();
+            if(comando.equals("logout")){
+                this.parametros = s.substring(ini+1,fin);
+                return true;
+            }else{
+                return false;
+            }
+        
     }
     
     @Override

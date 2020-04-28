@@ -10,6 +10,7 @@ public class ComentarEntrada extends ComandosSistema {
     private Foro foro;
     private Usuario usuarioActual;
     private Entrada entradaActual;
+    private String parametros;
 
     public ComentarEntrada(Foro foro) {
         this.foro = foro;
@@ -25,10 +26,9 @@ public class ComentarEntrada extends ComandosSistema {
      */
     @Override
     public boolean ejecutar(String s) {
-        setForo(this.foro);
-        if(this.usuarioActual != null){
+        if(comprobar(s)){
             if(this.entradaActual.isVerificado()){
-                Comentario nuevoComentario = new Comentario(usuarioActual,s);
+                Comentario nuevoComentario = new Comentario(usuarioActual,this.parametros);
                 nuevoComentario.validar();
                 if(nuevoComentario.isValidado()){
                     this.entradaActual.addComentario(nuevoComentario);
@@ -50,7 +50,20 @@ public class ComentarEntrada extends ComandosSistema {
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        setForo(this.foro);
+        if(this.usuarioActual == null){
+            return false;
+        } else {
+            int ini = s.indexOf("(");
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0,ini).toLowerCase();
+            if(comando.equals("comentarentrada")){
+                this.parametros = s.substring(ini+1,fin);
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 
     @Override

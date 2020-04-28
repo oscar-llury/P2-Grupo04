@@ -9,6 +9,7 @@ public class EliminarSubscripcion  extends ComandosSistema{
     private Foro foro;
     private SubForo subforoActual;
     private Usuario usuarioActual;
+    private String parametros;
 
     public EliminarSubscripcion(Foro foro){
        this.foro = foro;
@@ -24,10 +25,9 @@ public class EliminarSubscripcion  extends ComandosSistema{
      */
     @Override
     public boolean ejecutar(String s) {
-        setForo(this.foro);
-        if(this.usuarioActual != null){
-            if(foro.contieneSubForo(s)){
-                if(usuarioActual.contieneSubscripcion(s)){ 
+        if(comprobar(s)){
+            if(foro.contieneSubForo(this.parametros)){
+                if(usuarioActual.contieneSubscripcion(this.parametros)){ 
                     usuarioActual.eliminarSubcripcion(subforoActual);
                     return true;
                 }else{
@@ -46,7 +46,21 @@ public class EliminarSubscripcion  extends ComandosSistema{
 
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); 
+        setForo(this.foro);
+        if(this.usuarioActual == null){
+            return false;
+        } else {
+            int ini = s.indexOf("(");
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0,ini).toLowerCase();
+            if(comando.equals("eliminarsubscripcion")){
+                this.parametros = s.substring(ini+1,fin);
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
     }
 
     @Override
