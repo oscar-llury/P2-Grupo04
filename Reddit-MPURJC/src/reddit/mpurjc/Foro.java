@@ -1,10 +1,11 @@
 package reddit.mpurjc;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import reddit.mpurjc.Entradas.Entrada;
 import reddit.mpurjc.SubForo;
 
-public class Foro {
+public class Foro implements Serializable{
     
     // Esta clase contendrá la información de los subforos y los usuarios que lo componen
     private HashMap <String, SubForo> listaSubforos;

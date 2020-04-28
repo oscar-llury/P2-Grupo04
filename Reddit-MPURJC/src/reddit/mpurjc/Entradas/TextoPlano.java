@@ -1,10 +1,11 @@
 
 package reddit.mpurjc.Entradas;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 
-public class TextoPlano implements TipoEntrada {
+public class TextoPlano implements TipoEntrada , Serializable {
 
     protected String texto;
 

@@ -1,5 +1,6 @@
 package reddit.mpurjc.Entradas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,7 @@ import reddit.mpurjc.Penalizacion;
 import reddit.mpurjc.Usuario;
 import reddit.mpurjc.Votacion;
 
-public class Entrada implements TipoEntrada{
+public class Entrada implements TipoEntrada , Serializable{
 
     private int id;
     private String titulo;

@@ -1,9 +1,10 @@
 package reddit.mpurjc;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Penalizacion {
+public class Penalizacion implements Serializable{
 
     private Date fechaFin;
 

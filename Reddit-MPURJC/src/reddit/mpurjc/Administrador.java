@@ -1,12 +1,13 @@
 
 package reddit.mpurjc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import reddit.mpurjc.Entradas.Entrada;
 
-public class Administrador extends reddit.mpurjc.Usuario {
+public class Administrador extends reddit.mpurjc.Usuario implements Serializable{
     
     private List<Entrada> pendientes;
 

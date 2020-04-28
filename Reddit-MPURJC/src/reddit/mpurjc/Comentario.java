@@ -1,13 +1,14 @@
 
 package reddit.mpurjc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 
-public class Comentario {
+public class Comentario implements Serializable{
     
     private String texto;
     private HashMap <Usuario, Votacion> puntuaciones;

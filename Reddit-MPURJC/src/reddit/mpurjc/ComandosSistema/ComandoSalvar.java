@@ -4,13 +4,15 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import reddit.mpurjc.Foro;
 
-public class ComandoSalvar extends ComandosSistema{
+public class ComandoSalvar extends ComandosSistema implements Serializable{
 
     private Foro foro;
     private String ruta;
     private String nombre;
+    private String parametros;
     
     public ComandoSalvar(Foro foro) {
         this.foro = foro;
@@ -18,29 +20,40 @@ public class ComandoSalvar extends ComandosSistema{
     
     @Override
     public boolean ejecutar(String s) {
-        if(extraerRuta(s)){
-            new File(ruta).mkdirs();//Se crea el directorio si no existe
-            String fileName =ruta+"\\"+nombre+".txt";//Se combinan la ruta y el nombre
-            try{
-                FileOutputStream streamToFile= new FileOutputStream(fileName);
-                ObjectOutputStream objectToStream = new ObjectOutputStream(streamToFile);
-                objectToStream.writeObject(foro);//Se escribe el libro en el fichero
-                objectToStream.close();
-                streamToFile.close();
-            }catch(IOException ex){
-                ex.printStackTrace();
+        if(comprobar(s)){    
+            if(extraerRuta(parametros)){
+                new File(ruta).mkdirs();//Se crea el directorio si no existe
+                String fileName =ruta+"\\"+nombre+".txt";//Se combinan la ruta y el nombre
+                try{
+                    FileOutputStream streamToFile= new FileOutputStream(fileName);
+                    ObjectOutputStream objectToStream = new ObjectOutputStream(streamToFile);
+                    objectToStream.writeObject(foro);//Se escribe el libro en el fichero
+                    objectToStream.close();
+                    streamToFile.close();
+                }catch(IOException ex){
+                    ex.printStackTrace();
+                }
+                System.out.println("Proyecto guardado correctamente.");
+                return true; 
             }
-            System.out.println("Proyecto guardado correctamente.");
-            return true; 
-        }
-        else
+            else
+                return false;
+        }else
             return false;
-    
     }
-
+    //Salvar(ruta, nombre)
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setForo(foro);
+        int ini = s.indexOf('(');
+        int fin = s.lastIndexOf(")");
+        String comando = s.substring(0,ini).toLowerCase();
+        
+        if(comando.equals("salvar")){
+            this.parametros = s.substring(ini+1,fin);
+            return true;
+        }else
+            return false;
     }
 
     @Override
@@ -49,12 +62,11 @@ public class ComandoSalvar extends ComandosSistema{
     }
     
     private boolean extraerRuta(String s){
-        int iniRuta=s.indexOf('(')+1;
         int finRuta=s.lastIndexOf(',');
-        if((iniRuta==-1)||finRuta==-1)
+        if(finRuta==-1)
             return false;
-        ruta=s.substring(iniRuta,finRuta);
-        nombre=s.substring(finRuta+1,s.length()-1);
+        ruta=s.substring(0,finRuta);
+        nombre=s.substring(finRuta+1,s.length()).replaceAll(" ", "");
         return true;
     }
     

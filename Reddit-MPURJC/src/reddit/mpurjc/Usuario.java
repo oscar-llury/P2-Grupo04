@@ -1,11 +1,12 @@
 package reddit.mpurjc;
 
+import java.io.Serializable;
 import static java.lang.Boolean.FALSE;
 import java.util.ArrayList;
 import java.util.List;
 import static reddit.mpurjc.Usuario.Rol.*;
 
-public class Usuario {
+public class Usuario implements Serializable {
     
     private String nick;
     private String nombre;

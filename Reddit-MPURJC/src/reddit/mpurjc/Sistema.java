@@ -32,6 +32,7 @@ public class Sistema {
         Logout comandoLogout = new Logout(reddit);
         Login comandoLogin = new Login(reddit);
         ComandoSalvar comandoSalvar = new ComandoSalvar(reddit);
+        
         // Iniciar demostrador
         
         comandoNuevoUsuario.ejecutar("Admin,Admin,Admin@admin.urjc.es,AdminPass");
@@ -58,7 +59,7 @@ public class Sistema {
 
         comandoLogin.ejecutar("EmailUsuario ContraseñaUsuario"); // Donde pone EmailUsuario es el nick, tendriamos que poner que ponga el correo y recortarlo
 
-        comandoSalvar.ejecutar("E:/cole, hola");
+        comandoSalvar.ejecutar("Salvar(E:/cole,hola)");
         /*entradaActual = new Entrada(usuarioActual);
         entradaActual.construirEntrada();
         entradaActual.mostrar();*/

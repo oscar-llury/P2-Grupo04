@@ -1,6 +1,8 @@
 package reddit.mpurjc.Entradas;
 
-public class Ejercicio implements TipoEntrada {
+import java.io.Serializable;
+
+public class Ejercicio implements TipoEntrada , Serializable {
     
     String enunciado;
     String subenunciado;

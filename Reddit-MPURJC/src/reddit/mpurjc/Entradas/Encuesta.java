@@ -1,10 +1,11 @@
 package reddit.mpurjc.Entradas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class Encuesta implements TipoEntrada {    
+public class Encuesta implements TipoEntrada , Serializable{    
     
     protected String  enunciado;
     protected List<String> respuestas;

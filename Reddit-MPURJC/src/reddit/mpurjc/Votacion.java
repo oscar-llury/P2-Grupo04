@@ -1,7 +1,9 @@
 
 package reddit.mpurjc;
 
-public class Votacion {
+import java.io.Serializable;
+
+public class Votacion implements Serializable{
     
     private boolean votacion;
 
