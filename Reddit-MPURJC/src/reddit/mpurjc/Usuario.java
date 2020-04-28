@@ -115,10 +115,8 @@ public class Usuario implements Serializable {
     public boolean isPenalizado(){
         
         if((this.penalizacion != null)&&(this.penalizacion.isPenalizado())){
-            
             return true;
         }
-        
         return false;
     }
     

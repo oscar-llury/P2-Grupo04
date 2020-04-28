@@ -33,7 +33,7 @@ public class VotarEntrada extends ComandosSistema {
                 this.parametros = this.parametros.replace(" ","").toLowerCase();
                 int ini = this.parametros.indexOf("(");
                 int fin = this.parametros.indexOf(")");
-                int orden = Integer.parseInt(s.substring(ini+1,fin));
+                int orden = Integer.parseInt(this.parametros.substring(ini+1,fin));
                 boolean voto;
                 switch(this.parametros.substring(fin+1)){
                     case "like": voto = true;

@@ -27,7 +27,7 @@ public class NuevaEntrada extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
         if(comprobar(s)){
-            int index = s.indexOf(",");
+            int index = this.parametros.indexOf(",");
             String tituloEntrada = this.parametros.substring(0,index);
             this.parametros = this.parametros.substring(index+1, this.parametros.length());
             int id;

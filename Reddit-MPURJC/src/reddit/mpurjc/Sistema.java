@@ -35,7 +35,7 @@ public class Sistema {
         
         // Iniciar demostrador
         
-        comandoNuevoUsuario.ejecutar("Admin,Admin,Admin@admin.urjc.es,AdminPass");
+        comandoNuevoUsuario.ejecutar("NuevoUsuario(Admin,Admin,Admin@admin.urjc.es,AdminPass)");
 
         comandoNuevoUsuario.ejecutar("NuevoUsuario(NombreUsuario,ApellidosUsuario,EmailUsuario@urjc.es,ContraseñaUsuario)");
         
@@ -49,7 +49,7 @@ public class Sistema {
         
         comandoVotarComentario.ejecutar("VotarComentario((1) like)");
         
-        comandoVotarEntrada.ejecutar("VotarEntrada((1)  dislike)");
+        comandoVotarEntrada.ejecutar("VotarEntrada((1) dislike)");
         
         comandoNuevaSubscripcion.ejecutar("NuevaSubscripcion(SubForo 1)");
         

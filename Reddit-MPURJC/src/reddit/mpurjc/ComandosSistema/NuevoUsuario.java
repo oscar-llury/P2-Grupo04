@@ -21,20 +21,20 @@ public class NuevoUsuario extends ComandosSistema {
         
         if(comprobar(s)){
         
-            int separador = s.indexOf(",");
-            String nombre = s.substring(0,separador);
+            int separador = this.parametros.indexOf(",");
+            String nombre = this.parametros.substring(0,separador);
 
-             this.parametros =  this.parametros.substring(separador+1,s.length());
+            this.parametros =  this.parametros.substring(separador+1,this.parametros.length());
 
             separador =  this.parametros.indexOf(",");
             String apellidos =  this.parametros.substring(0,separador);
 
-             this.parametros =  this.parametros.substring(separador+1,s.length());
+            this.parametros =  this.parametros.substring(separador+1,this.parametros.length());
 
             separador =  this.parametros.indexOf(",");
             String email =  this.parametros.substring(0,separador);
 
-             this.parametros =  this.parametros.substring(separador+1,s.length());
+            this.parametros =  this.parametros.substring(separador+1,this.parametros.length());
 
             boolean unico = false;
             boolean evaluador = true;
