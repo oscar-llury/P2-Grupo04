@@ -66,7 +66,7 @@ public class Login extends ComandosSistema {
     private void mostrarNotificaciones(){
         foro.getUsuarioActual().getEntradasVistas().entrySet().forEach((entry) -> {
             int entradasActuales = foro.getSubForo(entry.getKey()).getEntradas().size();
-            System.out.println(entry.getKey()+" ("+ (entradasActuales-entry.getValue()));
+            System.out.println(entry.getKey()+" ("+ (entradasActuales-entry.getValue())+"*)");
         });
     }
             
