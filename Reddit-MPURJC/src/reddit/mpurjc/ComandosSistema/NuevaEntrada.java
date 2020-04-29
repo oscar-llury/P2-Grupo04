@@ -28,8 +28,12 @@ public class NuevaEntrada extends ComandosSistema {
     public boolean ejecutar(String s) {
         if (comprobar(s)) {
             int index = this.parametros.indexOf(",");
+            String subForo = this.parametros.substring(0, index);
+            this.subForoActual = this.foro.getSubForo(subForo);
+            this.parametros = this.parametros.substring(index + 1);
+            index = this.parametros.indexOf(",");
             String tituloEntrada = this.parametros.substring(0, index);
-            this.parametros = this.parametros.substring(index + 1, this.parametros.length());
+            this.parametros = this.parametros.substring(index + 1);
             int id;
             if (subForoActual.contarEntradas() == 0) {
                 id = 1;
@@ -42,7 +46,7 @@ public class NuevaEntrada extends ComandosSistema {
             while (pipe != -1) {
 
                 String obj1 = this.parametros.substring(0,pipe);
-                this.parametros = this.parametros.substring(pipe+1,this.parametros.length());
+                this.parametros = this.parametros.substring(pipe+1);
                 pipe = this.parametros.indexOf("|");
                 
                 contruirPorTipo(entrada,obj1);
@@ -55,6 +59,7 @@ public class NuevaEntrada extends ComandosSistema {
             this.subForoActual.insertarEntrada(entrada);
             foro.setEntradaActual(entrada);
             foro.getAdministrador().addPendientes(entrada);
+            System.out.println("Entrada creada correctamente.");
             return true;
         } else {
             System.out.println("Es necesario tener iniciada sesión.");

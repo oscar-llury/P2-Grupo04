@@ -3,6 +3,7 @@ package reddit.mpurjc;
 import java.io.Serializable;
 import static java.lang.Boolean.FALSE;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import static reddit.mpurjc.Usuario.Rol.*;
 
@@ -17,6 +18,7 @@ public class Usuario implements Serializable {
     private List<SubForo> subscripciones;
     private Penalizacion penalizacion;
     private boolean esAdministrador;
+    private HashMap <String, Integer> entradasVistas; 
 
     enum Rol
     {
@@ -34,6 +36,7 @@ public class Usuario implements Serializable {
         this.rol = sacarRol(email);
         this.subscripciones = new ArrayList<>();
         this.esAdministrador = FALSE;
+        this.entradasVistas = new HashMap<>();
     }
 
     public Usuario (String nombre, String apellidos, String email, String contraseña, boolean esAdministrador){
@@ -45,6 +48,7 @@ public class Usuario implements Serializable {
         this.rol = ADMINISTRADOR;
         this.subscripciones = new ArrayList<>();
         this.esAdministrador = esAdministrador;
+        this.entradasVistas = new HashMap<>();
     }
     
     public boolean inicioPermitido(){
@@ -111,6 +115,10 @@ public class Usuario implements Serializable {
     public List<SubForo> getSubscripciones() {
         return subscripciones;
     }
+    
+    public HashMap<String,Integer> getEntradasVistas(){
+        return entradasVistas;
+    }
 
     public Penalizacion getPenalizacion() {
         return penalizacion;
@@ -161,6 +169,12 @@ public class Usuario implements Serializable {
         this.subscripciones.add(subforo);
     }
     
+    public void addEntradasVistas(SubForo subforo){
+        String nombreSubforo = subforo.getNombre();
+        int tamaño = subforo.getEntradas().size();
+        this.entradasVistas.put(nombreSubforo,tamaño);
+    }
+    
     public void removeSubscripcion(SubForo subforo){
         this.subscripciones.remove(subforo);
     }
@@ -176,6 +190,15 @@ public class Usuario implements Serializable {
     
     public void eliminarSubcripcion(SubForo subforo){
         subscripciones.remove(subforo);
+        eliminarEntradasVistas(subforo);
     }
     
+    public void eliminarEntradasVistas(SubForo subforo){
+        String nombreSubforo = subforo.getNombre();
+        this.entradasVistas.remove(nombreSubforo);
+    }
+    
+    public void setEntradasVistas(SubForo subforo){
+        this.entradasVistas.put(subforo.getNombre(), subforo.getEntradas().size());
+    }
 }

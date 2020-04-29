@@ -26,9 +26,12 @@ public class EliminarSubscripcion  extends ComandosSistema{
     @Override
     public boolean ejecutar(String s) {
         if(comprobar(s)){
-            if(foro.contieneSubForo(this.parametros)){
+            this.subforoActual = this.foro.getSubForo(this.parametros);
+            if(this.subforoActual != null){
                 if(usuarioActual.contieneSubscripcion(this.parametros)){ 
+                    usuarioActual.eliminarEntradasVistas(subforoActual);
                     usuarioActual.eliminarSubcripcion(subforoActual);
+                    System.out.println("Subscripción eliminada correctamente.");
                     return true;
                 }else{
                     System.out.println("No estás subscrito a este SubForo.");

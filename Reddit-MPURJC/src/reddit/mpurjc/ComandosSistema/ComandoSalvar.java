@@ -22,6 +22,10 @@ public class ComandoSalvar extends ComandosSistema implements Serializable{
     public boolean ejecutar(String s) {
         if(comprobar(s)){    
             if(extraerRuta(parametros)){
+                foro.setEntradaActual(null);
+                foro.setSubForoActual(null);
+                foro.setUsuarioActual(null);
+                
                 new File(ruta).mkdirs();        //Se crea el directorio si no existe
                 String fileName = ruta + "\\" + nombre + ".txt";     //Se combinan la ruta y el nombre
                 try{

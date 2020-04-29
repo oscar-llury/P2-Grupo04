@@ -89,6 +89,7 @@ public class Comentario implements Serializable{
         }
         this.validado = valido;
         contarVotos();
+        if(devolver) System.out.println("Comentario guardado correctamente.");
         return devolver;
     }
     
@@ -127,4 +128,9 @@ public class Comentario implements Serializable{
     public boolean isValidado(){
         return this.validado;
     }
+    
+    public Comentario getComentarioPorOrden(int i){
+        return this.comentarios.get(i-1);
+    }
+    
 }

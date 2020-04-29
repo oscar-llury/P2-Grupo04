@@ -1,12 +1,13 @@
 package reddit.mpurjc.ComandosSistema;
 
+import java.util.Map;
 import reddit.mpurjc.Foro;
 import reddit.mpurjc.Usuario;
 
 public class Logout extends ComandosSistema {
+    
     private Foro foro;
     private String parametros;
-
 
     public Logout(Foro foro) {
         this.foro = foro;
@@ -22,7 +23,11 @@ public class Logout extends ComandosSistema {
     public boolean ejecutar(String s) {
         if(comprobar(s)){
             setForo(foro);
-           foro.setUsuarioActual(null);
+            actualizarNotificaciones();
+            System.out.println("LogOut correcto.");
+            foro.setEntradaActual(null);
+            foro.setSubForoActual(null);
+            foro.setUsuarioActual(null);
             return true;
         } else {
             return false;
@@ -50,4 +55,14 @@ public class Logout extends ComandosSistema {
     public void setForo(Foro foro) {
         this.foro = foro;
     }
+    
+    
+    public void actualizarNotificaciones(){
+        if(foro.getUsuarioActual().getEntradasVistas() != null){
+            foro.getUsuarioActual().getEntradasVistas().entrySet().forEach((entry) -> {
+                foro.getUsuarioActual().setEntradasVistas(foro.getSubForo(entry.getKey()));
+            });
+        }
+    }
+    
 }

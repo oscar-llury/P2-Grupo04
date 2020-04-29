@@ -53,17 +53,20 @@ public class NuevoUsuario extends ComandosSistema {
                 }
                 evaluador = evaluadorEmail(email);
             }
-
+            System.out.println("Usuario creado correctamente.");
             if(contruyendoAdmin){
                 Administrador admin = new Administrador(nombre,apellidos,email, this.parametros,true);
                 foro.insertarUsuario(admin);
                 foro.setAdministrador(admin);
                 this.contruyendoAdmin = false;
+                System.out.println("Usuario administrador creado correctamente.");
             }else{
                 Usuario usuario = new Usuario (nombre,apellidos,email, this.parametros);
                 foro.insertarUsuario(usuario);
                 foro.setUsuarioActual(usuario);
+                System.out.println("Sesión iniciada como: "+ foro.getUsuarioActual().getNick());
             }
+
             return true;
         }else{
             return false;

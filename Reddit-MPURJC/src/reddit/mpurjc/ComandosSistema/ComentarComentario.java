@@ -3,6 +3,7 @@ package reddit.mpurjc.ComandosSistema;
 import reddit.mpurjc.Comentario;
 import reddit.mpurjc.Entradas.Entrada;
 import reddit.mpurjc.Foro;
+import reddit.mpurjc.SubForo;
 import reddit.mpurjc.Usuario;
 
 public class ComentarComentario extends ComandosSistema {
@@ -31,11 +32,13 @@ public class ComentarComentario extends ComandosSistema {
         if(comprobar(s)){
             // Se podrá comentar dicho comentario siempre y cuando la entrada esté verificada 
             // y el comentario al que se hace referencia está validado
+            buscarComentarioActual(this.parametros);
             if(this.entradaActual.isVerificado() && this.comentarioActual.isValidado()){
                 Comentario nuevoComentario = new Comentario(usuarioActual,this.parametros);
                 nuevoComentario.validar();
                 if(nuevoComentario.isValidado()){
                     this.comentarioActual.addComentario(nuevoComentario);
+                    System.out.println("Comentario guardado correctamente.");
                     return true;
                 }else{
                     System.out.println("El comentario no es aceptado");
@@ -78,5 +81,40 @@ public class ComentarComentario extends ComandosSistema {
         this.entradaActual = foro.getEntradaActual();
         //this.comentarioActual = foro.getComentarioActual();
     }
+    //SubForo 1.1.1-
+    private void buscarComentarioActual(String s){
+        
+        int fin = s.indexOf(".");
+        String subforo = s.substring(0,fin);
+        s = s.substring(fin+1);
+        SubForo subForoActual = this.foro.getSubForo(subforo);
+        fin = s.indexOf(".");
+        int orden = Integer.parseInt(s.substring(0,fin));
+        s = s.substring(fin+1);
+        this.entradaActual = subForoActual.getEntradaPorOrden(orden);
+        fin = s.indexOf("-");
+        int profundidad = contarPuntosDeProfundidad(s.substring(0,fin));
+        int punto1 = this.parametros.indexOf("."); 
+        this.parametros = s.substring(fin+1);
+        
+        if (punto1 != -1){//2
+            //int orden = Integer.parseInt(s.substring(ini+1,punto1));
+            Comentario coment = this.entradaActual.getComentarioPorOrden(profundidad);
+            for(int i = 1; i<profundidad; i++){
+                coment = coment.getComentarioPorOrden(i);
+            }
+            this.comentarioActual = coment;
+        }else
+            this.comentarioActual = this.entradaActual.getComentarioPorOrden(profundidad);
+
+    }
     
+    private int contarPuntosDeProfundidad(String str){
+        int punto1 = str.indexOf(".");
+        if (punto1 != -1){
+            String[] words = str.split("\\.");
+            return words.length;
+        }else
+            return 1;
+    }
 }

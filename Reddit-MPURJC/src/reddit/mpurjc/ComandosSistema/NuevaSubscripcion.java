@@ -26,10 +26,13 @@ public class NuevaSubscripcion extends ComandosSistema {
      */
     @Override
     public boolean ejecutar(String s) {
-       if(comprobar(s)){      
+       if(comprobar(s)){
+           this.subforoActual = this.foro.getSubForo(this.parametros);
             //Podremos crear la nueva subscripción siempre y cuando el usuario no tenga ya esa subscripción
             if(!usuarioActual.contieneSubscripcion(this.parametros)){
                 usuarioActual.addSubscripcion(subforoActual);
+                usuarioActual.addEntradasVistas(subforoActual);
+                System.out.println("Subscripción registrada correctamente.");
                 return true;
             }else{
                 System.out.println("Ya estás subscrito a este SubForo.");

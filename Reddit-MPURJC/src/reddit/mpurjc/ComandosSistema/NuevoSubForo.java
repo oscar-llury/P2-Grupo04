@@ -32,6 +32,7 @@ public class NuevoSubForo extends ComandosSistema {
                 SubForo nuevoSubForo = new SubForo(this.parametros);
                 foro.insertarSubForo(nuevoSubForo);
                 foro.setSubForoActual(nuevoSubForo);
+                System.out.println("SubForo creado correctamente.");
                 return true;
             } else {
                 System.out.println("Ese subforo ya existe.");
