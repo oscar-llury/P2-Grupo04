@@ -1,11 +1,12 @@
 package reddit.mpurjc;
 
+import java.io.Serializable;
 import static java.lang.Boolean.FALSE;
 import java.util.ArrayList;
 import java.util.List;
 import static reddit.mpurjc.Usuario.Rol.*;
 
-public class Usuario {
+public class Usuario implements Serializable {
     
     private String nick;
     private String nombre;
@@ -21,6 +22,7 @@ public class Usuario {
     {
         ALUMNO, PROFESOR, ADMINISTRADOR;
     }
+    
     public Usuario(){}
     
     public Usuario (String nombre, String apellidos, String email, String contraseña){
@@ -53,7 +55,13 @@ public class Usuario {
         return false;
     }
 
+    /**
+     * Este método se utilizará para identificar el rol del usuario 
+     * @param email
+     * @return enumerado con el correspondiente rol de usuario
+     */
     private Rol sacarRol(String email){
+        // Se tendrá que verificar que el email introducido tenga la arroba en el email
         int index = email.indexOf("@");
         switch (email.substring(index,email.length()).toLowerCase()){
             case "alumnos.urjc.es": {
@@ -67,7 +75,12 @@ public class Usuario {
     
     private String sacarNick(String email){
         int index = email.indexOf("@");
+        // Utilizaremos el nick como resultado de la 1ª posición del correo hasta la posición anterior a la arroba
         return email.substring(0,index).toLowerCase();
+    }
+    
+    public boolean isProfesor(){
+        return this.rol == PROFESOR;
     }
 
     /*------------------------GETTERS------------------------*/
@@ -103,6 +116,14 @@ public class Usuario {
         return penalizacion;
     }
 
+    public boolean isPenalizado(){
+        
+        if((this.penalizacion != null)&&(this.penalizacion.isPenalizado())){
+            return true;
+        }
+        return false;
+    }
+    
     public boolean isEsAdministrador() {
         return esAdministrador;
     }
@@ -150,7 +171,7 @@ public class Usuario {
 
     public void setEsAdmin(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
-        Administrador admin = new Administrador(this.nombre,this.apellidos,this.email,this.contraseña,true);  
+        Administrador admin = new Administrador(this.nombre, this.apellidos, this.email, this.contraseña, true);  
     }
     
     public void eliminarSubcripcion(SubForo subforo){

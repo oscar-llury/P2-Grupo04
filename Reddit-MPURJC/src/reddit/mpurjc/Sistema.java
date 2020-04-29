@@ -1,12 +1,15 @@
 package reddit.mpurjc;
 
-import reddit.mpurjc.ComandosSistema.*;
-/** Autores:
+/** 
+ * Autores Práctica MP:
  * Javier Espín Prieto
  * Jorge Utrero Sevillano
  * Miguel Cendrero Ortega
  * Óscar Rivas Melar
  */
+
+import reddit.mpurjc.ComandosSistema.*;
+
 public class Sistema {
 
     public static void main(String[] args) {
@@ -16,7 +19,7 @@ public class Sistema {
         
 
         
-        //iniciar Comandos del Sistema
+        // Iniciar Comandos del Sistema
         NuevoSubForo comandoNuevoSubForo = new NuevoSubForo(reddit);
         NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(reddit);
         NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);
@@ -26,29 +29,56 @@ public class Sistema {
         ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
         NuevaSubscripcion comandoNuevaSubscripcion = new NuevaSubscripcion(reddit);
         EliminarSubscripcion comandoEliminarSubscripcion = new EliminarSubscripcion(reddit);
-        //Iniciar demostrador
+        Logout comandoLogout = new Logout(reddit);
+        Login comandoLogin = new Login(reddit);
+        ComandoSalvar comandoSalvar = new ComandoSalvar(reddit);
+        ComandoCargar comandoCargar = new ComandoCargar(reddit);
+        // Iniciar demostrador
         
-        comandoNuevoUsuario.ejecutar("Admin,Admin,Admin@admin.urjc.es,AdminPass");
+        //comandoCargar.ejecutar("Cargar(E:/cole/hola.txt)");
+        
+        //pintar foro
+        
+        
+        
+        comandoNuevoUsuario.ejecutar("NuevoUsuario(Admin,Admin,Admin@admin.urjc.es,AdminPass)");
 
-        comandoNuevoSubForo.ejecutar("SubForo 1");
-        comandoNuevoUsuario.ejecutar("NombreUsuario,ApellidosUsuario,EmailUsuario@urjc.es,ContraseñaUsuario");
-        comandoNuevaEntrada.ejecutar("TituloEntrada,Texto Plano, esto es el texto del Texto Plano.");
+        comandoNuevoUsuario.ejecutar("NuevoUsuario(NombreUsuario,ApellidosUsuario,EmailUsuario@urjc.es,ContraseñaUsuario)");
+        
+        
+        //subForo1
+        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
 
-        comandoValidarEntrada.ejecutar("all");
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 1,Texto Plano, esto es el texto de la entrada 1 subforo 1|"
+        +"Ejercicio, esto es ejercico entrada 1 subforo 1.)");
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 3,Encuesta, esto es el enunciado de la encuesta de la entrada 1 subforo 1, opcion 1, opcion 2)");
         
-        comandoNuevoComentarioEntrada.ejecutar("Esto es un comentario");
+        //subForo2
+        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 2)");
         
-        comandoVotarComentario.ejecutar("(1) like");
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 2,Texto Plano, esto es el texto de la entrada 2 subforo 2.)");
+
         
-        comandoVotarEntrada.ejecutar("(1)  dislike");
+        comandoValidarEntrada.ejecutar("ValidarEntrada(all)");
         
-        comandoNuevaSubscripcion.ejecutar("SubForo 1");
+        comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(Esto es un comentario)");
         
-        comandoEliminarSubscripcion.ejecutar("SubForo 1");
+        comandoVotarComentario.ejecutar("VotarComentario((1) like)");
         
-        /*entradaActual = new Entrada(usuarioActual);
-        entradaActual.construirEntrada();
-        entradaActual.mostrar();*/
+        comandoVotarEntrada.ejecutar("VotarEntrada((1) dislike)");
+        
+        comandoNuevaSubscripcion.ejecutar("NuevaSubscripcion(SubForo 1)");
+        
+        comandoEliminarSubscripcion.ejecutar("EliminarSubscripcion(SubForo 1)");
+
+        comandoLogout.ejecutar("Logout(Salir)");
+
+        comandoLogin.ejecutar("Login(EmailUsuario ContraseñaUsuario)"); // Donde pone EmailUsuario es el nick, tendriamos que poner que ponga el correo y recortarlo
+
+        comandoSalvar.ejecutar("Salvar(E:/cole,hola)");
+
+        
+        
     }
-    
+
 }

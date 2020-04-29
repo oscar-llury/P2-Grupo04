@@ -6,10 +6,10 @@ import reddit.mpurjc.Usuario;
 
 public class EliminarSubscripcion  extends ComandosSistema{
 
-    
     private Foro foro;
     private SubForo subforoActual;
     private Usuario usuarioActual;
+    private String parametros;
 
     public EliminarSubscripcion(Foro foro){
        this.foro = foro;
@@ -17,27 +17,51 @@ public class EliminarSubscripcion  extends ComandosSistema{
        this.usuarioActual = foro.getUsuarioActual();
     }
 
+    /**
+     * Este método se utilizará para eliminar una subscripción al SubForo
+     * @param s
+     * @return true si la subscripción se ha eliminado con éxito o false en 
+     * casos excepcionales
+     */
     @Override
     public boolean ejecutar(String s) {
-        setForo(this.foro);
-        
-        if(foro.contieneSubForo(s)){
-            if(usuarioActual.contieneSubscripcion(s)){ 
-                usuarioActual.eliminarSubcripcion(subforoActual);
-                return true;
+        if(comprobar(s)){
+            if(foro.contieneSubForo(this.parametros)){
+                if(usuarioActual.contieneSubscripcion(this.parametros)){ 
+                    usuarioActual.eliminarSubcripcion(subforoActual);
+                    return true;
+                }else{
+                    System.out.println("No estás subscrito a este SubForo.");
+                    return false;
+                }
             }else{
-                System.out.println("No estás subscrito a este SubForo.");
+                System.out.println("Este SubForo no existe.");
                 return false;
             }
         }else{
-            System.out.println("Este SubForo no exixte.");
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
 
+    //Comando para la clase EliminarSubscripcion en el Foro
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setForo(this.foro);
+        if(this.usuarioActual == null){
+            return false;
+        } else {
+            int ini = s.indexOf("(");
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0,ini).toLowerCase();
+            if(comando.equals("eliminarsubscripcion")){
+                this.parametros = s.substring(ini+1,fin);
+                return true;
+            }else{
+                return false;
+            }
+        }
+        
     }
 
     @Override

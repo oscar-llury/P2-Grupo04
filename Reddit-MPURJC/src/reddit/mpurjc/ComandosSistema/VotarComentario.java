@@ -10,7 +10,7 @@ public class VotarComentario extends ComandosSistema {
     private Foro foro;
     private Usuario usuarioActual;
     private Entrada entradaActual;
-    private Comentario comentarioActual;
+    private String parametros;
 
     public VotarComentario(Foro foro) {
         this.foro = foro;
@@ -18,40 +18,63 @@ public class VotarComentario extends ComandosSistema {
         this.entradaActual = foro.getEntradaActual();
     }
 
-    
+    /**
+     * Este método se utilizará para la votación de los comentarios y se podrán
+     * votar satisfactoriamente con un like o por el contrario con un dislike
+     * @param s
+     * @return boolean tipo de voto like o dislike que ha realizado el usuario
+     */
     @Override
     public boolean ejecutar(String s) {
-        setForo(this.foro);
-        s = s.replace(" ","").toLowerCase();
-        int ini = s.indexOf("(");
-        int fin = s.indexOf(")");
-        int profundidad = contarPuntosDeProfundidad(s.substring(ini+1,fin));
-        int punto1 = s.indexOf("."); 
-        
-        
-        
-        if (punto1!=-1){
-            int orden = Integer.parseInt(s.substring(ini+1,punto1));
-            for(int i=2; i<profundidad; i++){
-                
+       if(comprobar(s)){
+            if((this.usuarioActual != null)&&(this.entradaActual.isVerificado())){
+                this.parametros = this.parametros.replace(" ","").toLowerCase();
+                // Se representarán mediante paréntesis
+                int ini = this.parametros.indexOf("(");
+                int fin = this.parametros.indexOf(")");
+                int profundidad = contarPuntosDeProfundidad(this.parametros.substring(ini+1, fin));
+                int punto1 = this.parametros.indexOf("."); 
+
+                if (punto1 != -1){
+                    int orden = Integer.parseInt(s.substring(ini+1,punto1));
+                    for(int i = 2; i<profundidad; i++){
+
+                    }
+                }
+                Comentario comentario1 = this.entradaActual.getComentarioPorOrden(profundidad);
+                boolean voto;
+                switch(this.parametros.substring(fin+1)){
+                    case "like": voto = true;
+                                 break;
+                    case "dislike": voto = false;
+                                 break;
+                    default: voto = false;
+                                break;
+                }
+                return comentario1.votarComentario(usuarioActual, voto);
+            }else{
+                System.out.println("Es necesario tener iniciada sesión.");
+                return false;
             }
-        }
-        Comentario comentario1 = this.entradaActual.getComentarioPorOrden(profundidad);
-        boolean voto;
-        switch(s.substring(fin+1)){
-            case "like": voto = true;
-                         break;
-            case "dislike": voto = false;
-                         break;
-            default: voto = false;
-                        break;
-        }
-        return comentario1.votarComentario(usuarioActual, voto);
+       }else{
+           return false;
+       }
     }
 
+    //Comando para la clase VotarComentario en el Foro
     @Override
-    public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean comprobar(String s) { 
+        setForo(foro);
+        int ini = s.indexOf('(');
+        int fin = s.lastIndexOf(")");
+        String comando = s.substring(0,ini).toLowerCase();
+
+        if(comando.equals("votarcomentario")){
+            this.parametros = s.substring(ini+1,fin);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override

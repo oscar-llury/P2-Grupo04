@@ -1,11 +1,12 @@
 
 package reddit.mpurjc;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import reddit.mpurjc.Entradas.Entrada;
 
 
-public class SubForo {
+public class SubForo implements Serializable{
 
     private String nombre;
     private HashMap<Integer, Entrada> entradas;
@@ -39,8 +40,8 @@ public class SubForo {
     public boolean contieneEntrada(Entrada entrada){
         return this.entradas.containsValue(entrada);
     }
-    /*------------------------SETTERS------------------------*/
     
+    /*------------------------SETTERS------------------------*/
     
     public void setNombre(String nombre) {
         this.nombre = nombre;

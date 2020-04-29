@@ -7,26 +7,46 @@ public class ValidarEntrada extends ComandosSistema {
 
     private Foro foro;
     private Administrador admin;
+    private String parametros;
 
     public ValidarEntrada(Foro foro) {
         this.foro = foro;
         this.admin = foro.getAdministrador();
     }
     
+    /**
+     * Este método se utilizará para que el administrador pueda validar las entradas 
+     * introducidas
+     * @param s
+     * @return true si se han validado con éxito
+     */
     @Override
     public boolean ejecutar(String s) {
-        setForo(foro);
-        if(admin.hayPendientes()){
-            if(admin.validarTodasEntradas()){
-                admin.limpiarPendientes();
+        if(comprobar(s)){
+            if(admin.hayPendientes()){
+                admin.validarTodasEntradas();
             }
+            return true;
+        }else{
+            return false;
         }
-        return true;
     }
 
+    //Comando para la clase ValidarEntrada en el Foro
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        setForo(foro);
+        int ini = s.indexOf('(');
+        int fin = s.lastIndexOf(")");
+        String comando = s.substring(0,ini).toLowerCase();
+
+        if(comando.equals("validarentrada")){
+            this.parametros = s.substring(ini+1,fin);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     @Override

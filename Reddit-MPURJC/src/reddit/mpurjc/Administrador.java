@@ -1,11 +1,13 @@
 
 package reddit.mpurjc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import reddit.mpurjc.Entradas.Entrada;
 
-public class Administrador extends reddit.mpurjc.Usuario {
+public class Administrador extends reddit.mpurjc.Usuario implements Serializable{
     
     private List<Entrada> pendientes;
 
@@ -14,14 +16,16 @@ public class Administrador extends reddit.mpurjc.Usuario {
         this.pendientes = new ArrayList();
     }
     
-    public boolean validarTodasEntradas(){
-        boolean valido = true;
-        for (Entrada validar : pendientes) {
-            if(!validar.verificar()){
-                valido = false;
-            }
+    // Este método se utilizará para verificar las entradas que se han introducido
+    public void validarTodasEntradas(){
+      
+        Entrada entradaVerificar ;
+        while(!pendientes.isEmpty()) {
+            entradaVerificar = this.pendientes.get(0);
+            entradaVerificar.verificar();
+
+            this.pendientes.remove(entradaVerificar);
         }
-        return valido;
     }
     
     public boolean hayPendientes(){

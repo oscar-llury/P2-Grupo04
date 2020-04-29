@@ -1,11 +1,13 @@
 package reddit.mpurjc;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import reddit.mpurjc.Entradas.Entrada;
 import reddit.mpurjc.SubForo;
 
-public class Foro {
+public class Foro implements Serializable{
     
+    // Esta clase contendrá la información de los subforos y los usuarios que lo componen
     private HashMap <String, SubForo> listaSubforos;
     private HashMap <String, Usuario> listaUsuarios;
     private SubForo subForoActual;
@@ -60,6 +62,8 @@ public class Foro {
     public void addEntradaPendiente(Entrada entrada){
         this.usuarioAdministrador.addPendientes(entrada);
     }
+    
+    
 /*------------------------GETTERS------------------------*/
     public boolean sinSubForos(){
         return this.listaSubforos.isEmpty();
@@ -69,13 +73,17 @@ public class Foro {
         boolean a = this.listaUsuarios.isEmpty();
         return a;
     }
-    
+
+    public HashMap<String, Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
     public SubForo getSubForoActual() {
         return subForoActual;
     }
     
     public SubForo getSubForo(String s){
-        SubForo subforo= new SubForo(s);
+        SubForo subforo = new SubForo(s);
        return subforo;
     }
 

@@ -11,6 +11,7 @@ public class ComentarComentario extends ComandosSistema {
     private Usuario usuarioActual;
     private Comentario comentarioActual;
     private Entrada entradaActual;
+    private String parametros;
 
     public ComentarComentario(Foro foro) {
         this.foro = foro;
@@ -19,21 +20,55 @@ public class ComentarComentario extends ComandosSistema {
         //this.comentarioActual = foro.getComentarioActual();
     }
     
+    /**
+     * Este método se utilzará para comentar los comentarios ya expuestos 
+     * @param s
+     * @return boolean true en el caso de que se haya podido comentar con éxito y que dicho 
+     * comentario sea válido, en caso contrario, no podrá ser aceptado 
+     */
     @Override
     public boolean ejecutar(String s) {
-        if(this.entradaActual.isVerificado() && this.comentarioActual.isValidado()){
-            Comentario nuevoComentario = new Comentario(usuarioActual,s);
-            this.comentarioActual.addComentario(nuevoComentario);
-            return true;
+        if(comprobar(s)){
+            // Se podrá comentar dicho comentario siempre y cuando la entrada esté verificada 
+            // y el comentario al que se hace referencia está validado
+            if(this.entradaActual.isVerificado() && this.comentarioActual.isValidado()){
+                Comentario nuevoComentario = new Comentario(usuarioActual,this.parametros);
+                nuevoComentario.validar();
+                if(nuevoComentario.isValidado()){
+                    this.comentarioActual.addComentario(nuevoComentario);
+                    return true;
+                }else{
+                    System.out.println("El comentario no es aceptado");
+                    //add penalizacion
+                    return false;
+                }
+            }else{
+                System.out.println("No se ha podido comentar la entrada.");
+                return false;
+            }
         }else{
-            System.out.println("No se ha podido comentar la entrada.");
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
 
+    //Comando para la clase ComentarComentario en el Foro
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setForo(this.foro);
+        if(this.usuarioActual == null){
+            return false;
+        } else {
+            int ini = s.indexOf("(");
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0,ini).toLowerCase();
+            if(comando.equals("comentarcomentario")){
+                this.parametros = s.substring(ini+1,fin);
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 
     @Override

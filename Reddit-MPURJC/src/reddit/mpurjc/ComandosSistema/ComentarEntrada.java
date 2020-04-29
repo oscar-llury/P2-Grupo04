@@ -10,6 +10,7 @@ public class ComentarEntrada extends ComandosSistema {
     private Foro foro;
     private Usuario usuarioActual;
     private Entrada entradaActual;
+    private String parametros;
 
     public ComentarEntrada(Foro foro) {
         this.foro = foro;
@@ -17,27 +18,53 @@ public class ComentarEntrada extends ComandosSistema {
         this.entradaActual = foro.getEntradaActual();
     }
     
+    /**
+     * Este método se utilizará para comentar las entradas propuestas
+     * @param s
+     * @return boolean true en caso de que se haya comentado con éxito la entrada o 
+     * false en otros casos 
+     */
     @Override
     public boolean ejecutar(String s) {
-        setForo(this.foro);
-        if(this.entradaActual.isVerificado()){
-            Comentario nuevoComentario = new Comentario(usuarioActual,s);
-            if(nuevoComentario.validar()){
-                this.entradaActual.addComentario(nuevoComentario);
-                return true;
+        if(comprobar(s)){
+            if(this.entradaActual.isVerificado()){
+                Comentario nuevoComentario = new Comentario(usuarioActual,this.parametros);
+                nuevoComentario.validar();
+                if(nuevoComentario.isValidado()){
+                    this.entradaActual.addComentario(nuevoComentario);
+                    return true;
+                }else{
+                    System.out.println("El comentario no es aceptado.");
+                    //add penalizacion
+                    return false;
+                }
             }else{
-                System.out.println("El comentario no es aceptado;");
+                System.out.println("No se ha podido comentar la entrada.");
                 return false;
             }
         }else{
-            System.out.println("No se ha podido comentar la entrada.");
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
 
+    //Comando para la clase ComentarEntrada en el Foro
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setForo(this.foro);
+        if(this.usuarioActual == null){
+            return false;
+        } else {
+            int ini = s.indexOf("(");
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0,ini).toLowerCase();
+            if(comando.equals("comentarentrada")){
+                this.parametros = s.substring(ini+1,fin);
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 
     @Override

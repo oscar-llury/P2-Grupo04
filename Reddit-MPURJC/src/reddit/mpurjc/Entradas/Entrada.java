@@ -1,13 +1,16 @@
 package reddit.mpurjc.Entradas;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 import reddit.mpurjc.Comentario;
+import reddit.mpurjc.Penalizacion;
 import reddit.mpurjc.Usuario;
 import reddit.mpurjc.Votacion;
 
-public class Entrada implements TipoEntrada{
+public class Entrada implements TipoEntrada , Serializable{
 
     private int id;
     private String titulo;
@@ -27,18 +30,23 @@ public class Entrada implements TipoEntrada{
         this.verificado = false;
         this.puntuaciones = new HashMap<>();
         this.comentarios = new ArrayList<>();
-        this.negativo=0;
-        this.positivo=0;
+        this.negativo = 0;
+        this.positivo = 0;
         this.id = id;
     }
     
 
+    /**
+     * Este método se utilizará para en el caso de que esté verificado nos mostrará el 
+     * título, autor y puntuación de las votaciones contadas en la clase 
+     * VotarEntrada. También nos mostrará los comentarios de dichas entradas.
+     */
     @Override
     public void mostrar() {
         if(this.verificado){
-            System.out.println("Título: "+this.titulo);
-            System.out.println("Autor: "+this.autor.getNick());
-            System.out.println("Puntuación: "+ contarVotos());
+            System.out.println("Título: " + this.titulo);
+            System.out.println("Autor: " + this.autor.getNick());
+            System.out.println("Puntuación: " + contarVotos());
             this.contenido.forEach((iter) -> {
                 iter.mostrar();
             });
@@ -47,25 +55,46 @@ public class Entrada implements TipoEntrada{
                 iter.mostrar();
             });
         }else{
-            System.out.println("Esta entrada aun no ha sido verificada por un usuario Administrador.");
+            System.out.println("Esta entrada aún no ha sido verificada por un usuario Administrador.");
         }
     }
-    //devuelve true si es valido su contenido (tipo de entrada)
+    
+    
+    /**
+     * Se procederá a verificar la entrada y en el caso de que no se haya verificado
+     * se impondrá la correspondiente penalización
+     */
     @Override
-    public boolean verificar() {
-        boolean validar = true;
+    public void verificar() {
         for (TipoEntrada iter : this.contenido) {
-            if(!iter.verificar()){
-                validar = false;
+            iter.verificar();
+        }
+        System.out.println("¿Deseas verificar la entrada?");
+        Scanner scan = new Scanner(System.in);
+        String s = scan.next();
+        s = s.toLowerCase();
+        this.verificado = s.equals("si");
+        
+        if(!this.verificado){
+            if(this.autor.getPenalizacion().isPenalizado()){
+                Penalizacion penalizacion = this.autor.getPenalizacion();
+                penalizacion.actualizarPenalizacion();
+            }else{
+                Penalizacion penalizacion = new Penalizacion();
+                this.autor.setPenalizacion(penalizacion);
             }
         }
-        this.verificado = validar;
-        return validar;
+        
     } 
     
+    /**
+     * Este método se utilizará para contar los votos de las entradas positiva o 
+     * negativamente
+     * @return Listado con los votos positivos y los votos negativos, respectivamente.
+     */
     public String contarVotos(){
-        this.negativo=0;
-        this.positivo=0;
+        this.negativo = 0;
+        this.positivo = 0;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
             if (v.getVotacion()){
                 this.positivo++;
@@ -73,18 +102,26 @@ public class Entrada implements TipoEntrada{
                 this.negativo++;
             }
         });
-        return ("Positivos: "+this.positivo+", Negativos: "+this.negativo);
+        return ("Positivos: " + this.positivo + ", Negativos: " + this.negativo);
     }
     
+    /**
+     * Este método se utilizará para la votación de las entradas y su correspondiente 
+     * almacenamiento
+     * @param votante
+     * @param voto
+     * @return true en caso de que la votación se haya realizado con éxito
+     */
     public boolean votarEntrada(Usuario votante, boolean voto){
         boolean valido = verificado;
+        this.verificado = false;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
             if (k.getNick().equals(votante.getNick())){
-                verificado=false;
+                verificado = true;
             }
         });
         boolean devolver = false;
-        if(verificado){
+        if(!verificado){
             Votacion votacion = new Votacion(voto);
             this.puntuaciones.put(votante,votacion);
             devolver = true;
@@ -95,9 +132,11 @@ public class Entrada implements TipoEntrada{
                 devolver = true;
             }
         }
-        this.verificado=valido;
+        this.verificado = valido;
         return devolver;
     }
+    
+    
     /*------------------------GETTERS------------------------*/
     public boolean isVerificado() {
         return this.verificado;
@@ -135,7 +174,7 @@ public class Entrada implements TipoEntrada{
     }
     
     public void addEncuesta(String s){
-        Encuesta encuesta=new Encuesta(s);
+        Encuesta encuesta = new Encuesta(s);
         this.contenido.add(encuesta);
 
     }

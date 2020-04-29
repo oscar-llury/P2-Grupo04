@@ -10,6 +10,7 @@ public class NuevaEntrada extends ComandosSistema {
     private Foro foro;
     private Usuario usuarioActual;
     private SubForo subForoActual;
+    private String parametros;
 
     public NuevaEntrada(Foro foro) {
         this.foro = foro;
@@ -17,49 +18,67 @@ public class NuevaEntrada extends ComandosSistema {
         this.subForoActual = foro.getSubForoActual();
     }
 
+    /**
+     * Este método se utilizará para crear una entrada
+     *
+     * @param s
+     * @return true si la entrada ha sido creada satisfactoriamente
+     */
     @Override
     public boolean ejecutar(String s) {
-        setForo(this.foro);
-        int index = s.indexOf(",");
-        String tituloEntrada = s.substring(0,index);
-        s = s.substring(index+1, s.length());
-        int id;
-        if(subForoActual.contarEntradas()==0){
-            id = 1;
-        }else{
-            id = subForoActual.contarEntradas();
-        }
-        Entrada entrada = new Entrada(id,tituloEntrada,usuarioActual);
-        
-        index = s.indexOf(",");
-        String tipoEntrada = s.substring(0,index).toLowerCase();
-        s = s.substring(index+1, s.length());
-        switch(tipoEntrada){
-            case "texto plano": {
-                entrada.addTextoPlano(s);
-                break;
+        if (comprobar(s)) {
+            int index = this.parametros.indexOf(",");
+            String tituloEntrada = this.parametros.substring(0, index);
+            this.parametros = this.parametros.substring(index + 1, this.parametros.length());
+            int id;
+            if (subForoActual.contarEntradas() == 0) {
+                id = 1;
+            } else {
+                id = subForoActual.contarEntradas()+1;
             }
-            case "encuesta": {
-                //entrada.addEncuesta();
-            }
-            case "ejercicio": {
-                //entrada.addEjercicio();
-            }
-            default: {
-                System.out.println("No se ha podido generar la entrada.");
-                return false;
+            Entrada entrada = new Entrada(id, tituloEntrada, usuarioActual);
 
-            }
+            int pipe = this.parametros.indexOf("|");
+            while (pipe != -1) {
+
+                String obj1 = this.parametros.substring(0,pipe);
+                this.parametros = this.parametros.substring(pipe+1,this.parametros.length());
+                pipe = this.parametros.indexOf("|");
+                
+                contruirPorTipo(entrada,obj1);
+                
+            }  
+            
+            contruirPorTipo(entrada,this.parametros);
+                
+                
+            this.subForoActual.insertarEntrada(entrada);
+            foro.setEntradaActual(entrada);
+            foro.getAdministrador().addPendientes(entrada);
+            return true;
+        } else {
+            System.out.println("Es necesario tener iniciada sesión.");
+            return false;
         }
-        this.subForoActual.insertarEntrada(entrada);
-        foro.setEntradaActual(entrada);
-        foro.getAdministrador().addPendientes(entrada);
-        return true;
     }
 
+    //Comando para la clase NuevaEntrada en el Foro
     @Override
     public boolean comprobar(String s) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setForo(this.foro);
+        if (this.usuarioActual == null) {
+            return false;
+        } else {
+            int ini = s.indexOf("(");
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0, ini).toLowerCase();
+            if (comando.equals("nuevaentrada")) {
+                this.parametros = s.substring(ini + 1, fin);
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     @Override
@@ -68,5 +87,35 @@ public class NuevaEntrada extends ComandosSistema {
         this.usuarioActual = foro.getUsuarioActual();
         this.subForoActual = foro.getSubForoActual();
     }
-    
+
+    private void contruirPorTipo(Entrada entrada, String s) {
+        int index = s.indexOf(",");
+        String tipoEntrada = s.substring(0, index).toLowerCase();
+        s = s.substring(index + 1, s.length());
+        switch (tipoEntrada) {                  //Podremos crear las distintas entradas disponibles
+            case "texto plano": {               //El texto plano podrá ser creado por cualquier usuario
+                entrada.addTextoPlano(s);
+                break;
+            }
+            case "encuesta": {                  //La encuesta será creada solamente por un profesor
+                if (this.usuarioActual.isProfesor())
+                    entrada.addEncuesta(s);
+                else 
+                    System.out.println("Es necesario ser porfesor.");
+                break;
+            }
+            case "ejercicio": {                 //El ejercicio será creado solamente por un profesor
+                if (this.usuarioActual.isProfesor())
+                    entrada.addEjercicio(s);
+                else
+                    System.out.println("Es necesario ser porfesor.");
+                break;
+            }
+            default: {
+                System.out.println("No se ha podido generar la entrada.");
+            }
+        }  
+    }
+
+
 }
