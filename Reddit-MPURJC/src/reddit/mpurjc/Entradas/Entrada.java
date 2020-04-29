@@ -114,13 +114,14 @@ public class Entrada implements TipoEntrada , Serializable{
      */
     public boolean votarEntrada(Usuario votante, boolean voto){
         boolean valido = verificado;
+        this.verificado = false;
         this.puntuaciones.forEach((Usuario k, Votacion v) -> {
             if (k.getNick().equals(votante.getNick())){
-                verificado = false;
+                verificado = true;
             }
         });
         boolean devolver = false;
-        if(verificado){
+        if(!verificado){
             Votacion votacion = new Votacion(voto);
             this.puntuaciones.put(votante,votacion);
             devolver = true;

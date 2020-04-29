@@ -32,8 +32,14 @@ public class Sistema {
         Logout comandoLogout = new Logout(reddit);
         Login comandoLogin = new Login(reddit);
         ComandoSalvar comandoSalvar = new ComandoSalvar(reddit);
-        
+        ComandoCargar comandoCargar = new ComandoCargar(reddit);
         // Iniciar demostrador
+        
+        //comandoCargar.ejecutar("Cargar(E:/cole/hola.txt)");
+        
+        //pintar foro
+        
+        
         
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Admin,Admin,Admin@admin.urjc.es,AdminPass)");
 
@@ -43,8 +49,8 @@ public class Sistema {
         //subForo1
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
 
-        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 1,Texto Plano, esto es el texto de la entrada 1 subforo 1.)");
-        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 2,Ejercicio, esto es ejercico entrada 1 subforo 1.)");
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 1,Texto Plano, esto es el texto de la entrada 1 subforo 1|"
+        +"Ejercicio, esto es ejercico entrada 1 subforo 1.)");
         comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 3,Encuesta, esto es el enunciado de la encuesta de la entrada 1 subforo 1, opcion 1, opcion 2)");
         
         //subForo2
@@ -71,6 +77,8 @@ public class Sistema {
 
         comandoSalvar.ejecutar("Salvar(E:/cole,hola)");
 
+        
+        
     }
 
 }

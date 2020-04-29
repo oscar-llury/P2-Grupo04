@@ -19,11 +19,12 @@ public class Administrador extends reddit.mpurjc.Usuario implements Serializable
     // Este método se utilizará para verificar las entradas que se han introducido
     public void validarTodasEntradas(){
       
-        Iterator<Entrada> it = pendientes.iterator();
+        Entrada entradaVerificar ;
         while(!pendientes.isEmpty()) {
-            Entrada entrada = it.next();
-            entrada.verificar();
-            this.pendientes.remove(entrada);
+            entradaVerificar = this.pendientes.get(0);
+            entradaVerificar.verificar();
+
+            this.pendientes.remove(entradaVerificar);
         }
     }
     

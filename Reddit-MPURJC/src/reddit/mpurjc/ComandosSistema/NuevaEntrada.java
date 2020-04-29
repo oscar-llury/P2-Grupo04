@@ -34,7 +34,7 @@ public class NuevaEntrada extends ComandosSistema {
             if (subForoActual.contarEntradas() == 0) {
                 id = 1;
             } else {
-                id = subForoActual.contarEntradas();
+                id = subForoActual.contarEntradas()+1;
             }
             Entrada entrada = new Entrada(id, tituloEntrada, usuarioActual);
 
@@ -101,14 +101,14 @@ public class NuevaEntrada extends ComandosSistema {
                 if (this.usuarioActual.isProfesor())
                     entrada.addEncuesta(s);
                 else 
-                    System.out.println("No permitido");
+                    System.out.println("Es necesario ser porfesor.");
                 break;
             }
             case "ejercicio": {                 //El ejercicio será creado solamente por un profesor
                 if (this.usuarioActual.isProfesor())
                     entrada.addEjercicio(s);
                 else
-                    System.out.println("No permitido");
+                    System.out.println("Es necesario ser porfesor.");
                 break;
             }
             default: {

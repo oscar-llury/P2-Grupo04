@@ -27,7 +27,7 @@ public class VotarComentario extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
        if(comprobar(s)){
-            if(this.usuarioActual != null){
+            if((this.usuarioActual != null)&&(this.entradaActual.isVerificado())){
                 this.parametros = this.parametros.replace(" ","").toLowerCase();
                 // Se representarán mediante paréntesis
                 int ini = this.parametros.indexOf("(");
@@ -63,8 +63,7 @@ public class VotarComentario extends ComandosSistema {
 
     //Comando para la clase VotarComentario en el Foro
     @Override
-    public boolean comprobar(String s) {
-        //throw new UnsupportedOperationException("Not supported yet."); 
+    public boolean comprobar(String s) { 
         setForo(foro);
         int ini = s.indexOf('(');
         int fin = s.lastIndexOf(")");
