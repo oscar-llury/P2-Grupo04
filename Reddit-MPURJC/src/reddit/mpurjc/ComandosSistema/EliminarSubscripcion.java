@@ -44,6 +44,7 @@ public class EliminarSubscripcion  extends ComandosSistema{
         }
     }
 
+    //Comando para la clase EliminarSubscripcion en el Foro
     @Override
     public boolean comprobar(String s) {
         setForo(this.foro);

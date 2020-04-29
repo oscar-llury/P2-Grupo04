@@ -13,7 +13,7 @@ public class Ejercicio implements TipoEntrada , Serializable {
             enunciado = s.substring(1, separador);
             subenunciado = s.substring(separador,s.length());
         }else
-        enunciado = s;
+            enunciado = s;
     }
 
     @Override

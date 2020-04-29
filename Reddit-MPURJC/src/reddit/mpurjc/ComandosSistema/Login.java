@@ -45,6 +45,7 @@ public class Login extends ComandosSistema {
 
     }
 
+    //Comando para la clase Login en el Foro
     @Override
     public boolean comprobar(String s) {
         setForo(this.foro);

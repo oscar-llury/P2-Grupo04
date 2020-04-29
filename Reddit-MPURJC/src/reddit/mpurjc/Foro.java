@@ -62,6 +62,8 @@ public class Foro implements Serializable{
     public void addEntradaPendiente(Entrada entrada){
         this.usuarioAdministrador.addPendientes(entrada);
     }
+    
+    
 /*------------------------GETTERS------------------------*/
     public boolean sinSubForos(){
         return this.listaSubforos.isEmpty();

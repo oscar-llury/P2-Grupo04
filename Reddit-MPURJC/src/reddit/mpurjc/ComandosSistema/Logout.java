@@ -29,6 +29,7 @@ public class Logout extends ComandosSistema {
         }
     }
 
+    //Comando para la clase Logout en el Foro
     @Override
     public boolean comprobar(String s) {
         setForo(this.foro);

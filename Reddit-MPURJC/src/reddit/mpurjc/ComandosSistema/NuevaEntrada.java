@@ -62,6 +62,7 @@ public class NuevaEntrada extends ComandosSistema {
         }
     }
 
+    //Comando para la clase NuevaEntrada en el Foro
     @Override
     public boolean comprobar(String s) {
         setForo(this.foro);
@@ -91,19 +92,19 @@ public class NuevaEntrada extends ComandosSistema {
         int index = s.indexOf(",");
         String tipoEntrada = s.substring(0, index).toLowerCase();
         s = s.substring(index + 1, s.length());
-        switch (tipoEntrada) {    //Podremos crear las distintas entradas disponibles
-            case "texto plano": {
+        switch (tipoEntrada) {                  //Podremos crear las distintas entradas disponibles
+            case "texto plano": {               //El texto plano podrá ser creado por cualquier usuario
                 entrada.addTextoPlano(s);
                 break;
             }
-            case "encuesta": {
+            case "encuesta": {                  //La encuesta será creada solamente por un profesor
                 if (this.usuarioActual.isProfesor())
                     entrada.addEncuesta(s);
                 else 
                     System.out.println("No permitido");
                 break;
             }
-            case "ejercicio": {
+            case "ejercicio": {                 //El ejercicio será creado solamente por un profesor
                 if (this.usuarioActual.isProfesor())
                     entrada.addEjercicio(s);
                 else

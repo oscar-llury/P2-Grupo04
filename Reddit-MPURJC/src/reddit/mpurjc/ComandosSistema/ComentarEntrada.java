@@ -48,6 +48,7 @@ public class ComentarEntrada extends ComandosSistema {
         }
     }
 
+    //Comando para la clase ComentarEntrada en el Foro
     @Override
     public boolean comprobar(String s) {
         setForo(this.foro);

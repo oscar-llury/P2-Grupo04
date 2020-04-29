@@ -23,8 +23,8 @@ public class ComandoCargar extends ComandosSistema implements Serializable {
     public boolean ejecutar(String s) {
         if(comprobar(s)){
             try{
-                FileInputStream fileToStream= new FileInputStream(ruta);
-                ObjectInputStream streamToObject=new ObjectInputStream(fileToStream);
+                FileInputStream fileToStream = new FileInputStream(ruta);
+                ObjectInputStream streamToObject = new ObjectInputStream(fileToStream);
                 foroAux = (Foro) streamToObject.readObject();
                 System.out.println("Proyecto cargado correctamente.");
             }catch(IOException | ClassNotFoundException ex){

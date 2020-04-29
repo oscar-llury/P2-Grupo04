@@ -57,6 +57,7 @@ public class VotarEntrada extends ComandosSistema {
         }
     }
 
+    //Comando para la clase VotarEntrada en el Foro
     @Override
     public boolean comprobar(String s) {
        // throw new UnsupportedOperationException("Not supported yet."); 

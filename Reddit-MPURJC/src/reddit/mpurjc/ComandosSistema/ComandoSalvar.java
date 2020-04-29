@@ -22,12 +22,12 @@ public class ComandoSalvar extends ComandosSistema implements Serializable{
     public boolean ejecutar(String s) {
         if(comprobar(s)){    
             if(extraerRuta(parametros)){
-                new File(ruta).mkdirs();//Se crea el directorio si no existe
-                String fileName =ruta+"\\"+nombre+".txt";//Se combinan la ruta y el nombre
+                new File(ruta).mkdirs();        //Se crea el directorio si no existe
+                String fileName = ruta + "\\" + nombre + ".txt";     //Se combinan la ruta y el nombre
                 try{
-                    FileOutputStream streamToFile= new FileOutputStream(fileName);
+                    FileOutputStream streamToFile = new FileOutputStream(fileName);
                     ObjectOutputStream objectToStream = new ObjectOutputStream(streamToFile);
-                    objectToStream.writeObject(foro);//Se escribe el libro en el fichero
+                    objectToStream.writeObject(foro);       //Se escribe el libro en el fichero
                     objectToStream.close();
                     streamToFile.close();
                 }catch(IOException ex){
@@ -41,6 +41,7 @@ public class ComandoSalvar extends ComandosSistema implements Serializable{
         }else
             return false;
     }
+    
     //Salvar(ruta, nombre)
     @Override
     public boolean comprobar(String s) {
@@ -62,11 +63,11 @@ public class ComandoSalvar extends ComandosSistema implements Serializable{
     }
     
     private boolean extraerRuta(String s){
-        int finRuta=s.lastIndexOf(',');
-        if(finRuta==-1)
+        int finRuta = s.lastIndexOf(',');
+        if(finRuta == -1)
             return false;
-        ruta=s.substring(0,finRuta);
-        nombre=s.substring(finRuta+1,s.length()).replaceAll(" ", "");
+        ruta = s.substring(0,finRuta);
+        nombre = s.substring(finRuta+1,s.length()).replaceAll(" ", "");
         return true;
     }
     

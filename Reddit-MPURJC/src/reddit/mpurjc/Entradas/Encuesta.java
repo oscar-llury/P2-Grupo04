@@ -35,7 +35,7 @@ public class Encuesta implements TipoEntrada , Serializable{
         mostrar();
     }
 
-    // Se mostará el enunciado y las opciones a las respuestas, respectivamente
+    // Se mostrará el enunciado y las opciones a las respuestas, respectivamente
     @Override
     public void mostrar() {
         int i=1;

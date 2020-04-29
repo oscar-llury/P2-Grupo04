@@ -32,6 +32,7 @@ public class ValidarEntrada extends ComandosSistema {
         }
     }
 
+    //Comando para la clase ValidarEntrada en el Foro
     @Override
     public boolean comprobar(String s) {
        

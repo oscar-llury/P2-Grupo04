@@ -21,8 +21,7 @@ public class ComentarComentario extends ComandosSistema {
     }
     
     /**
-     * Esre método se utilzará para comentar los comentarios ya expuestos con
-     * anterioridad 
+     * Este método se utilzará para comentar los comentarios ya expuestos 
      * @param s
      * @return boolean true en el caso de que se haya podido comentar con éxito y que dicho 
      * comentario sea válido, en caso contrario, no podrá ser aceptado 
@@ -53,6 +52,7 @@ public class ComentarComentario extends ComandosSistema {
         }
     }
 
+    //Comando para la clase ComentarComentario en el Foro
     @Override
     public boolean comprobar(String s) {
         setForo(this.foro);

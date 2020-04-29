@@ -46,6 +46,7 @@ public class NuevoSubForo extends ComandosSistema {
         }
     }
 
+    //Comando para la clase NuevoSubForo en el Foro
     @Override
     public boolean comprobar(String s) {
          setForo(foro);

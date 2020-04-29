@@ -70,6 +70,7 @@ public class NuevoUsuario extends ComandosSistema {
         }
     }
 
+    //Comando para la clase NuevoUsuario en el Foro
     @Override
     public boolean comprobar(String s) {
         

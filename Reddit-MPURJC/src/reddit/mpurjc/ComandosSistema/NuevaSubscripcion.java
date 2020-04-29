@@ -41,6 +41,7 @@ public class NuevaSubscripcion extends ComandosSistema {
        }
     }
 
+    //Comando para la clase NuevaSubscripcion en el Foro
     @Override
     public boolean comprobar(String s) {
         setForo(this.foro);
