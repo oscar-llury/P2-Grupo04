@@ -67,12 +67,12 @@ public class Entrada implements TipoEntrada , Serializable{
     @Override
     public void verificar() {
         for (TipoEntrada iter : this.contenido) {
+            System.out.print("   -> ");
             iter.verificar();
+            System.out.println();
         }
-        System.out.println("¿Deseas verificar la entrada?");
-        Scanner scan = new Scanner(System.in);
-        String s = scan.next();
-        s = s.toLowerCase();
+        System.out.print("¿Deseas verificar la entrada? ");
+        String s = decirSi("Si").toLowerCase();
         this.verificado = s.equals("si");
         
         if(!this.verificado){
@@ -136,6 +136,10 @@ public class Entrada implements TipoEntrada , Serializable{
         return devolver;
     }
     
+    public String decirSi(String s){
+        System.out.println(s);
+        return s;
+    }
     
     /*------------------------GETTERS------------------------*/
     public boolean isVerificado() {

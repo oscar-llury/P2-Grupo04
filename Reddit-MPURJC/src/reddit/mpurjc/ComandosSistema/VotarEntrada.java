@@ -1,7 +1,5 @@
 package reddit.mpurjc.ComandosSistema;
 
-import java.util.ArrayList;
-import java.util.List;
 import reddit.mpurjc.Entradas.Entrada;
 import reddit.mpurjc.Foro;
 import reddit.mpurjc.SubForo;
@@ -11,13 +9,13 @@ public class VotarEntrada extends ComandosSistema {
 
     private Foro foro;
     private Usuario usuarioActual;
-    private SubForo subForoActual;
+    private Entrada entradaActual;
     private String parametros;
         
     public VotarEntrada(Foro foro){
         this.foro = foro;
         this.usuarioActual = foro.getUsuarioActual();
-        this.subForoActual = foro.getSubForoActual();
+        this.entradaActual = foro.getEntradaActual();
     }
 
     /**
@@ -29,23 +27,20 @@ public class VotarEntrada extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
         if(comprobar(s)){
+            buscarEntradaActual(this.parametros);
             if(this.usuarioActual != null){
                 this.parametros = this.parametros.replace(" ","").toLowerCase();
-                int ini = this.parametros.indexOf("(");
-                int fin = this.parametros.indexOf(")");
-                int orden = Integer.parseInt(this.parametros.substring(ini+1,fin));
                 boolean voto;
-                switch(this.parametros.substring(fin+1)){
+                switch(this.parametros){
                     case "like": voto = true;
                                  break;
                     case "dislike": voto = false;
                                  break;
                     default: voto = false;
                                 break;
-                }
-                Entrada entradaVotar = this.subForoActual.getEntradaPorOrden(orden);  
-                boolean error = entradaVotar.votarEntrada(usuarioActual, voto);
-                entradaVotar.contarVotos();
+                } 
+                boolean error = this.entradaActual.votarEntrada(usuarioActual, voto);
+                this.entradaActual.contarVotos();
                 return error;
             }else{
                 System.out.println("Es necesario tener iniciada sesión.");
@@ -80,7 +75,17 @@ public class VotarEntrada extends ComandosSistema {
     public void setForo(Foro foro) {
         this.foro = foro;
         this.usuarioActual = this.foro.getUsuarioActual();
-        this.subForoActual = this.foro.getSubForoActual();
+        this.entradaActual = this.foro.getEntradaActual();
     }
-    
+    //SubForo 1.1-dislike
+    public void buscarEntradaActual(String s){
+        int fin = s.indexOf(".");
+        String subforo = s.substring(0,fin);
+        s = s.substring(fin+1);
+        SubForo subForo = this.foro.getSubForo(subforo);
+        fin = s.indexOf("-");
+        int orden = Integer.parseInt(s.substring(0,fin));
+        this.parametros = s.substring(fin+1);
+        this.entradaActual = subForo.getEntradaPorOrden(orden);
+    }
 }

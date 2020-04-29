@@ -3,6 +3,7 @@ package reddit.mpurjc.ComandosSistema;
 import reddit.mpurjc.Comentario;
 import reddit.mpurjc.Entradas.Entrada;
 import reddit.mpurjc.Foro;
+import reddit.mpurjc.SubForo;
 import reddit.mpurjc.Usuario;
 
 public class VotarComentario extends ComandosSistema {
@@ -10,6 +11,7 @@ public class VotarComentario extends ComandosSistema {
     private Foro foro;
     private Usuario usuarioActual;
     private Entrada entradaActual;
+    private Comentario comentarioActual;
     private String parametros;
 
     public VotarComentario(Foro foro) {
@@ -22,28 +24,18 @@ public class VotarComentario extends ComandosSistema {
      * Este método se utilizará para la votación de los comentarios y se podrán
      * votar satisfactoriamente con un like o por el contrario con un dislike
      * @param s
-     * @return boolean tipo de voto like o dislike que ha realizado el usuario
+     * @return boolean tipo de voto like o dislike que ha realizado el usuario   SubForo 1.1.1.1-like
      */
     @Override
     public boolean ejecutar(String s) {
        if(comprobar(s)){
+           buscarComentarioActual(this.parametros);
             if((this.usuarioActual != null)&&(this.entradaActual.isVerificado())){
                 this.parametros = this.parametros.replace(" ","").toLowerCase();
                 // Se representarán mediante paréntesis
-                int ini = this.parametros.indexOf("(");
-                int fin = this.parametros.indexOf(")");
-                int profundidad = contarPuntosDeProfundidad(this.parametros.substring(ini+1, fin));
-                int punto1 = this.parametros.indexOf("."); 
-
-                if (punto1 != -1){
-                    int orden = Integer.parseInt(s.substring(ini+1,punto1));
-                    for(int i = 2; i<profundidad; i++){
-
-                    }
-                }
-                Comentario comentario1 = this.entradaActual.getComentarioPorOrden(profundidad);
+                
                 boolean voto;
-                switch(this.parametros.substring(fin+1)){
+                switch(this.parametros){
                     case "like": voto = true;
                                  break;
                     case "dislike": voto = false;
@@ -51,7 +43,7 @@ public class VotarComentario extends ComandosSistema {
                     default: voto = false;
                                 break;
                 }
-                return comentario1.votarComentario(usuarioActual, voto);
+                return this.comentarioActual.votarComentario(usuarioActual, voto);
             }else{
                 System.out.println("Es necesario tener iniciada sesión.");
                 return false;
@@ -85,7 +77,39 @@ public class VotarComentario extends ComandosSistema {
     }
     
     private int contarPuntosDeProfundidad(String str){
-        String[] words = str.split(".");
-        return 1;
+        int punto1 = str.indexOf(".");
+        if (punto1 != -1){
+            String[] words = str.split("\\.");
+            return words.length;
+        }else
+            return 1;
+    }
+    
+    private void buscarComentarioActual(String s){
+        
+        int fin = s.indexOf(".");
+        String subforo = s.substring(0,fin);
+        s = s.substring(fin+1);
+        SubForo subForoActual = this.foro.getSubForo(subforo);
+        fin = s.indexOf(".");
+        int orden = Integer.parseInt(s.substring(0,fin));
+        s = s.substring(fin+1);
+        fin = s.indexOf("-");
+        this.entradaActual = subForoActual.getEntradaPorOrden(orden);
+        int profundidad = contarPuntosDeProfundidad(s.substring(0,fin));
+        int punto1 = this.parametros.indexOf("."); 
+        this.parametros = s.substring(fin+1);
+        
+        if (punto1 != -1){//2
+            fin = s.indexOf(".");
+            orden = Integer.parseInt(s.substring(0,fin));
+            Comentario coment = this.entradaActual.getComentarioPorOrden(orden);
+            for(int i = 1; i<profundidad; i++){
+                coment = coment.getComentarioPorOrden(i);
+            }
+            this.comentarioActual = coment;
+        }else
+            this.comentarioActual = this.entradaActual.getComentarioPorOrden(profundidad);
+
     }
 }

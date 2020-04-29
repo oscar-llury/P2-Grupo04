@@ -127,4 +127,9 @@ public class Comentario implements Serializable{
     public boolean isValidado(){
         return this.validado;
     }
+    
+    public Comentario getComentarioPorOrden(int i){
+        return this.comentarios.get(i-1);
+    }
+    
 }

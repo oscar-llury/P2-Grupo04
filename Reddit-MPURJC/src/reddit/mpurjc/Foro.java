@@ -83,8 +83,7 @@ public class Foro implements Serializable{
     }
     
     public SubForo getSubForo(String s){
-        SubForo subforo = new SubForo(s);
-       return subforo;
+        return this.listaSubforos.get(s);
     }
 
     public Entrada getEntradaActual() {

@@ -24,6 +24,7 @@ public class Sistema {
         NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(reddit);
         NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);
         ComentarEntrada comandoNuevoComentarioEntrada = new ComentarEntrada(reddit);
+        ComentarComentario comandoComentarComentario = new ComentarComentario(reddit);
         VotarComentario comandoVotarComentario = new VotarComentario(reddit);
         VotarEntrada comandoVotarEntrada = new VotarEntrada(reddit);
         ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
@@ -48,26 +49,40 @@ public class Sistema {
         
         //subForo1
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
-
+        
         comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 1,Texto Plano, esto es el texto de la entrada 1 subforo 1|"
         +"Ejercicio, esto es ejercico entrada 1 subforo 1.)");
-        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 3,Encuesta, esto es el enunciado de la encuesta de la entrada 1 subforo 1, opcion 1, opcion 2)");
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 2,Encuesta, esto es el enunciado de la encuesta de la entrada 1 subforo 1, opcion 1, opcion 2)");
+        
+        comandoValidarEntrada.ejecutar("ValidarEntrada(all)");
+        //decirSi("Si");
+        
+        comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
+        comandoComentarComentario.ejecutar("ComentarComentario(SubForo 1.1.1-Esto es un comentario a un comentario)");
+        comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 2)");
         
         //subForo2
-        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 2)");
         
         comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 2,Texto Plano, esto es el texto de la entrada 2 subforo 2.)");
 
+        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 2)");
         
-        comandoValidarEntrada.ejecutar("ValidarEntrada(all)");
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(Entrada 1,Texto Plano, esto es el texto de la entrada 2 subforo 2.)");
         
-        comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(Esto es un comentario)");
+        //comandoLogout.ejecutar("Logout(Salir)");
         
-        comandoVotarComentario.ejecutar("VotarComentario((1) like)");
+        comandoVotarEntrada.ejecutar("VotarEntrada(SubForo 1.1-dislike)");
+                
+        comandoVotarComentario.ejecutar("VotarComentario(SubForo 1.1.1.1-like)");
         
-        comandoVotarEntrada.ejecutar("VotarEntrada((1) dislike)");
+        
+     
+        
         
         comandoNuevaSubscripcion.ejecutar("NuevaSubscripcion(SubForo 1)");
+        
+    
+        
         
         comandoEliminarSubscripcion.ejecutar("EliminarSubscripcion(SubForo 1)");
 

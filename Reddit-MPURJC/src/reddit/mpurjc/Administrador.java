@@ -49,4 +49,5 @@ public class Administrador extends reddit.mpurjc.Usuario implements Serializable
     public void limpiarPendientes(){
         this.pendientes.clear();
     }
+    
 }

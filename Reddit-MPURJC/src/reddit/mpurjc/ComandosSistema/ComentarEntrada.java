@@ -3,6 +3,7 @@ package reddit.mpurjc.ComandosSistema;
 import reddit.mpurjc.Comentario;
 import reddit.mpurjc.Entradas.Entrada;
 import reddit.mpurjc.Foro;
+import reddit.mpurjc.SubForo;
 import reddit.mpurjc.Usuario;
 
 public class ComentarEntrada extends ComandosSistema {
@@ -27,6 +28,7 @@ public class ComentarEntrada extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
         if(comprobar(s)){
+            buscarEntradaActual(this.parametros);
             if(this.entradaActual.isVerificado()){
                 Comentario nuevoComentario = new Comentario(usuarioActual,this.parametros);
                 nuevoComentario.validar();
@@ -74,4 +76,15 @@ public class ComentarEntrada extends ComandosSistema {
         this.entradaActual = this.foro.getEntradaActual();
     }
     
+    public void buscarEntradaActual(String s){
+        
+        int fin = s.indexOf(".");
+        String subforo = s.substring(0,fin);
+        s = s.substring(fin+1);
+        SubForo subForo = this.foro.getSubForo(subforo);
+        fin = s.indexOf("-");
+        int orden = Integer.parseInt(s.substring(0,fin));
+        this.parametros = s.substring(fin+1);
+        this.entradaActual = subForo.getEntradaPorOrden(orden);
+    }
 }
