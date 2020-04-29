@@ -1,6 +1,8 @@
 package reddit.mpurjc.ComandosSistema;
 
+import java.util.Map;
 import reddit.mpurjc.Foro;
+import reddit.mpurjc.SubForo;
 import reddit.mpurjc.Usuario;
 
 public class Login extends ComandosSistema {
@@ -37,6 +39,7 @@ public class Login extends ComandosSistema {
                         }
                         foro.setUsuarioActual(valor);
                         System.out.println("Usuario logeado con éxito");
+                        mostrarNotificaciones();
                     }
                 }
             }
@@ -59,6 +62,14 @@ public class Login extends ComandosSistema {
             return false;
         }
     }
+    
+    private void mostrarNotificaciones(){
+        foro.getUsuarioActual().getEntradasVistas().entrySet().forEach((entry) -> {
+            int entradasActuales = foro.getSubForo(entry.getKey()).getEntradas().size();
+            System.out.println(entry.getKey()+" ("+ (entradasActuales-entry.getValue()));
+        });
+    }
+            
 
     @Override
     public void setForo(Foro foro) {

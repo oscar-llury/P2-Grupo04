@@ -1,5 +1,6 @@
 package reddit.mpurjc.ComandosSistema;
 
+import java.util.Map;
 import reddit.mpurjc.Foro;
 import reddit.mpurjc.Usuario;
 
@@ -49,5 +50,12 @@ public class Logout extends ComandosSistema {
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;
+    }
+    
+    private void actualizarNotificaciones(){
+        foro.getUsuarioActual().getEntradasVistas().entrySet().forEach((entry) -> {
+            int entradasActuales = foro.getSubForo(entry.getKey()).getEntradas().size();
+            foro.getUsuarioActual().getEntradasVistas().put(entry.getKey(),entradasActuales);
+        });
     }
 }

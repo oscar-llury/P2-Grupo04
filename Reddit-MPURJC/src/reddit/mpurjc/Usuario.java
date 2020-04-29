@@ -3,6 +3,7 @@ package reddit.mpurjc;
 import java.io.Serializable;
 import static java.lang.Boolean.FALSE;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import static reddit.mpurjc.Usuario.Rol.*;
 
@@ -17,6 +18,7 @@ public class Usuario implements Serializable {
     private List<SubForo> subscripciones;
     private Penalizacion penalizacion;
     private boolean esAdministrador;
+    private HashMap <String, Integer> entradasVistas; 
 
     enum Rol
     {
@@ -111,6 +113,10 @@ public class Usuario implements Serializable {
     public List<SubForo> getSubscripciones() {
         return subscripciones;
     }
+    
+    public HashMap<String,Integer> getEntradasVistas(){
+        return entradasVistas;
+    }
 
     public Penalizacion getPenalizacion() {
         return penalizacion;
@@ -159,6 +165,12 @@ public class Usuario implements Serializable {
     
     public void addSubscripcion(SubForo subforo){
         this.subscripciones.add(subforo);
+    }
+    
+    public void addEntradasVistas(SubForo subforo){
+        String nombreSubforo = subforo.getNombre();
+        int tamaño = subforo.getEntradas().size();
+        this.entradasVistas.put(nombreSubforo,tamaño);
     }
     
     public void removeSubscripcion(SubForo subforo){
