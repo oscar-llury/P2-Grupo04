@@ -30,6 +30,7 @@ public class NuevaSubscripcion extends ComandosSistema {
             //Podremos crear la nueva subscripción siempre y cuando el usuario no tenga ya esa subscripción
             if(!usuarioActual.contieneSubscripcion(this.parametros)){
                 usuarioActual.addSubscripcion(subforoActual);
+                usuarioActual.addEntradasVistas(subforoActual);
                 return true;
             }else{
                 System.out.println("Ya estás subscrito a este SubForo.");
