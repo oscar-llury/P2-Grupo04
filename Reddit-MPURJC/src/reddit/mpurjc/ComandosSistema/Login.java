@@ -22,11 +22,13 @@ public class Login extends ComandosSistema {
      */
     @Override
     public boolean ejecutar(String s) {
+        boolean valido = false;
         if (comprobar(s)) {
             String nick_contra[] = this.parametros.split(" ");
             String nick = nick_contra[0].toLowerCase();
             String contraseña = nick_contra[1];
             Usuario valor;
+            
             for (String key : foro.getListaUsuarios().keySet()) {
                 valor = foro.getListaUsuarios().get(key);
                 if ((nick.equals(key)) && (valor.getContraseña().equals(contraseña))) {
@@ -39,13 +41,18 @@ public class Login extends ComandosSistema {
                         }
                         foro.setUsuarioActual(valor);
                         System.out.println("Usuario logeado con éxito");
+                        System.out.println("Sesión iniciada como: "+ foro.getUsuarioActual().getNick());
+                        valido = true;
                         mostrarNotificaciones();
                     }
-                }
+                }     
             }
         }
-        return true;
-
+        if(!valido){
+            System.out.println("Credenciales mal introducidas.");
+            return false;
+        }else
+            return true;
     }
 
     //Comando para la clase Login en el Foro
@@ -64,10 +71,14 @@ public class Login extends ComandosSistema {
     }
     
     private void mostrarNotificaciones(){
-        foro.getUsuarioActual().getEntradasVistas().entrySet().forEach((entry) -> {
-            int entradasActuales = foro.getSubForo(entry.getKey()).getEntradas().size();
-            System.out.println(entry.getKey()+" ("+ (entradasActuales-entry.getValue())+"*)");
-        });
+        if(foro.getUsuarioActual().getEntradasVistas() != null){
+            foro.getUsuarioActual().getEntradasVistas().entrySet().forEach((entry) -> {
+                int entradasActuales = foro.getSubForo(entry.getKey()).getEntradas().size();
+                if(entradasActuales-entry.getValue()!=0){
+                    System.out.println(entry.getKey()+" ("+ (entradasActuales-entry.getValue())+"*)");
+                }
+            });
+        }
     }
             
 

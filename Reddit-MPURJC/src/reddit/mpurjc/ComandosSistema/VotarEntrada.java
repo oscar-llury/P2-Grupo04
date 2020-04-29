@@ -41,6 +41,7 @@ public class VotarEntrada extends ComandosSistema {
                 } 
                 boolean error = this.entradaActual.votarEntrada(usuarioActual, voto);
                 this.entradaActual.contarVotos();
+                System.out.println("Voto realizado correctamente");
                 return error;
             }else{
                 System.out.println("Es necesario tener iniciada sesión.");

@@ -36,6 +36,7 @@ public class Usuario implements Serializable {
         this.rol = sacarRol(email);
         this.subscripciones = new ArrayList<>();
         this.esAdministrador = FALSE;
+        this.entradasVistas = new HashMap<>();
     }
 
     public Usuario (String nombre, String apellidos, String email, String contraseña, boolean esAdministrador){
@@ -47,6 +48,7 @@ public class Usuario implements Serializable {
         this.rol = ADMINISTRADOR;
         this.subscripciones = new ArrayList<>();
         this.esAdministrador = esAdministrador;
+        this.entradasVistas = new HashMap<>();
     }
     
     public boolean inicioPermitido(){
@@ -188,6 +190,15 @@ public class Usuario implements Serializable {
     
     public void eliminarSubcripcion(SubForo subforo){
         subscripciones.remove(subforo);
+        eliminarEntradasVistas(subforo);
     }
     
+    public void eliminarEntradasVistas(SubForo subforo){
+        String nombreSubforo = subforo.getNombre();
+        this.entradasVistas.remove(nombreSubforo);
+    }
+    
+    public void setEntradasVistas(SubForo subforo){
+        this.entradasVistas.put(subforo.getNombre(), subforo.getEntradas().size());
+    }
 }

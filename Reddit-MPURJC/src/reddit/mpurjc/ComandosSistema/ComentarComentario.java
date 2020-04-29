@@ -38,6 +38,7 @@ public class ComentarComentario extends ComandosSistema {
                 nuevoComentario.validar();
                 if(nuevoComentario.isValidado()){
                     this.comentarioActual.addComentario(nuevoComentario);
+                    System.out.println("Comentario guardado correctamente.");
                     return true;
                 }else{
                     System.out.println("El comentario no es aceptado");
