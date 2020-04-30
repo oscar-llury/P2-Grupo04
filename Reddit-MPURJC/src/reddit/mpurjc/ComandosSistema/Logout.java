@@ -1,11 +1,9 @@
 package reddit.mpurjc.ComandosSistema;
 
-import java.util.Map;
 import reddit.mpurjc.Foro;
-import reddit.mpurjc.Usuario;
 
 public class Logout extends ComandosSistema {
-    
+
     private Foro foro;
     private String parametros;
 
@@ -13,15 +11,15 @@ public class Logout extends ComandosSistema {
         this.foro = foro;
     }
 
-
     /**
      * Este método nos servirá simplemente para cerrar la sesión del usuario
+     *
      * @param s
      * @return true si el cierre de sesión ha sido correcta
      */
     @Override
     public boolean ejecutar(String s) {
-        if(comprobar(s)){
+        if (comprobar(s)) {
             setForo(foro);
             actualizarNotificaciones();
             System.out.println("LogOut correcto.");
@@ -38,31 +36,30 @@ public class Logout extends ComandosSistema {
     @Override
     public boolean comprobar(String s) {
         setForo(this.foro);
-        
-            int ini = s.indexOf("(");
-            int fin = s.lastIndexOf(")");
-            String comando = s.substring(0,ini).toLowerCase();
-            if(comando.equals("logout")){
-                this.parametros = s.substring(ini+1,fin);
-                return true;
-            }else{
-                return false;
-            }
-        
+
+        int ini = s.indexOf("(");
+        int fin = s.lastIndexOf(")");
+        String comando = s.substring(0, ini).toLowerCase();
+        if (comando.equals("logout")) {
+            this.parametros = s.substring(ini + 1, fin);
+            return true;
+        } else {
+            return false;
+        }
+
     }
-    
+
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;
     }
-    
-    
-    public void actualizarNotificaciones(){
-        if(foro.getUsuarioActual().getEntradasVistas() != null){
+
+    private void actualizarNotificaciones() {
+        if (foro.getUsuarioActual().getEntradasVistas() != null) {
             foro.getUsuarioActual().getEntradasVistas().entrySet().forEach((entry) -> {
                 foro.getUsuarioActual().setEntradasVistas(foro.getSubForo(entry.getKey()));
             });
         }
     }
-    
+
 }

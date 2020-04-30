@@ -1,8 +1,6 @@
 package reddit.mpurjc.ComandosSistema;
 
-import java.util.Map;
 import reddit.mpurjc.Foro;
-import reddit.mpurjc.SubForo;
 import reddit.mpurjc.Usuario;
 
 public class Login extends ComandosSistema {
@@ -28,31 +26,33 @@ public class Login extends ComandosSistema {
             String nick = nick_contra[0].toLowerCase();
             String contraseña = nick_contra[1];
             Usuario valor;
-            
+
             for (String key : foro.getListaUsuarios().keySet()) {
                 valor = foro.getListaUsuarios().get(key);
                 if ((nick.equals(key)) && (valor.getContraseña().equals(contraseña))) {
                     // El usuario tendrá deshabilitado la opción de login mientras esté penalizado
                     if (valor.isPenalizado()) {
-                        System.out.println("No puedes logearte, estas penalizado");
+                        System.out.println("!!!!!! No puedes logearte, estas penalizado !!!!!!");
+                        valido = true;
                     } else {
                         if (valor.getPenalizacion() != null) {
                             valor.setPenalizacion(null);
                         }
                         foro.setUsuarioActual(valor);
                         System.out.println("Usuario logeado con éxito");
-                        System.out.println("Sesión iniciada como: "+ foro.getUsuarioActual().getNick());
+                        System.out.println("Sesión iniciada como: " + foro.getUsuarioActual().getNick());
                         valido = true;
                         mostrarNotificaciones();
                     }
-                }     
+                }
             }
         }
-        if(!valido){
+        if (!valido) {
             System.out.println("Credenciales mal introducidas.");
             return false;
-        }else
+        } else {
             return true;
+        }
     }
 
     //Comando para la clase Login en el Foro
@@ -69,18 +69,17 @@ public class Login extends ComandosSistema {
             return false;
         }
     }
-    
-    private void mostrarNotificaciones(){
-        if(foro.getUsuarioActual().getEntradasVistas() != null){
+
+    private void mostrarNotificaciones() {
+        if (foro.getUsuarioActual().getEntradasVistas() != null) {
             foro.getUsuarioActual().getEntradasVistas().entrySet().forEach((entry) -> {
                 int entradasActuales = foro.getSubForo(entry.getKey()).getEntradas().size();
-                if(entradasActuales-entry.getValue()!=0){
-                    System.out.println(entry.getKey()+" ("+ (entradasActuales-entry.getValue())+"*)");
+                if (entradasActuales - entry.getValue() != 0) {
+                    System.out.println(">>> Nueva notificación: "+entry.getKey() + " (" + (entradasActuales - entry.getValue()) + "*)");
                 }
             });
         }
     }
-            
 
     @Override
     public void setForo(Foro foro) {

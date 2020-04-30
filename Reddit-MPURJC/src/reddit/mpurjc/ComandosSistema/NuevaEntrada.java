@@ -38,24 +38,23 @@ public class NuevaEntrada extends ComandosSistema {
             if (subForoActual.contarEntradas() == 0) {
                 id = 1;
             } else {
-                id = subForoActual.contarEntradas()+1;
+                id = subForoActual.contarEntradas() + 1;
             }
             Entrada entrada = new Entrada(id, tituloEntrada, usuarioActual);
 
             int pipe = this.parametros.indexOf("|");
             while (pipe != -1) {
 
-                String obj1 = this.parametros.substring(0,pipe);
-                this.parametros = this.parametros.substring(pipe+1);
+                String obj1 = this.parametros.substring(0, pipe);
+                this.parametros = this.parametros.substring(pipe + 1);
                 pipe = this.parametros.indexOf("|");
-                
-                contruirPorTipo(entrada,obj1);
-                
-            }  
-            
-            contruirPorTipo(entrada,this.parametros);
-                
-                
+
+                contruirPorTipo(entrada, obj1);
+
+            }
+
+            contruirPorTipo(entrada, this.parametros);
+
             this.subForoActual.insertarEntrada(entrada);
             foro.setEntradaActual(entrada);
             foro.getAdministrador().addPendientes(entrada);
@@ -97,30 +96,31 @@ public class NuevaEntrada extends ComandosSistema {
         int index = s.indexOf(",");
         String tipoEntrada = s.substring(0, index).toLowerCase();
         s = s.substring(index + 1, s.length());
-        switch (tipoEntrada) {                  //Podremos crear las distintas entradas disponibles
-            case "texto plano": {               //El texto plano podrá ser creado por cualquier usuario
+        switch (tipoEntrada) { //Podremos crear las distintas entradas disponibles
+            case "texto plano": { //El texto plano podrá ser creado por cualquier usuario
                 entrada.addTextoPlano(s);
                 break;
             }
-            case "encuesta": {                  //La encuesta será creada solamente por un profesor
-                if (this.usuarioActual.isProfesor())
+            case "encuesta": { //La encuesta será creada solamente por un profesor
+                if (this.usuarioActual.isProfesor()) {
                     entrada.addEncuesta(s);
-                else 
+                } else {
                     System.out.println("Es necesario ser porfesor.");
+                }
                 break;
             }
-            case "ejercicio": {                 //El ejercicio será creado solamente por un profesor
-                if (this.usuarioActual.isProfesor())
+            case "ejercicio": { //El ejercicio será creado solamente por un profesor
+                if (this.usuarioActual.isProfesor()) {
                     entrada.addEjercicio(s);
-                else
+                } else {
                     System.out.println("Es necesario ser porfesor.");
+                }
                 break;
             }
             default: {
                 System.out.println("No se ha podido generar la entrada.");
             }
-        }  
+        }
     }
-
 
 }
