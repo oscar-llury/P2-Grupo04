@@ -2,6 +2,7 @@
 package reddit.mpurjc;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import reddit.mpurjc.Entradas.Entrada;
 
@@ -28,8 +29,8 @@ public class SubForo implements Serializable{
         return nombre;
     }
 
-    public HashMap<Integer, Entrada> getEntradas() {
-        return entradas;
+    public Collection<Entrada> getEntradas() {
+        return entradas.values();
     }
     
     public Entrada getEntradaPorOrden(int i){

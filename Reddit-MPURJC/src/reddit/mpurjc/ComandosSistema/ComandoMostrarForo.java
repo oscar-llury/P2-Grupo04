@@ -32,7 +32,7 @@ public class ComandoMostrarForo extends ComandosSistema {
        setForo(this.foro);
  
        SubForo sub;
-       Collection<SubForo> listaSub =  this.foro.getListaSubForos().values();
+       Collection<SubForo> listaSub =  this.foro.getListaSubForos();
        Iterator <SubForo> iterSub = listaSub.iterator();
 
         while(iterSub.hasNext()){ //Esto mutra nombre de subforos
@@ -40,7 +40,7 @@ public class ComandoMostrarForo extends ComandosSistema {
             System.out.println("\t"+ sub.getNombre());
             
             Entrada entrada;
-            Collection<Entrada> listaEntradas = sub.getEntradas().values();
+            Collection<Entrada> listaEntradas = sub.getEntradas();
             Iterator <Entrada> iterEntr = listaEntradas.iterator();
             
             while(iterEntr.hasNext()){ //Esto itera por todas las entradas

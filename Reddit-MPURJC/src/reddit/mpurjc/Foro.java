@@ -1,6 +1,7 @@
 package reddit.mpurjc;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import reddit.mpurjc.Entradas.Entrada;
 import reddit.mpurjc.SubForo;
@@ -78,8 +79,8 @@ public class Foro implements Serializable{
         return listaUsuarios;
     }
     
-    public HashMap<String, SubForo> getListaSubForos(){
-        return listaSubforos;
+    public Collection<SubForo> getListaSubForos(){
+        return listaSubforos.values();
     }
 
     public SubForo getSubForoActual() {
