@@ -33,8 +33,23 @@ public class Sistema {
         Logout comandoLogout = new Logout(reddit);
         Login comandoLogin = new Login(reddit);
         ComandoSalvar comandoSalvar = new ComandoSalvar(reddit);
-        ComandoCargar comandoCargar = new ComandoCargar(reddit);
         ComandoMostrarForo comandoMostrarForo = new ComandoMostrarForo(reddit);
+        ComandoCargar comandoCargar = new ComandoCargar(reddit,
+                comandoNuevoSubForo,
+                comandoNuevoUsuario,
+                comandoNuevaEntrada,
+                comandoNuevoComentarioEntrada,
+                comandoComentarComentario,
+                comandoVotarComentario,
+                comandoVotarEntrada,
+                comandoValidarEntrada,
+                comandoNuevaSubscripcion,
+                comandoEliminarSubscripcion,
+                comandoLogout,
+                comandoLogin,
+                comandoSalvar,
+                comandoMostrarForo);
+        
         // Iniciar demostrador
         
         
@@ -132,7 +147,7 @@ public class Sistema {
         
         //guardar Foro
         
-        comandoSalvar.ejecutar("Salvar(E:/cole,hola)");
+        comandoSalvar.ejecutar("Salvar(c:/Reddit,hola)");
         
         
         //--------Prueba de errores---------
@@ -153,9 +168,9 @@ public class Sistema {
         //--------Recuperar el foro guardado---------
         System.out.println("--------Recuperar el foro guardado--------");
         
-        comandoCargar.ejecutar("Cargar(E:/cole/hola.txt)");
+        comandoCargar.ejecutar("Cargar(c:/Reddit/hola.txt)");
         
-        //mostrar foro
+        comandoMostrarForo.ejecutar("");
     }
 
 }
