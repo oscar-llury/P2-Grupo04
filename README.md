@@ -24,7 +24,7 @@ Durante esta fase se ha desarrollado el diseño de la arquitectura del sistema R
 **Diagrama de clases del paquete ComandosSistema**
 ![Diagrma de clases del paquete ComandosSistema](diagramas-UML/UMLclassesDiagram(ComandosSistema)-Reddit-G4.png)
 
-Diagramas desarrollados con [StarUML](http://staruml.io/), el archivo se adjunta en [src/UMLclassesDiagram-Reddit-G4.mdj](diagramas-UML/UMLclassesDiagram-Reddit-G4.mdj).
+Diagramas desarrollados con [StarUML](http://staruml.io/), el archivo se adjunta en [diagramas-UML/UMLclassesDiagram-Reddit-G4.mdj](diagramas-UML/UMLclassesDiagram-Reddit-G4.mdj).
 
 ## Fase 2: Implementación
 
