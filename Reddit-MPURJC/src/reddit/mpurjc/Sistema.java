@@ -16,10 +16,9 @@ public class Sistema {
         System.out.println("Bienvenido a Reddit URJC 2020");      
         
         Foro reddit = new Foro();
-        
 
-        
         // Iniciar Comandos del Sistema
+        
         NuevoSubForo comandoNuevoSubForo = new NuevoSubForo(reddit);
         NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(reddit);
         NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);
@@ -50,14 +49,11 @@ public class Sistema {
                 comandoSalvar,
                 comandoMostrarForo);
         
-        // Iniciar demostrador
+        //--------INICIO DEMOSTRADOR--------
         
-        
-        
+
         comandoMostrarForo.ejecutar("");
 
-        
-        
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Admin,Admin,Admin@admin.urjc.es,AdminPass)");
 
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Profesor1,ApellidosUsuario,emailProfesor@urjc.es,pass)");
@@ -68,19 +64,16 @@ public class Sistema {
         
         
         comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 1,Entrada 1,Texto Plano, esto es el texto de la entrada 1 subforo 1|"
-        +"Ejercicio, esto es ejercico entrada 1 subforo 1.)");
+        +"Ejercicio, esto es ejercicio entrada 1 subforo 1.)");
         
         comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 1,Entrada 2,Encuesta, esto es el enunciado de la encuesta de la entrada 1 subforo 1, opcion 1, opcion 2)");
             
             //un administrador externo valida las entradas
             comandoValidarEntrada.ejecutar("ValidarEntrada(all)");
             //decirSi("Si");
-        
-        
-        
+            
         comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
 
-        
         comandoMostrarForo.ejecutar("");
         
         comandoComentarComentario.ejecutar("ComentarComentario(SubForo 1.1.1-Esto es un comentario a un comentario)");
@@ -91,7 +84,6 @@ public class Sistema {
 
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 2)");
 
-        
         comandoLogout.ejecutar("Logout()");
         
         //nuevo usuario alumno
@@ -146,24 +138,28 @@ public class Sistema {
         
         comandoSalvar.ejecutar("Salvar(c:/Reddit,hola)");
         
-        
         //--------Prueba de errores---------
         System.out.println("--------Prueba de errores--------");
         
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
+        
         comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 2,Entrada 3,Texto Plano, esto es el texto de la entrada 3 subforo 2.)");
+        
         comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
+        
         comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
         
         comandoVotarEntrada.ejecutar("VotarEntrada(SubForo 1.1-dislike)");
+        
         comandoNuevaSubscripcion.ejecutar("NuevaSubscripcion(SubForo 2)");
+        
         comandoEliminarSubscripcion.ejecutar("EliminarSubscripcion(SubForo 2)");
         
         comandoLogin.ejecutar("Login(emailErroneo pass)");
         
+        //-----Recuperar el foro guardado-----
         
-        //--------Recuperar el foro guardado---------
-        System.out.println("--------Recuperar el foro guardado--------");
+        System.out.println("-----Recuperar el foro guardado-----");
         
         comandoCargar.ejecutar("Cargar(c:/Reddit/hola.txt)");
         

@@ -12,7 +12,7 @@ public class ComandoCargar extends ComandosSistema implements Serializable {
 
     private Foro foro, foroAux;
     private String ruta;
-   
+
     private NuevoSubForo comandoNuevoSubForo;
     private NuevoUsuario comandoNuevoUsuario;
     private NuevaEntrada comandoNuevaEntrada;
@@ -28,13 +28,13 @@ public class ComandoCargar extends ComandosSistema implements Serializable {
     private ComandoSalvar comandoSalvar;
     private ComandoMostrarForo comandoMostrarForo;
 
-    public ComandoCargar(Foro foro, NuevoSubForo comandoNuevoSubForo, NuevoUsuario comandoNuevoUsuario, 
+    public ComandoCargar(Foro foro, NuevoSubForo comandoNuevoSubForo, NuevoUsuario comandoNuevoUsuario,
             NuevaEntrada comandoNuevaEntrada, ComentarEntrada comandoNuevoComentarioEntrada,
-            ComentarComentario comandoComentarComentario, VotarComentario comandoVotarComentario, 
-            VotarEntrada comandoVotarEntrada, ValidarEntrada comandoValidarEntrada, 
+            ComentarComentario comandoComentarComentario, VotarComentario comandoVotarComentario,
+            VotarEntrada comandoVotarEntrada, ValidarEntrada comandoValidarEntrada,
             NuevaSubscripcion comandoNuevaSubscripcion, EliminarSubscripcion comandoEliminarSubscripcion,
             Logout comandoLogout, Login comandoLogin, ComandoSalvar comandoSalvar, ComandoMostrarForo comandoMostrarForo) {
-        
+
         this.foro = foro;
         this.comandoNuevoSubForo = comandoNuevoSubForo;
         this.comandoNuevoUsuario = comandoNuevoUsuario;
@@ -51,16 +51,16 @@ public class ComandoCargar extends ComandosSistema implements Serializable {
         this.comandoSalvar = comandoSalvar;
         this.comandoMostrarForo = comandoMostrarForo;
     }
-    
+
     @Override
     public boolean ejecutar(String s) {
-        if(comprobar(s)){
-            try{
+        if (comprobar(s)) {
+            try {
                 FileInputStream fileToStream = new FileInputStream(ruta);
                 ObjectInputStream streamToObject = new ObjectInputStream(fileToStream);
                 foroAux = (Foro) streamToObject.readObject();
                 System.out.println("Proyecto cargado correctamente.");
-            }catch(IOException | ClassNotFoundException ex){
+            } catch (IOException | ClassNotFoundException ex) {
                 System.out.println("Ruta no encontrada.");
                 Logger.getLogger(ComandoCargar.class.getName()).log(Level.SEVERE, null, ex);
                 return false;
@@ -80,10 +80,11 @@ public class ComandoCargar extends ComandosSistema implements Serializable {
             this.comandoLogin.setForo(foro);
             this.comandoSalvar.setForo(foro);
             this.comandoMostrarForo.setForo(foro);
-            
+
             return true;
-        }else
+        } else {
             return false;
+        }
     }
 
     //Cargar(ruta)
@@ -92,18 +93,19 @@ public class ComandoCargar extends ComandosSistema implements Serializable {
         setForo(foro);
         int ini = s.indexOf('(');
         int fin = s.lastIndexOf(")");
-        String comando = s.substring(0,ini).toLowerCase();
-        
-        if(comando.equals("cargar")){
-            this.ruta = s.substring(ini+1,fin);
+        String comando = s.substring(0, ini).toLowerCase();
+
+        if (comando.equals("cargar")) {
+            this.ruta = s.substring(ini + 1, fin);
             return true;
-        }else
+        } else {
             return false;
+        }
     }
 
     @Override
     public void setForo(Foro foro) {
         this.foro = foro;
     }
-    
+
 }

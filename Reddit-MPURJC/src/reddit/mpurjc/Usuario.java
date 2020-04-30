@@ -8,7 +8,7 @@ import java.util.List;
 import static reddit.mpurjc.Usuario.Rol.*;
 
 public class Usuario implements Serializable {
-    
+
     private String nick;
     private String nombre;
     private String apellidos;
@@ -18,16 +18,16 @@ public class Usuario implements Serializable {
     private List<SubForo> subscripciones;
     private Penalizacion penalizacion;
     private boolean esAdministrador;
-    private HashMap <String, Integer> entradasVistas; 
+    private HashMap<String, Integer> entradasVistas;
 
-    enum Rol
-    {
+    enum Rol {
         ALUMNO, PROFESOR, ADMINISTRADOR;
     }
-    
-    public Usuario(){}
-    
-    public Usuario (String nombre, String apellidos, String email, String contraseña){
+
+    public Usuario() {
+    }
+
+    public Usuario(String nombre, String apellidos, String email, String contraseña) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email.toLowerCase();
@@ -39,7 +39,7 @@ public class Usuario implements Serializable {
         this.entradasVistas = new HashMap<>();
     }
 
-    public Usuario (String nombre, String apellidos, String email, String contraseña, boolean esAdministrador){
+    public Usuario(String nombre, String apellidos, String email, String contraseña, boolean esAdministrador) {
         this.nombre = nombre;
         this.apellidos = apellidos;
         this.email = email.toLowerCase();
@@ -50,41 +50,30 @@ public class Usuario implements Serializable {
         this.esAdministrador = esAdministrador;
         this.entradasVistas = new HashMap<>();
     }
-    
-    public boolean inicioPermitido(){
-        return false;
-    }
-    
-    public boolean comprobarCredenciales(Usuario usuario){
-        return false;
-    }
 
     /**
-     * Este método se utilizará para identificar el rol del usuario 
+     * Este método se utilizará para identificar el rol del usuario
+     *
      * @param email
      * @return enumerado con el correspondiente rol de usuario
      */
-    private Rol sacarRol(String email){
+    private Rol sacarRol(String email) {
         // Se tendrá que verificar que el email introducido tenga la arroba en el email
         int index = email.indexOf("@");
-        switch (email.substring(index,email.length()).toLowerCase()){
+        switch (email.substring(index, email.length()).toLowerCase()) {
             case "alumnos.urjc.es": {
                 return ALUMNO;
-            }                    
+            }
             default: {
                 return PROFESOR;
-            }               
+            }
         }
     }
-    
-    private String sacarNick(String email){
+
+    private String sacarNick(String email) {
         int index = email.indexOf("@");
         // Utilizaremos el nick como resultado de la 1ª posición del correo hasta la posición anterior a la arroba
-        return email.substring(0,index).toLowerCase();
-    }
-    
-    public boolean isProfesor(){
-        return this.rol == PROFESOR;
+        return email.substring(0, index).toLowerCase();
     }
 
     /*------------------------GETTERS------------------------*/
@@ -115,8 +104,8 @@ public class Usuario implements Serializable {
     public List<SubForo> getSubscripciones() {
         return subscripciones;
     }
-    
-    public HashMap<String,Integer> getEntradasVistas(){
+
+    public HashMap<String, Integer> getEntradasVistas() {
         return entradasVistas;
     }
 
@@ -124,30 +113,42 @@ public class Usuario implements Serializable {
         return penalizacion;
     }
 
-    public boolean isPenalizado(){
-        
-        if((this.penalizacion != null)&&(this.penalizacion.isPenalizado())){
+    public boolean isPenalizado() {
+
+        if ((this.penalizacion != null) && (this.penalizacion.isPenalizado())) {
             return true;
         }
         return false;
     }
-    
+
     public boolean isEsAdministrador() {
         return esAdministrador;
     }
-    
-    public boolean contieneSubscripcion(String s){
+
+    public boolean contieneSubscripcion(String s) {
         boolean contenido = this.esAdministrador;
         this.subscripciones.forEach((iter) -> {
-                if(iter.getNombre().equals(s)){
-                    this.esAdministrador = true;
-                }
-            });
+            if (iter.getNombre().equals(s)) {
+                this.esAdministrador = true;
+            }
+        });
         boolean devolver = esAdministrador;
         this.esAdministrador = contenido;
         return devolver;
     }
-    
+
+    public boolean inicioPermitido() {
+        return false;
+    }
+
+    public boolean comprobarCredenciales(Usuario usuario) {
+        return false;
+    }
+
+    public boolean isProfesor() {
+        return this.rol == PROFESOR;
+    }
+
     /*------------------------SETTERS------------------------*/
     public void setNombre(String nombre) {
         this.nombre = nombre;
@@ -164,18 +165,18 @@ public class Usuario implements Serializable {
     public void setSubscripciones(List<SubForo> subscripciones) {
         this.subscripciones = subscripciones;
     }
-    
-    public void addSubscripcion(SubForo subforo){
+
+    public void addSubscripcion(SubForo subforo) {
         this.subscripciones.add(subforo);
     }
-    
-    public void addEntradasVistas(SubForo subforo){
+
+    public void addEntradasVistas(SubForo subforo) {
         String nombreSubforo = subforo.getNombre();
         int tamaño = subforo.getEntradas().size();
-        this.entradasVistas.put(nombreSubforo,tamaño);
+        this.entradasVistas.put(nombreSubforo, tamaño);
     }
-    
-    public void removeSubscripcion(SubForo subforo){
+
+    public void removeSubscripcion(SubForo subforo) {
         this.subscripciones.remove(subforo);
     }
 
@@ -185,20 +186,20 @@ public class Usuario implements Serializable {
 
     public void setEsAdmin(boolean esAdministrador) {
         this.esAdministrador = esAdministrador;
-        Administrador admin = new Administrador(this.nombre, this.apellidos, this.email, this.contraseña, true);  
+        Administrador admin = new Administrador(this.nombre, this.apellidos, this.email, this.contraseña, true);
     }
-    
-    public void eliminarSubcripcion(SubForo subforo){
+
+    public void eliminarSubcripcion(SubForo subforo) {
         subscripciones.remove(subforo);
         eliminarEntradasVistas(subforo);
     }
-    
-    public void eliminarEntradasVistas(SubForo subforo){
+
+    public void eliminarEntradasVistas(SubForo subforo) {
         String nombreSubforo = subforo.getNombre();
         this.entradasVistas.remove(nombreSubforo);
     }
-    
-    public void setEntradasVistas(SubForo subforo){
+
+    public void setEntradasVistas(SubForo subforo) {
         this.entradasVistas.put(subforo.getNombre(), subforo.getEntradas().size());
     }
 }

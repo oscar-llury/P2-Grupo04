@@ -6,7 +6,6 @@ import reddit.mpurjc.Entradas.Entrada;
 import reddit.mpurjc.Foro;
 import reddit.mpurjc.SubForo;
 
-
 public class ComandoMostrarForo extends ComandosSistema {
 
     private Foro foro;
@@ -28,8 +27,8 @@ public class ComandoMostrarForo extends ComandosSistema {
                 sub = iterSub.next();
                 System.out.println("************************************");
                 System.out.println("\t" + sub.getNombre());
-                System.out.println("************************************");    
-                
+                System.out.println("************************************");
+
                 Entrada entrada;
                 Collection<Entrada> listaEntradas = sub.getEntradas();
                 Iterator<Entrada> iterEntr = listaEntradas.iterator();
@@ -40,7 +39,7 @@ public class ComandoMostrarForo extends ComandosSistema {
                     entrada = iterEntr.next();
                     entrada.mostrar();
                 }
-                
+
             }
         } else {
             System.out.println("El foro está vacío");
