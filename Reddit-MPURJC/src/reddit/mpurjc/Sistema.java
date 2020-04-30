@@ -54,7 +54,7 @@ public class Sistema {
         
         
         
-        //pintar foro
+        comandoMostrarForo.ejecutar("");
 
         
         

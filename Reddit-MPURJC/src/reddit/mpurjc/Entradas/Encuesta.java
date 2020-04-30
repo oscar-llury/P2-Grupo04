@@ -46,6 +46,5 @@ public class Encuesta implements TipoEntrada , Serializable{
             System.out.println("La opción " + i +  " :  " + it.next());
             i++;
         }
-        it.remove();
     }
 }

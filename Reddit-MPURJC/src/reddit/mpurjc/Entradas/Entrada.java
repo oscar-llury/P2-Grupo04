@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Scanner;
 import reddit.mpurjc.Comentario;
 import reddit.mpurjc.Penalizacion;
 import reddit.mpurjc.Usuario;
