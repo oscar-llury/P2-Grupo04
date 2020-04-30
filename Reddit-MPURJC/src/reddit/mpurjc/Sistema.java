@@ -1,24 +1,19 @@
 package reddit.mpurjc;
 
-/** 
- * Autores Práctica MP:
- * Javier Espín Prieto
- * Jorge Utrero Sevillano
- * Miguel Cendrero Ortega
- * Óscar Rivas Melar
+/**
+ * Autores Práctica MP: Javier Espín Prieto Jorge Utrero Sevillano Miguel
+ * Cendrero Ortega Óscar Rivas Melar
  */
-
 import reddit.mpurjc.ComandosSistema.*;
 
 public class Sistema {
 
     public static void main(String[] args) {
-        System.out.println("Bienvenido a Reddit URJC 2020");      
-        
+        System.out.println("Bienvenido a Reddit URJC 2020");
+
         Foro reddit = new Foro();
 
         // Iniciar Comandos del Sistema
-        
         NuevoSubForo comandoNuevoSubForo = new NuevoSubForo(reddit);
         NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(reddit);
         NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);
@@ -48,10 +43,8 @@ public class Sistema {
                 comandoLogin,
                 comandoSalvar,
                 comandoMostrarForo);
-        
-        //--------INICIO DEMOSTRADOR--------
-        
 
+        //--------INICIO DEMOSTRADOR--------
         comandoMostrarForo.ejecutar("");
 
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Admin,Admin,Admin@admin.urjc.es,AdminPass)");
@@ -60,109 +53,102 @@ public class Sistema {
 
         //subForo1
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
-      
-        
-        
+
         comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 1,Entrada 1,Texto Plano, esto es el texto de la entrada 1 subforo 1|"
-        +"Ejercicio, esto es ejercicio entrada 1 subforo 1.)");
-        
+                + "Ejercicio, esto es ejercicio entrada 1 subforo 1.)");
+
         comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 1,Entrada 2,Encuesta, esto es el enunciado de la encuesta de la entrada 1 subforo 1, opcion 1, opcion 2)");
-            
+
             //un administrador externo valida las entradas
             comandoValidarEntrada.ejecutar("ValidarEntrada(all)");
             //decirSi("Si");
-            
+
         comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
 
         comandoMostrarForo.ejecutar("");
-        
-        comandoComentarComentario.ejecutar("ComentarComentario(SubForo 1.1.1-Esto es un comentario a un comentario)");
-        
-        comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 2)");
-        
-        //subForo2
 
+        comandoComentarComentario.ejecutar("ComentarComentario(SubForo 1.1.1-Esto es un comentario a un comentario)");
+
+        //subForo2
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 2)");
 
         comandoLogout.ejecutar("Logout()");
-        
+
         //nuevo usuario alumno
-        
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Alumno1,ApellidosUsuario,emailAlumno@alumnos.urjc.es,pass)");
-        
-        //comandoLogin.ejecutar("Login(emailAlumno pass)");
-        
+
         comandoVotarEntrada.ejecutar("VotarEntrada(SubForo 1.1-dislike)");
-                
+
         comandoVotarComentario.ejecutar("VotarComentario(SubForo 1.1.1.1-like)");
-        
+
         comandoNuevaSubscripcion.ejecutar("NuevaSubscripcion(SubForo 1)");
-        
+
         comandoNuevaSubscripcion.ejecutar("NuevaSubscripcion(SubForo 2)");
-        
+
         comandoLogout.ejecutar("Logout()");
-        
+
         //vuelve el profesor actualiza el SubForo 2
-        
         comandoLogin.ejecutar("Login(emailProfesor pass)");
-        
+
         comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 2,Entrada 1,Texto Plano, esto es el texto de la entrada 2 subforo 2.)");
-        
+
         comandoLogout.ejecutar("Logout()");
-        
+
         //vuelve el alumno con subscripciones
-        
         comandoLogin.ejecutar("Login(emailAlumno pass)");
-        
+
         comandoEliminarSubscripcion.ejecutar("EliminarSubscripcion(SubForo 2)");
 
         comandoLogout.ejecutar("Logout()");
 
         //vuelve el profesor para añadir una entrada nueva al SubForo 2
-        
         comandoLogin.ejecutar("Login(emailProfesor pass)");
-        
+
         comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 2,Entrada 3,Texto Plano, esto es el texto de la entrada 3 subforo 2.)");
-        
-        comandoLogout.ejecutar("Logout()");
-        
-        //vuelve el alumno sin subscripciones
-        
-        comandoLogin.ejecutar("Login(emailAlumno pass)");
-        
-        comandoEliminarSubscripcion.ejecutar("EliminarSubscripcion(SubForo 2)");
 
         comandoLogout.ejecutar("Logout()");
-        
+
+        //vuelve el alumno sin subscripciones
+        comandoLogin.ejecutar("Login(emailAlumno pass)");
+
+        comandoEliminarSubscripcion.ejecutar("EliminarSubscripcion(SubForo 2)");
+
+        comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 2 idiota)");
+
+        comandoLogout.ejecutar("Logout()");
+
+        //vuelve el alumno con penalización
+        comandoLogin.ejecutar("Login(emailAlumno pass)");
+
+        comandoEliminarSubscripcion.ejecutar("EliminarSubscripcion(SubForo 2)");
+
         //guardar Foro
-        
         comandoSalvar.ejecutar("Salvar(c:/Reddit,hola)");
-        
+
         //--------Prueba de errores---------
         System.out.println("--------Prueba de errores--------");
-        
+
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
-        
+
         comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 2,Entrada 3,Texto Plano, esto es el texto de la entrada 3 subforo 2.)");
-        
+
         comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
-        
+
         comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
-        
+
         comandoVotarEntrada.ejecutar("VotarEntrada(SubForo 1.1-dislike)");
-        
+
         comandoNuevaSubscripcion.ejecutar("NuevaSubscripcion(SubForo 2)");
-        
+
         comandoEliminarSubscripcion.ejecutar("EliminarSubscripcion(SubForo 2)");
-        
+
         comandoLogin.ejecutar("Login(emailErroneo pass)");
-        
+
         //-----Recuperar el foro guardado-----
-        
         System.out.println("-----Recuperar el foro guardado-----");
-        
+
         comandoCargar.ejecutar("Cargar(c:/Reddit/hola.txt)");
-        
+
         comandoMostrarForo.ejecutar("");
     }
 

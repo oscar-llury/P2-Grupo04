@@ -32,7 +32,8 @@ public class Login extends ComandosSistema {
                 if ((nick.equals(key)) && (valor.getContraseña().equals(contraseña))) {
                     // El usuario tendrá deshabilitado la opción de login mientras esté penalizado
                     if (valor.isPenalizado()) {
-                        System.out.println("No puedes logearte, estas penalizado");
+                        System.out.println("!!!!!! No puedes logearte, estas penalizado !!!!!!");
+                        valido = true;
                     } else {
                         if (valor.getPenalizacion() != null) {
                             valor.setPenalizacion(null);

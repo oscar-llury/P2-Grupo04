@@ -180,6 +180,10 @@ public class Usuario implements Serializable {
         this.subscripciones.remove(subforo);
     }
 
+    public void addPenalizacion() {
+        this.penalizacion = new Penalizacion();
+    }
+
     public void setPenalizacion(Penalizacion penalizacion) {
         this.penalizacion = penalizacion;
     }

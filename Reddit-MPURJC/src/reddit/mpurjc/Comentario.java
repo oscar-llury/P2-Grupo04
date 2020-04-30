@@ -105,16 +105,27 @@ public class Comentario implements Serializable {
         String str = this.texto.toLowerCase();
         String[] words = str.split(" ");
         String censurado[] = {"idiota", "joder", "cabron"};
-        for (String word : words) {
+        str="";
+        String word;
+        boolean sancionar = false;
+        for (int i=0;i<words.length;i++) {
+            word= words[i];
             for (String censura : censurado) {
                 if (word.equals(censura)) {
                     /**
                      * Si algún comentario tuviera alguna palabra inadecuada se
-                     * sustituirán por asteriscos.
+                     * sustituirán por asteriscos y se sancionará al autor.
                      */
+                    sancionar = true;
                     word = word.replaceAll("\\B\\w\\B", "*");
+                    words[i]=word;
                 }
             }
+            str=str+words[i]+" ";
+        }
+        if (sancionar){
+            this.autor.addPenalizacion();
+            this.texto = str;
         }
         Iterator<Comentario> it = comentarios.iterator();
         // Mientras tengamos comentarios, se irán validando
