@@ -153,6 +153,10 @@ public class Entrada implements TipoEntrada , Serializable{
     public List<TipoEntrada> getContenido() {
         return contenido;
     }
+    
+    public List<Comentario> getComentarios(){
+        return comentarios;
+    }
 
     public Usuario getAutor() {
         return autor;

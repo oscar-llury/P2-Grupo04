@@ -133,4 +133,8 @@ public class Comentario implements Serializable{
         return this.comentarios.get(i-1);
     }
     
+    public String getTexto (){
+        return texto;
+    }
+    
 }

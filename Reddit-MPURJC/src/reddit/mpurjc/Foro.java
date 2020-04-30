@@ -77,6 +77,10 @@ public class Foro implements Serializable{
     public HashMap<String, Usuario> getListaUsuarios() {
         return listaUsuarios;
     }
+    
+    public HashMap<String, SubForo> getListaSubForos(){
+        return listaSubforos;
+    }
 
     public SubForo getSubForoActual() {
         return subForoActual;

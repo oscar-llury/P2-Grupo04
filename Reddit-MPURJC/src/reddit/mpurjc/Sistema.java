@@ -34,6 +34,7 @@ public class Sistema {
         Login comandoLogin = new Login(reddit);
         ComandoSalvar comandoSalvar = new ComandoSalvar(reddit);
         ComandoCargar comandoCargar = new ComandoCargar(reddit);
+        ComandoMostrarForo comandoMostrarForo = new ComandoMostrarForo(reddit);
         // Iniciar demostrador
         
         
@@ -48,6 +49,11 @@ public class Sistema {
 
         //subForo1
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
+        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 2)");
+        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 3)");
+        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 4)");
+        
+        
         
         comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 1,Entrada 1,Texto Plano, esto es el texto de la entrada 1 subforo 1|"
         +"Ejercicio, esto es ejercico entrada 1 subforo 1.)");
@@ -58,7 +64,12 @@ public class Sistema {
             comandoValidarEntrada.ejecutar("ValidarEntrada(all)");
             //decirSi("Si");
         
+        
+        
         comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
+        comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 2)");
+        
+        comandoMostrarForo.ejecutar("");
         
         comandoComentarComentario.ejecutar("ComentarComentario(SubForo 1.1.1-Esto es un comentario a un comentario)");
         
