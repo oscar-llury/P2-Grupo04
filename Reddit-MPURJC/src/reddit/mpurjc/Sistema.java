@@ -64,10 +64,7 @@ public class Sistema {
 
         //subForo1
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
-        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 2)");
-        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 3)");
-        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 4)");
-        
+      
         
         
         comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 1,Entrada 1,Texto Plano, esto es el texto de la entrada 1 subforo 1|"
@@ -82,7 +79,7 @@ public class Sistema {
         
         
         comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
-        comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 2)");
+
         
         comandoMostrarForo.ejecutar("");
         

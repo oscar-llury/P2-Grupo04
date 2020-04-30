@@ -23,9 +23,13 @@ public class ValidarEntrada extends ComandosSistema {
     @Override
     public boolean ejecutar(String s) {
         if(comprobar(s)){
+            System.out.println("-------Validación administrador-------");
             if(admin.hayPendientes()){
                 admin.validarTodasEntradas();
+            } else{
+                System.out.println("No hay entradas que verificar");
             }
+            System.out.println("----------Fin administrador----------");
             return true;
         }else{
             return false;

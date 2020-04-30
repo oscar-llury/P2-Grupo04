@@ -65,10 +65,10 @@ public class Entrada implements TipoEntrada , Serializable{
      */
     @Override
     public void verificar() {
+        
+        System.out.print(" -> ");
         for (TipoEntrada iter : this.contenido) {
-            System.out.print("   -> ");
             iter.verificar();
-            System.out.println();
         }
         System.out.print("¿Deseas verificar la entrada? ");
         String s = decirSi("Si").toLowerCase();
@@ -83,7 +83,7 @@ public class Entrada implements TipoEntrada , Serializable{
                 this.autor.setPenalizacion(penalizacion);
             }
         }
-        
+     System.out.println();   
     } 
     
     /**

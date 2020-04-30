@@ -39,7 +39,7 @@ public class Encuesta implements TipoEntrada , Serializable{
     @Override
     public void mostrar() {
         int i=1;
-        System.out.println("El enunciado de la encuesta es: " + enunciado);
+        System.out.println("El enunciado de la encuesta : " + enunciado);
         Iterator<String> it = respuestas.iterator();
         
         while(it.hasNext()){

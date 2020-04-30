@@ -26,23 +26,27 @@ public class ComandoMostrarForo extends ComandosSistema {
         if (iterSub.hasNext()) {
             while (iterSub.hasNext()) { //itera por todos los subforo
                 sub = iterSub.next();
+                System.out.println("************************************");
                 System.out.println("\t" + sub.getNombre());
-
+                System.out.println("************************************");    
+                
                 Entrada entrada;
                 Collection<Entrada> listaEntradas = sub.getEntradas();
                 Iterator<Entrada> iterEntr = listaEntradas.iterator();
 
                 while (iterEntr.hasNext()) { //itera por todas las entradas
 
+                    System.out.println("--------------------------");
                     entrada = iterEntr.next();
                     entrada.mostrar();
-
                 }
+                
             }
         } else {
             System.out.println("El foro está vacío");
             return false;
         }
+        System.out.println("************************************");
         return true;
     }
 

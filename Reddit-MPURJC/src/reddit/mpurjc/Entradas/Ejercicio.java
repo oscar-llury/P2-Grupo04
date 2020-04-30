@@ -24,10 +24,10 @@ public class Ejercicio implements TipoEntrada , Serializable {
     // Se mostrará el enunciado y subenunciado del ejercicio, respectivamente
     @Override
     public void mostrar(){
-        System.out.println("Enunciado del ejercicio: \n" + this.enunciado);
+        System.out.println("Enunciado del ejercicio: " + this.enunciado);
         System.out.println();
         if(this.subenunciado != null){
-            System.out.println("Subenunciado del ejercicio: \n" + this.subenunciado);
+            System.out.println("Subenunciado del ejercicio: " + this.subenunciado);
         }
     }
     

@@ -38,8 +38,11 @@ public class Comentario implements Serializable{
         System.out.println("Puntuación: " + contarVotos());
         // Se mostrarán los comentarios anidados 
         Iterator<Comentario> it = comentarios.iterator();
+        
         while(it.hasNext()){
+            System.out.println("······Comentarios: ······");
             it.next().mostrar();
+            System.out.println("·························");
         }
     }
     
