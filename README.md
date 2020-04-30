@@ -46,13 +46,15 @@ La clase de ejecución es Sistema, que se encarga de ejecutar un demostrador par
     |    Entrada 1  
     |    |    esto es el texto del Texto Plano.  
 
-Si se quiere consultar como deben introducirse los comandos consultar el archivo [CommandsInput.md]().
+Si se quiere consultar como deben introducirse los comandos consultar el archivo [CommandsInput.md](CommandsInput.md).
 
 ### Escalabilidad
 
-El sistema no permite la interacción real con un usuario mediante la salida y entrada de datos por línea de comandos. En caso de querer ampliar el proyecto y permitir dicha interacción, se debe sustituir al completo la clase *Sistema*. No es necesario realizar ninguna otra modificación en el resto de archivos, ya que estos ya han sido preparados para la interacción con un usuario real y tienen su control de errores respectivamente.  
-En caso de querer extender el sistema añadiendo nuevos comandos que permitan realizar nuevas acciones sobre los datos del sistema, estos deben colocarse en la carpeta *ComandosSistema* y derivar de la clase abstracta *ComandosSistema.java*. Posteriormente, es suficiente con implementar de la forma deseada los métodos que se indican en la clase abstracta.  
-De igual forma, en caso de querer añadir nuevos tipos de entradas, el nuevo fichero debe colocarse en el paquete *Entradas* y derivar de la interfaz *TipoEntrada.java*. Posteriormente, es suficiente con implementar los métodos indicados y añadir como propiedad privada la estructura de datos que almacenará los datos de dicho nuevo tipo de entrada.
+El sistema no permite la interacción real con un usuario mediante la salida y entrada de datos por línea de comandos. En caso de querer ampliar el proyecto y permitir dicha interacción, se debe sustituir al completo la clase *[Sistema](Reddit-MPURJC/src/reddit/mpurjc/Sistema.java)*. No es necesario realizar ninguna otra modificación en el resto de archivos, ya que estos ya han sido preparados para la interacción con un usuario real y tienen su control de errores respectivamente.  
+  
+En caso de querer extender el sistema añadiendo nuevos comandos que permitan realizar nuevas acciones sobre los datos del sistema, estos deben colocarse en la carpeta *[ComandosSistema](Reddit-MPURJC/src/reddit/mpurjc/ComandosSistema)* y derivar de la clase abstracta *[ComandosSistema.java](Reddit-MPURJC/src/reddit/mpurjc/ComandosSistema/ComandosSistema.java)*. Posteriormente, es suficiente con implementar de la forma deseada los métodos que se indican en la clase abstracta.  
+  
+De igual forma, en caso de querer añadir nuevos tipos de entradas, el nuevo fichero debe colocarse en el paquete *[Entradas](Reddit-MPURJC/src/reddit/mpurjc/Entradas)* y derivar de la interfaz *[TipoEntrada.java](Reddit-MPURJC/src/reddit/mpurjc/Entradas/TipoEntrada.java)*. Posteriormente, es suficiente con implementar los métodos indicados y añadir como propiedad privada la estructura de datos que almacenará los datos de dicho nuevo tipo de entrada.
 
 
 ## Fase 3: Test
