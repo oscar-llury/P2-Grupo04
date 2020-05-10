@@ -34,7 +34,7 @@ public class NuevaEntradaTest {
     /**
      * Test of ejecutar method, of class NuevaEntrada.
      */
-    /*
+    
     @Test
     public void testEjecutar_EjercicioSinedoAlumno() {
         System.out.println("****Test Crear Entrada Ejercicio Siendo Alumno****");
@@ -46,7 +46,7 @@ public class NuevaEntradaTest {
         
         boolean result = comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 1,Titulo Entrada,Ejercicio, esto es ejercicio entrada 1 subforo 1.)"); 
 
-        boolean expResult = true;
+        boolean expResult = false;
 
         assertEquals(expResult, result);
     }
@@ -62,11 +62,11 @@ public class NuevaEntradaTest {
         
         boolean result = comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 1,Titulo Entrada,Texto, esto es el texto de la entrada 1 subforo 1)"); 
 
-        boolean expResult = true;
+        boolean expResult = false;
 
         assertEquals(expResult, result);
     }
-    */
+    
     @Test
     public void testEjecutar_SinUsuario() {
         System.out.println("***********Test Crear Entrada Sin Usuario*********");

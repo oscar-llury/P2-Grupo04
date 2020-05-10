@@ -169,7 +169,10 @@ public class Entrada implements TipoEntrada, Serializable {
     }
 
     public Comentario getComentarioPorOrden(int i) {
-        return this.comentarios.get(i - 1);
+        if(i<=this.comentarios.size()){
+            return this.comentarios.get(i - 1);
+        }else
+            return null;
     }
 
     /*------------------------SETTERS------------------------*/

@@ -39,10 +39,10 @@ public class ComentarComentarioTest {
     /**
      * Test of ejecutar method, of class ComentarComentario.
      */
-    /*
+    
     @Test
     public void testEjecutar_NoEncuentraEntrada() {
-        System.out.println("******Test ComentarioComentario CORRECTAMENTE*****");
+        System.out.println("*Test ComentarioComentario No Encuentra Comentario*");
 
         ComentarComentario instance = new ComentarComentario(reddit);
         
@@ -52,7 +52,7 @@ public class ComentarComentarioTest {
 
         assertEquals(expResult, result);
     }
-    */
+    
     @Test
     public void testEjecutar_Penalizacion() {
         System.out.println("***Test ComentarioComentario Penalizar Usuario***");
@@ -62,6 +62,11 @@ public class ComentarComentarioTest {
         instance.ejecutar("ComentarComentario(SubForo 1.1.1-Esto es el comentario 2 idiota)");
         
         boolean result = reddit.getUsuarioActual().isPenalizado();
+        
+        if(result){
+            System.out.println("El usuario ha sido penalizado.");
+        }
+        
         boolean expResult = true;
         
         assertEquals(expResult, result);

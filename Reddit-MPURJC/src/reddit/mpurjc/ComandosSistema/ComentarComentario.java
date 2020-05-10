@@ -35,7 +35,7 @@ public class ComentarComentario extends ComandosSistema {
             // Se podrá comentar dicho comentario siempre y cuando la entrada esté verificada 
             // y el comentario al que se hace referencia está validado
             buscarComentarioActual(this.parametros);
-            if (this.entradaActual.isVerificado() && this.comentarioActual.isValidado()) {
+            if (this.comentarioActual != null && this.entradaActual.isVerificado() && this.comentarioActual.isValidado()) {
                 Comentario nuevoComentario = new Comentario(usuarioActual, this.parametros);
                 nuevoComentario.validar();
                 if (nuevoComentario.isValidado()) {
@@ -48,7 +48,7 @@ public class ComentarComentario extends ComandosSistema {
                     return false;
                 }
             } else {
-                System.out.println("No se ha podido comentar la entrada.");
+                System.out.println("No se ha podido comentar el comentario.");
                 return false;
             }
         } else {
@@ -83,7 +83,6 @@ public class ComentarComentario extends ComandosSistema {
         this.entradaActual = foro.getEntradaActual();
     }
 
-    //SubForo 1.1.1-
     private void buscarComentarioActual(String s) {
 
         int fin = s.indexOf(".");
@@ -101,8 +100,10 @@ public class ComentarComentario extends ComandosSistema {
 
         if (punto1 != -1) {//2
             Comentario coment = this.entradaActual.getComentarioPorOrden(profundidad);
-            for (int i = 1; i < profundidad; i++) {
-                coment = coment.getComentarioPorOrden(i);
+            if (coment != null) {
+                for (int i = 1; i < profundidad; i++) {
+                    coment = coment.getComentarioPorOrden(i);
+                }
             }
             this.comentarioActual = coment;
         } else {
@@ -117,7 +118,7 @@ public class ComentarComentario extends ComandosSistema {
             String[] words = str.split("\\.");
             return words.length;
         } else {
-            return 1;
+            return Integer.parseInt(str);
         }
     }
 }
