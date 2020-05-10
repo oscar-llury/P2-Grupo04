@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reddit.mpurjc.ComandosSistema;
 
 import org.junit.After;
@@ -13,58 +8,53 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import reddit.mpurjc.Foro;
 
-/**
- *
- * @author micen
- */
 public class LogoutTest {
-    
-    private static Foro foroPrueba = new Foro();
-    static Logout comando = new Logout(foroPrueba);
-    
+
+    private static Foro reddit = new Foro();
+
     public LogoutTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
-        NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(foroPrueba);
+        NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(reddit);
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Profesor1,ApellidosUsuario,emailProfesor@urjc.es,pass)");
     }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
     @Before
     public void setUp() {
     }
-    
+
+    @Test
+    public void testLogout_Correcto() {
+        System.out.println("**************Test Logout CORRECTAMENTE***********");
+
+        Logout logout = new Logout(reddit);
+        boolean result = logout.ejecutar("Logout()");
+
+        assertTrue(result);
+    }
+
+    @Test
+    public void testLogout_EstandoLogout() {
+        System.out.println("*************Test Logout Estando Logout***********");
+
+        Logout logout = new Logout(reddit);
+        logout.ejecutar("Logout()");
+
+        boolean result = logout.ejecutar("Logout()");
+
+        assertTrue(result);
+    }
+
     @After
     public void tearDown() {
+        System.out.println("********************END TEST**********************");
+        System.out.println("");
     }
 
-    @Test
-    public void testEjecutar() {
-        
-        assertTrue(comando.ejecutar("Logout()"));
-    }
-    
-    @Test
-    public void testLogoutestandoLogout() {
-        
-        comando.ejecutar("Logout()");
-        assertTrue(comando.ejecutar("Logout()"));
+    @AfterClass
+    public static void tearDownClass() {
     }
 
-
-    @Test
-    public void testComprobar() {
-        
-    }
-
-    @Test
-    public void testSetForo() {
-        
-    }
-    
 }

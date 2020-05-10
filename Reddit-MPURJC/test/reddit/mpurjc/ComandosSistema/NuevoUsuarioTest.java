@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reddit.mpurjc.ComandosSistema;
 
 import org.junit.After;
@@ -14,67 +9,73 @@ import static org.junit.Assert.*;
 import reddit.mpurjc.Foro;
 import reddit.mpurjc.Usuario;
 
-
-/**
- *
- * @author micen
- */
 public class NuevoUsuarioTest {
-    Foro foroPrueba = new Foro();
-    
-    NuevoUsuario comando = new NuevoUsuario(foroPrueba);
+
+    Foro reddit = new Foro();
+
     public NuevoUsuarioTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
     @Before
     public void setUp() {
     }
-    
+
+    @Test
+    public void testNuevoUsuario_Correcto() {
+        System.out.println("*********Test NuevoUsuario CORRECTAMENTE**********");
+
+        NuevoUsuario nuevoUsuario = new NuevoUsuario(reddit);
+        nuevoUsuario.ejecutar("NuevoUsuario(Profesor1,ApellidosUsuario,emailProfesor@urjc.es,pass)");
+
+        assertEquals(1, reddit.getListaUsuarios().size());
+
+        Usuario usuarioPrueba = reddit.getListaUsuarios().get("emailprofesor");
+
+        assertEquals("Profesor1", usuarioPrueba.getNombre());
+        assertEquals("pass", usuarioPrueba.getContraseña());
+        assertEquals("emailprofesor@urjc.es", usuarioPrueba.getEmail());
+        assertEquals("ApellidosUsuario", usuarioPrueba.getApellidos());
+    }
+
+    @Test
+    public void testNuevoUsuario_UsuarioRepetido() {
+        System.out.println("********Test NuevoUsuario Usuario Repetido********");
+
+        NuevoUsuario nuevoUsuario = new NuevoUsuario(reddit);
+        String parametros = "NuevoUsuario(Profesor1,ApellidosUsuario,emailProfesor@urjc.es,pass)";
+
+        nuevoUsuario.ejecutar(parametros);
+
+        boolean result = nuevoUsuario.ejecutar(parametros);
+
+        assertFalse(result);
+    }
+
+    @Test
+    public void testNuevoUsuario_CorreoMal() {
+        System.out.println("********Test NuevoUsuario Correo No URJC**********");
+
+        NuevoUsuario nuevoUsuario = new NuevoUsuario(reddit);
+        String parametros = "NuevoUsuario(Alumno,ApellidosUsuario,emailAlumno@google.com,pass)";
+
+        boolean result = nuevoUsuario.ejecutar(parametros);
+
+        assertFalse(result);
+
+        System.out.println("");
+    }
+
     @After
     public void tearDown() {
+        System.out.println("********************END TEST**********************");
+        System.out.println("");
     }
 
-    @Test
-    public void testEjecutar() {
-        String parametros = "NuevoUsuario(Profesor1,ApellidosUsuario,emailProfesor@urjc.es,pass)";
-        comando.ejecutar(parametros);
-        assertEquals(1,foroPrueba.getListaUsuarios().size());
-        Usuario usuarioPrueba = foroPrueba.getListaUsuarios().get("emailprofesor");
-        assertEquals("Profesor1",usuarioPrueba.getNombre());
-        assertEquals("pass",usuarioPrueba.getContraseña());
-        assertEquals("emailprofesor@urjc.es",usuarioPrueba.getEmail());
-        assertEquals("ApellidosUsuario",usuarioPrueba.getApellidos());
+    @AfterClass
+    public static void tearDownClass() {
     }
-
-    @Test
-    public void testUsuarioRepetido(){
-        String parametros = "NuevoUsuario(Profesor1,ApellidosUsuario,emailProfesor@urjc.es,pass)";
-        comando.ejecutar(parametros);
-        assertFalse(comando.ejecutar(parametros));
-    }
-    
-    @Test
-    public void testCorreoMal(){
-        String parametros = "NuevoUsuario(Alumno,ApellidosUsuario,emailAlumno@google.com,pass)";
-        assertFalse(comando.ejecutar(parametros));
-    }
-    
-    @Test
-    public void testComprobar() {
-        
-    }
-
-    @Test
-    public void testSetForo() {
-        
-    }
-    
 }
