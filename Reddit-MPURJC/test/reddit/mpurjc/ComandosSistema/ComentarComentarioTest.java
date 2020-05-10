@@ -41,7 +41,7 @@ public class ComentarComentarioTest {
      */
     
     @Test
-    public void testEjecutar_NoEncuentraEntrada() {
+    public void testComentarComentario_NoEncuentraComentario() {
         System.out.println("*Test ComentarioComentario No Encuentra Comentario*");
 
         ComentarComentario instance = new ComentarComentario(reddit);
@@ -54,7 +54,7 @@ public class ComentarComentarioTest {
     }
     
     @Test
-    public void testEjecutar_Penalizacion() {
+    public void testComentarComentario_Penalizacion() {
         System.out.println("***Test ComentarioComentario Penalizar Usuario***");
 
         ComentarComentario instance = new ComentarComentario(reddit);
@@ -73,7 +73,7 @@ public class ComentarComentarioTest {
     }
     
     @Test
-    public void testEjecutar_Correcto() {
+    public void testComentarComentario_Correcto() {
         System.out.println("******Test ComentarioComentario CORRECTAMENTE*****");
 
         ComentarComentario instance = new ComentarComentario(reddit);

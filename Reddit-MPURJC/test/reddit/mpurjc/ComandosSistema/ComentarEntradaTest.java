@@ -38,7 +38,7 @@ public class ComentarEntradaTest {
      */
    
     @Test
-    public void testEjecutar_SinValidar() {
+    public void testComentarEntrada_SinValidar() {
         System.out.println("***Test ComentarioEntrada Sin Validar por Admin***");
 
         ComentarEntrada instance = new ComentarEntrada(reddit);
@@ -52,7 +52,7 @@ public class ComentarEntradaTest {
     }
     
     @Test
-    public void testEjecutar_SinUsuarioLogeado() {
+    public void testComentarEntrada_SinUsuarioLogeado() {
         System.out.println("****Test ComentarioEntrada Sin Usuario Logeado****");
         
         Logout comandoLogout = new Logout(reddit);
@@ -69,7 +69,7 @@ public class ComentarEntradaTest {
     }
     
     @Test
-    public void testEjecutar_Correcto() {
+    public void testComentarEntrada_Correcto() {
         System.out.println("*******Test ComentarioEntrada CORRECTAMENTE*******");
         
         Login comandoLogin = new Login(reddit);

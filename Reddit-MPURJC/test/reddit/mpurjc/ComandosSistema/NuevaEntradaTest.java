@@ -36,7 +36,7 @@ public class NuevaEntradaTest {
      */
     
     @Test
-    public void testEjecutar_EjercicioSinedoAlumno() {
+    public void testNuevaEntrada_EjercicioSiendoAlumno() {
         System.out.println("****Test Crear Entrada Ejercicio Siendo Alumno****");
         
         Login comandoLogin = new Login(reddit);
@@ -52,7 +52,7 @@ public class NuevaEntradaTest {
     }
     
     @Test
-    public void testEjecutar_TipoEntradaIncorrecto() {
+    public void testNuevaEntrada_TipoEntradaIncorrecto() {
         System.out.println("**Test Crear Entrada Con Tipo Entrada Incorrecto**");
         
         Login comandoLogin = new Login(reddit);
@@ -68,7 +68,7 @@ public class NuevaEntradaTest {
     }
     
     @Test
-    public void testEjecutar_SinUsuario() {
+    public void testNuevaEntrada_SinUsuario() {
         System.out.println("***********Test Crear Entrada Sin Usuario*********");
         
         Logout comandoLogout = new Logout(reddit);
@@ -84,7 +84,7 @@ public class NuevaEntradaTest {
     }
     
     @Test
-    public void testEjecutar_Correctamente() {
+    public void testNuevaEntrada_Correcto() {
         System.out.println("**********Test Crear Entrada CORRECTAMENTE********");
         
         Login comandoLogin = new Login(reddit);
