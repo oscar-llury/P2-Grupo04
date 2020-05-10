@@ -55,7 +55,7 @@ public class Logout extends ComandosSistema {
     }
 
     private void actualizarNotificaciones() {
-        if (foro.getUsuarioActual().getEntradasVistas() != null) {
+        if ((foro.getUsuarioActual() != null) && (foro.getUsuarioActual().getEntradasVistas() != null)) {
             foro.getUsuarioActual().getEntradasVistas().entrySet().forEach((entry) -> {
                 foro.getUsuarioActual().setEntradasVistas(foro.getSubForo(entry.getKey()));
             });

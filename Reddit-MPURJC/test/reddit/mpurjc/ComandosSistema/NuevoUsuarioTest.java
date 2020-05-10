@@ -58,15 +58,14 @@ public class NuevoUsuarioTest {
     public void testUsuarioRepetido(){
         String parametros = "NuevoUsuario(Profesor1,ApellidosUsuario,emailProfesor@urjc.es,pass)";
         comando.ejecutar(parametros);
-        assertTrue(comando.ejecutar(parametros));
+        assertFalse(comando.ejecutar(parametros));
     }
     
-    /**@Test
+    @Test
     public void testCorreoMal(){
         String parametros = "NuevoUsuario(Alumno,ApellidosUsuario,emailAlumno@google.com,pass)";
-        boolean prueba = comando.ejecutar(parametros);
-        assertEquals(false,prueba);
-    }**/
+        assertFalse(comando.ejecutar(parametros));
+    }
     
     @Test
     public void testComprobar() {

@@ -48,6 +48,14 @@ public class LogoutTest {
         
         assertTrue(comando.ejecutar("Logout()"));
     }
+    
+    @Test
+    public void testLogoutestandoLogout() {
+        
+        comando.ejecutar("Logout()");
+        assertTrue(comando.ejecutar("Logout()"));
+    }
+
 
     @Test
     public void testComprobar() {
