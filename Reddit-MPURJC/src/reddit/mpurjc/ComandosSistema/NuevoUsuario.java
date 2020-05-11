@@ -35,24 +35,17 @@ public class NuevoUsuario extends ComandosSistema {
             String email = this.parametros.substring(0, separador);
 
             this.parametros = this.parametros.substring(separador + 1, this.parametros.length());
-
-            boolean unico = false;
-            boolean evaluador = true;
-            while ((!unico || !evaluador)) {
-                if (!evaluador) {
+                if (!evaluadorEmail(email)) {
                     //Sólo aceptaremos nuevos usuarios que proporcionen un email de la Universidad
-                    System.out.print("El email introducido no es correcto o no pertenece a la URJC\n"
-                            + "Introduce de nuevo el email: ");
-                    Scanner scan = new Scanner(System.in);
-                    email = scan.nextLine();
+                    System.out.print("El email introducido no es correcto o no pertenece a la URJC");
+                    return false;
                 }
                 if (!foro.sinUsuarios()) {
-                    unico = !foro.contieneUsuario(sacarNick(email));
-                } else {
-                    unico = true;
-                }
-                evaluador = evaluadorEmail(email);
-            }
+                    if(foro.contieneUsuario(sacarNick(email))){
+                        System.out.println("Ese usuario ya existe");
+                        return false;
+                    }
+                } 
             System.out.println("Usuario creado correctamente.");
             if (contruyendoAdmin) {
                 Administrador admin = new Administrador(nombre, apellidos, email, this.parametros, true);
