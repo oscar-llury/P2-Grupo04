@@ -30,6 +30,7 @@ public class NuevaSubscripcion extends ComandosSistema {
         if (comprobar(s)) {
             this.subforoActual = this.foro.getSubForo(this.parametros);
             //Podremos crear la nueva subscripción siempre y cuando el usuario no tenga ya esa subscripción
+           if(this.subforoActual != null){
             if (!usuarioActual.contieneSubscripcion(this.parametros)) {
                 usuarioActual.addSubscripcion(subforoActual);
                 usuarioActual.addEntradasVistas(subforoActual);
@@ -39,6 +40,10 @@ public class NuevaSubscripcion extends ComandosSistema {
                 System.out.println("Ya estás subscrito a este SubForo.");
                 return false;
             }
+           }else{
+               System.out.println("Este SubForo no existe.");
+                return false;
+           }
         } else {
             System.out.println("Es necesario tener iniciada sesión.");
             return false;
