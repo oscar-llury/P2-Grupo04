@@ -60,9 +60,13 @@ public class Usuario implements Serializable {
     private Rol sacarRol(String email) {
         // Se tendrá que verificar que el email introducido tenga la arroba en el email
         int index = email.indexOf("@");
-        switch (email.substring(index, email.length()).toLowerCase()) {
+        String opcion  = email.substring(index+1, email.length()).toLowerCase();
+        switch (opcion) {
             case "alumnos.urjc.es": {
                 return ALUMNO;
+            }
+            case "admin.urjc.es": {
+                return ADMINISTRADOR;
             }
             default: {
                 return PROFESOR;
