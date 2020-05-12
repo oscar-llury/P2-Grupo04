@@ -175,6 +175,10 @@ public class Entrada implements TipoEntrada, Serializable {
             return null;
     }
     
+    public int getPuntuacionesSize(){
+        return this.puntuaciones.size();
+    }
+    
     /*------------------------SETTERS------------------------*/
     public void setContenido(List<TipoEntrada> contenido) {
         this.contenido = contenido;

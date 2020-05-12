@@ -32,7 +32,7 @@ public class VotarComentario extends ComandosSistema {
     public boolean ejecutar(String s) {
         if (comprobar(s)) {
             buscarComentarioActual(this.parametros);
-            if ((this.comentarioActual != null) &&(this.usuarioActual != null) && (this.entradaActual.isVerificado())) {
+            if ((this.comentarioActual != null)&& (this.entradaActual.isVerificado())) {
                 this.parametros = this.parametros.replace(" ", "").toLowerCase();
 
                 boolean voto;
@@ -49,10 +49,11 @@ public class VotarComentario extends ComandosSistema {
                 }
                 return this.comentarioActual.votarComentario(usuarioActual, voto);
             } else {
-                System.out.println("Es necesario tener iniciada sesión.");
+                System.out.println("No se ha podido realizar el voto.");
                 return false;
             }
         } else {
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
@@ -61,15 +62,19 @@ public class VotarComentario extends ComandosSistema {
     @Override
     public boolean comprobar(String s) {
         setForo(foro);
-        int ini = s.indexOf('(');
-        int fin = s.lastIndexOf(")");
-        String comando = s.substring(0, ini).toLowerCase();
+        if (this.usuarioActual == null) {
+            return false; 
+        }else{
+            int ini = s.indexOf('(');
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0, ini).toLowerCase();
 
-        if (comando.equals("votarcomentario")) {
-            this.parametros = s.substring(ini + 1, fin);
-            return !this.entradaActual.getComentarios().isEmpty();
-        } else {
-            return false;
+            if (comando.equals("votarcomentario")) {
+                this.parametros = s.substring(ini + 1, fin);
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
