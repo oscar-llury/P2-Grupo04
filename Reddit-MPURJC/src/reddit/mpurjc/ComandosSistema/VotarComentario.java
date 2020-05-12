@@ -67,7 +67,7 @@ public class VotarComentario extends ComandosSistema {
 
         if (comando.equals("votarcomentario")) {
             this.parametros = s.substring(ini + 1, fin);
-            return true;
+            return !this.entradaActual.getComentarios().isEmpty();
         } else {
             return false;
         }

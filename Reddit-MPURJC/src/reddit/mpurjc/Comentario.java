@@ -2,9 +2,11 @@ package reddit.mpurjc;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import reddit.mpurjc.Entradas.Entrada;
 
 public class Comentario implements Serializable {
 
@@ -146,6 +148,10 @@ public class Comentario implements Serializable {
 
     public String getTexto() {
         return texto;
+    }
+    
+    public Collection<Votacion> getPuntuaciones() {
+        return puntuaciones.values();
     }
 
     /*------------------------SETTERS------------------------*/
