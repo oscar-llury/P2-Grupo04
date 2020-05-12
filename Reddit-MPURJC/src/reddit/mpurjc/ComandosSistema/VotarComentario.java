@@ -32,7 +32,7 @@ public class VotarComentario extends ComandosSistema {
     public boolean ejecutar(String s) {
         if (comprobar(s)) {
             buscarComentarioActual(this.parametros);
-            if ((this.usuarioActual != null) && (this.entradaActual.isVerificado())) {
+            if ((this.comentarioActual != null) &&(this.usuarioActual != null) && (this.entradaActual.isVerificado())) {
                 this.parametros = this.parametros.replace(" ", "").toLowerCase();
 
                 boolean voto;
@@ -44,8 +44,8 @@ public class VotarComentario extends ComandosSistema {
                         voto = false;
                         break;
                     default:
-                        voto = false;
-                        break;
+                        System.out.println("Voto mal introducido.");
+                        return false;
                 }
                 return this.comentarioActual.votarComentario(usuarioActual, voto);
             } else {
@@ -86,7 +86,7 @@ public class VotarComentario extends ComandosSistema {
             String[] words = str.split("\\.");
             return words.length;
         } else {
-            return 1;
+            return Integer.parseInt(str);
         }
     }
 
@@ -109,8 +109,10 @@ public class VotarComentario extends ComandosSistema {
             fin = s.indexOf(".");
             orden = Integer.parseInt(s.substring(0, fin));
             Comentario coment = this.entradaActual.getComentarioPorOrden(orden);
-            for (int i = 1; i < profundidad; i++) {
-                coment = coment.getComentarioPorOrden(i);
+            if (coment != null) {
+                for (int i = 1; i < profundidad; i++) {
+                    coment = coment.getComentarioPorOrden(i);
+                }
             }
             this.comentarioActual = coment;
         } else {

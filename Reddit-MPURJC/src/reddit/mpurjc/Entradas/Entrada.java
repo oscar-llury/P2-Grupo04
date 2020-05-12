@@ -174,7 +174,7 @@ public class Entrada implements TipoEntrada, Serializable {
         }else
             return null;
     }
-
+    
     /*------------------------SETTERS------------------------*/
     public void setContenido(List<TipoEntrada> contenido) {
         this.contenido = contenido;

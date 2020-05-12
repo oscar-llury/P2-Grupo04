@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reddit.mpurjc.ComandosSistema;
 
 import org.junit.After;
@@ -13,10 +8,6 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import reddit.mpurjc.Foro;
 
-/**
- *
- * @author micen
- */
 public class VotarComentarioTest {
     
     private static final Foro reddit = new Foro();
@@ -29,11 +20,7 @@ public class VotarComentarioTest {
         NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(reddit);
         NuevoSubForo comandoNuevoSubForo = new NuevoSubForo(reddit);
         NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
-        
-        
-        
-        
-        
+
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Admin,Admin,Admin@admin.urjc.es,AdminPass)");
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Profesor1,ApellidosUsuario,emailProfesor@urjc.es,pass)");
         comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
@@ -42,28 +29,20 @@ public class VotarComentarioTest {
        
     }
     
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
     @Before
     public void setUp() {
     }
-    
-    @After
-    public void tearDown() {
-    }
+
 
     @Test
     public void testEjecutar() {
-        
         
         ComentarEntrada comandoNuevoComentarioEntrada = new ComentarEntrada(reddit);
         comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
         
         VotarComentario comandoVotarComentario = new VotarComentario(reddit);
         comandoVotarComentario.ejecutar("VotarComentario(SubForo 1.1.1.-like)");
-        int tamaño = reddit.getEntradaActual().getComentarios().get(0).getPuntuaciones().size();
+        int tamaño = reddit.getEntradaActual().getComentarioPorOrden(1).getPuntuacionesSize();
         assertEquals(1,tamaño);
     }
     
@@ -72,15 +51,24 @@ public class VotarComentarioTest {
         VotarComentario comandoVotarComentario = new VotarComentario(reddit);
         assertFalse(comandoVotarComentario.ejecutar("VotarComentario(SubForo 1.1.1.-like)"));
     }
-
+    
     @Test
-    public void testComprobar() {
-        
+    public void testNiLikeNiDislike(){
+        ComentarEntrada comandoNuevoComentarioEntrada = new ComentarEntrada(reddit);
+        comandoNuevoComentarioEntrada.ejecutar("ComentarEntrada(SubForo 1.1-Esto es el comentario 1)");
+
+        VotarComentario comandoVotarComentario = new VotarComentario(reddit);
+        assertFalse(comandoVotarComentario.ejecutar("VotarComentario(SubForo 1.1.1.-algo)"));
+    }
+    
+    @After
+    public void tearDown() {
+        System.out.println("********************END TEST**********************");
+        System.out.println("");
     }
 
-    @Test
-    public void testSetForo() {
-        
+    @AfterClass
+    public static void tearDownClass() {
     }
     
 }

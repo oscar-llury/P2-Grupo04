@@ -143,15 +143,18 @@ public class Comentario implements Serializable {
     }
 
     public Comentario getComentarioPorOrden(int i) {
-        return this.comentarios.get(i - 1);
+        if(i<=this.comentarios.size()){
+            return this.comentarios.get(i - 1);
+        }else
+            return null;
     }
 
     public String getTexto() {
         return texto;
     }
     
-    public Collection<Votacion> getPuntuaciones() {
-        return puntuaciones.values();
+    public int getPuntuacionesSize() {
+        return puntuaciones.size();
     }
 
     /*------------------------SETTERS------------------------*/
