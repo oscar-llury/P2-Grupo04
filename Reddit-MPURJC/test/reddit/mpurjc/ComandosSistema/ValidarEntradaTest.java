@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package reddit.mpurjc.ComandosSistema;
 
 import org.junit.After;
@@ -13,44 +8,53 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import reddit.mpurjc.Foro;
 
-/**
- *
- * @author micen
- */
 public class ValidarEntradaTest {
+    
+    private static Foro reddit = new Foro();
     
     public ValidarEntradaTest() {
     }
     
     @BeforeClass
     public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
+        NuevoUsuario comandoNuevoUsuario = new NuevoUsuario(reddit);
+        NuevoSubForo comandoNuevoSubForo = new NuevoSubForo(reddit);
+        
+        comandoNuevoUsuario.ejecutar("NuevoUsuario(Admin,Admin,Admin@admin.urjc.es,AdminPass)");
+        comandoNuevoUsuario.ejecutar("NuevoUsuario(Profesor1,ApellidosUsuario,emailProfesor@urjc.es,pass)");
+        comandoNuevoSubForo.ejecutar("NuevoSubForo(SubForo 1)");
     }
     
     @Before
     public void setUp() {
     }
+   
+    @Test
+    public void testValidarEntrada_Correcto() {
+        System.out.println("*************Test VotarEntrada Correcto***********");
+        
+        NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);
+        ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
+        
+        comandoNuevaEntrada.ejecutar("NuevaEntrada(SubForo 1,Entrada 1,Encuesta, esto es el enunciado de la encuesta de la entrada 1 subforo 1, opcion 1, opcion 2)");
+        comandoValidarEntrada.ejecutar("ValidarEntrada(all)"); 
+        
+        boolean valido = reddit.getEntradaActual().isVerificado();
+        
+        if(valido){
+            System.out.println("Entrada validada correctamente");
+        }
+        
+        assertTrue(valido);
+    }
     
     @After
     public void tearDown() {
+        System.out.println("********************END TEST**********************");
+        System.out.println("");
     }
 
-    @Test
-    public void testEjecutar() {
-        
+    @AfterClass
+    public static void tearDownClass() {
     }
-
-    @Test
-    public void testComprobar() {
-        
-    }
-
-    @Test
-    public void testSetForo() {
-
-    }
-    
 }
