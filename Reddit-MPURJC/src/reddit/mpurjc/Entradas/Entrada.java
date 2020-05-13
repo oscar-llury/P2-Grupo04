@@ -73,6 +73,7 @@ public class Entrada implements TipoEntrada, Serializable {
         System.out.print("¿Deseas verificar la entrada? ");
         String s = decirSi("Si").toLowerCase();
         this.verificado = s.equals("si");
+        System.out.println("Entrada validada correctamente");
 
         if (!this.verificado) {
             if (this.autor.getPenalizacion().isPenalizado()) {

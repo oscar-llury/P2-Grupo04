@@ -25,13 +25,18 @@ public class ValidarEntrada extends ComandosSistema {
     public boolean ejecutar(String s) {
         if (comprobar(s)) {
             System.out.println("-------Validación administrador-------");
-            if (admin.hayPendientes()) {
+            if (admin == null) {
+                System.out.println("No hay administrador disponible");
+                return false;
+            } else if (admin.hayPendientes()) {
                 admin.validarTodasEntradas();
+                System.out.println("----------Fin administrador----------");
+                return true;
             } else {
                 System.out.println("No hay entradas que verificar");
+                System.out.println("----------Fin administrador----------");
+                return false;
             }
-            System.out.println("----------Fin administrador----------");
-            return true;
         } else {
             return false;
         }
