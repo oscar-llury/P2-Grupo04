@@ -18,7 +18,6 @@ public class ValidarEntradaTest {
     
     @BeforeClass
     public static void setUpClass() {
-        
         NuevoSubForo comandoNuevoSubForo = new NuevoSubForo(reddit);
        
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Profesor1,ApellidosUsuario,emailProfesor@urjc.es,pass)");
@@ -29,15 +28,19 @@ public class ValidarEntradaTest {
     public void setUp() {
     }
     
-        @Test
-    public void validarSinAdmin(){
+    @Test
+    public void testValidarEntrada_SinAdmin(){
+        System.out.println("*******Test ValidarEntrada Sin Administrador******");
+        
         ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
         boolean valida = comandoValidarEntrada.ejecutar("ValidarEntrada(all)");
         assertFalse(valida);
     }
     
      @Test
-    public void testValidarSinEntradas(){
+    public void testValidarEntrada_SinEntradas(){
+        System.out.println("*********Test ValidarEntrada Sin Entradas*********");
+        
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Admin,Admin,Admin@admin.urjc.es,AdminPass)");
         ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
         boolean valida = comandoValidarEntrada.ejecutar("ValidarEntrada(all)");
@@ -46,8 +49,9 @@ public class ValidarEntradaTest {
    
     @Test
     public void testValidarEntrada_Correcto() {
+        System.out.println("***********Test ValidarEntrada Correcto***********");
+        
         comandoNuevoUsuario.ejecutar("NuevoUsuario(Admin,Admin,Admin@admin.urjc.es,AdminPass)");
-        System.out.println("*************Test VotarEntrada Correcto***********");
         
         NuevaEntrada comandoNuevaEntrada = new NuevaEntrada(reddit);
         ValidarEntrada comandoValidarEntrada = new ValidarEntrada(reddit);
@@ -57,15 +61,9 @@ public class ValidarEntradaTest {
         comandoValidarEntrada.ejecutar("ValidarEntrada(all)"); 
         
         boolean valido = reddit.getEntradaActual().isVerificado();
-        
-    
-        
+
         assertTrue(valido);
     }
-    
-   
-    
-
     
     @After
     public void tearDown() {
