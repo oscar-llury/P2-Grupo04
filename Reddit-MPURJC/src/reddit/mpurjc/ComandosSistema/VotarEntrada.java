@@ -30,7 +30,7 @@ public class VotarEntrada extends ComandosSistema {
     public boolean ejecutar(String s) {
         if (comprobar(s)) {
             buscarEntradaActual(this.parametros);
-            if (this.usuarioActual != null) {
+            if (this.entradaActual != null) {
                 this.parametros = this.parametros.replace(" ", "").toLowerCase();
                 boolean voto;
                 switch (this.parametros) {
@@ -41,19 +41,20 @@ public class VotarEntrada extends ComandosSistema {
                         voto = false;
                         break;
                     default:
-                        voto = false;
-                        break;
+                        System.out.println("Voto mal introducido.");
+                        return false;
                 }
                 boolean error = this.entradaActual.votarEntrada(usuarioActual, voto);
                 this.entradaActual.contarVotos();
                 System.out.println("Voto realizado correctamente");
                 return error;
             } else {
-                System.out.println("Es necesario tener iniciada sesión.");
+                System.out.println("No se ha encontrado la entrada.");
                 return false;
             }
 
         } else {
+            System.out.println("Es necesario tener iniciada sesión.");
             return false;
         }
     }
@@ -61,19 +62,21 @@ public class VotarEntrada extends ComandosSistema {
     //Comando para la clase VotarEntrada en el Foro
     @Override
     public boolean comprobar(String s) {
-
         setForo(foro);
-        int ini = s.indexOf('(');
-        int fin = s.lastIndexOf(")");
-        String comando = s.substring(0, ini).toLowerCase();
-
-        if (comando.equals("votarentrada")) {
-            this.parametros = s.substring(ini + 1, fin);
-            return true;
-        } else {
+        if (this.usuarioActual == null) {
             return false;
-        }
+        } else {
+            int ini = s.indexOf('(');
+            int fin = s.lastIndexOf(")");
+            String comando = s.substring(0, ini).toLowerCase();
 
+            if (comando.equals("votarentrada")) {
+                this.parametros = s.substring(ini + 1, fin);
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     @Override

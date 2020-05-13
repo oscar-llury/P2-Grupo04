@@ -53,13 +53,19 @@ public class NuevaEntrada extends ComandosSistema {
 
             }
 
-            contruirPorTipo(entrada, this.parametros);
-
-            this.subForoActual.insertarEntrada(entrada);
-            foro.setEntradaActual(entrada);
-            foro.getAdministrador().addPendientes(entrada);
-            System.out.println("Entrada creada correctamente.");
-            return true;
+            boolean contruido = contruirPorTipo(entrada, this.parametros);
+            
+            if (contruido){
+                this.subForoActual.insertarEntrada(entrada);
+                foro.setEntradaActual(entrada);
+                foro.getAdministrador().addPendientes(entrada);
+                System.out.println("Entrada creada correctamente.");
+                return true;
+            }else{
+                System.out.println("No se ha podido generar la entrada.");
+                return false;
+            }
+            
         } else {
             System.out.println("Es necesario tener iniciada sesión.");
             return false;
@@ -92,33 +98,36 @@ public class NuevaEntrada extends ComandosSistema {
         this.subForoActual = foro.getSubForoActual();
     }
 
-    private void contruirPorTipo(Entrada entrada, String s) {
+    private boolean contruirPorTipo(Entrada entrada, String s) {
         int index = s.indexOf(",");
         String tipoEntrada = s.substring(0, index).toLowerCase();
         s = s.substring(index + 1, s.length());
         switch (tipoEntrada) { //Podremos crear las distintas entradas disponibles
             case "texto plano": { //El texto plano podrá ser creado por cualquier usuario
                 entrada.addTextoPlano(s);
-                break;
+                return true;
             }
             case "encuesta": { //La encuesta será creada solamente por un profesor
                 if (this.usuarioActual.isProfesor()) {
                     entrada.addEncuesta(s);
+                    return true;
                 } else {
                     System.out.println("Es necesario ser porfesor.");
+                    return false;
                 }
-                break;
             }
             case "ejercicio": { //El ejercicio será creado solamente por un profesor
                 if (this.usuarioActual.isProfesor()) {
                     entrada.addEjercicio(s);
+                    return true;
                 } else {
                     System.out.println("Es necesario ser porfesor.");
+                    return false;
                 }
-                break;
             }
             default: {
-                System.out.println("No se ha podido generar la entrada.");
+                System.out.println("No se reconoce el Tipo de Entrada.");
+                return false;
             }
         }
     }
