@@ -73,6 +73,7 @@ public class Entrada implements TipoEntrada, Serializable {
         System.out.print("¿Deseas verificar la entrada? ");
         String s = decirSi("Si").toLowerCase();
         this.verificado = s.equals("si");
+        System.out.println("Entrada validada correctamente");
 
         if (!this.verificado) {
             if (this.autor.getPenalizacion().isPenalizado()) {
@@ -174,7 +175,11 @@ public class Entrada implements TipoEntrada, Serializable {
         }else
             return null;
     }
-
+    
+    public int getPuntuacionesSize(){
+        return this.puntuaciones.size();
+    }
+    
     /*------------------------SETTERS------------------------*/
     public void setContenido(List<TipoEntrada> contenido) {
         this.contenido = contenido;
