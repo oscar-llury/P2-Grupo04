@@ -58,3 +58,28 @@ De igual forma, en caso de querer añadir nuevos tipos de entradas, el nuevo fic
 
 
 ## Fase 3: Test
+
+El sistema cuenta con test unitarios implementados para los métodos *ejecutar* de las clases del paquete *[ComandosSistema](Reddit-MPURJC/src/reddit/mpurjc/ComandosSistema)*. Puede revisar todos estos test en el archivo [CommandsTest.md](CommandsTest.md).
+
+En caso de necesitar probar los test y tener problemas con las librerías y versiones de Junit, las versiones utilizadas en este proyecto son **JUnit 4.12** y **Hamcrest 1.3**, que deben estar añadidas al *calsspath* de librerías del proyecto.
+
+En caso de necesitar crear nuevos test, se deben colocar en el paquete correspondiente dentro de la carpeta de [Test](Reddit-MPURJC/test/reddit/mpurjc) del sistema. Además, si se quieren lanzar junto al resto de tests, debe incluirse en nombre de la clase en la etiqueta *SuiteClasses* se la clase [AllTests.java](Reddit-MPURJC/test/reddit/mpurjc/AllTest.java) de la siguiente forma:
+
+```
+@RunWith(Suite.class)
+@SuiteClasses({ ComentarComentarioTest.class,
+        ComentarEntradaTest.class,
+        EliminarSubscripcionTest.class,
+        LoginTest.class,
+        LogoutTest.class,
+        NuevaEntradaTest.class,
+        NuevaSubscripcionTest.class,
+        NuevoSubForoTest.class,
+        NuevoUsuarioTest.class,
+        ValidarEntradaTest.class,
+        VotarComentarioTest.class,
+        VotarEntradaTest.class
+})
+```
+
+
