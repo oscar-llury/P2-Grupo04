@@ -16,13 +16,13 @@ A continuación se detallan todos los test disponibles en el sistema:
 - Realizar logout habiendo hecho ya previamente logout (**testLogout_EstandoLogout()**).
 
 ### Nuevo Usuario
--Realizar el test correctamente (**testNuevoUsuario_Correcto()**).
+- Realizar el test correctamente (**testNuevoUsuario_Correcto()**).
 - Crear un usuario que ya exista, es decir, con los mimos datos, (**testNuevoUsuario_UsuarioRepetido()**).
 - Crear un usuario con un correo no perteneciente a la URJC, por ejemplo correo@google.com, (**testNuevoUsuario_CorreoMal()**).
 
 ## Test de SubForo
 
-###NuevoSubForo
+### NuevoSubForo
 - Realizar el test correctamente (**testNuevoSubForo_Correcto()**).
 - Intentar crear nuevo un subforo sin un usuario logueado (**testNuevoSubForo_SinUsuarioLogeado()**).
 - Intentar crear un  nuevo subforo que ya existe en el foro (**testNuevoSubForo_Repetido()**).
